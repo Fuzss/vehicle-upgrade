@@ -1,0 +1,9 @@
+accessWidener   v2  named
+accessible  field   net/minecraft/world/entity/animal/horse/AbstractHorse   playerJumpPendingScale  F
+accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    mainHandItem    Lnet/minecraft/world/item/ItemStack;
+accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    offHandItem Lnet/minecraft/world/item/ItemStack;
+accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    mainHandHeight  F
+accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    offHandHeight   F
+accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    oMainHandHeight F
+accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    oOffHandHeight  F
+accessible  method  net/minecraft/world/entity/vehicle/VehicleEntity    getDropItem ()Lnet/minecraft/world/item/Item;
