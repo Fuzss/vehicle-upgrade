@@ -35,7 +35,8 @@ public class OpenMountInventoryHandler {
                 }
                 return EventResultHolder.interrupt(InteractionResult.SUCCESS);
             } else if (entity.getType().is(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)
-                    && entity instanceof Mob mob && mob.isSaddled()) {
+                    && entity instanceof Mob mob && (mob.isSaddled() || mob.isWearingBodyArmor()) && (
+                    !(entity instanceof TamableAnimal tamableAnimal) || tamableAnimal.isTame())) {
                 if (!level.isClientSide) {
                     ServerboundOpenServerControlledInventoryMessage.openCustomInventoryScreen((ServerPlayer) player,
                             mob);

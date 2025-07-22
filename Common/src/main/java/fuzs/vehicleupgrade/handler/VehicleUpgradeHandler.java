@@ -2,6 +2,8 @@ package fuzs.vehicleupgrade.handler;
 
 import fuzs.puzzleslib.api.event.v1.core.EventResult;
 import fuzs.puzzleslib.api.event.v1.core.EventResultHolder;
+import fuzs.vehicleupgrade.VehicleUpgrade;
+import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -25,8 +27,12 @@ import java.util.Optional;
 public class VehicleUpgradeHandler {
 
     public static EventResultHolder<InteractionResult> onUseEntity(Player player, Level level, InteractionHand interactionHand, Entity entity) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).manuallyDismountPassengers) {
+            return EventResultHolder.pass();
+        }
+
         if (player.isSecondaryUseActive() && player.getItemInHand(interactionHand).isEmpty()) {
-            if (entity.isPassenger() && entity.getVehicle() instanceof VehicleEntity) {
+            if (entity.isPassenger() && !(entity instanceof Player) && entity.getVehicle() instanceof VehicleEntity) {
                 entity.stopRiding();
 
                 if (entity instanceof Mob mob) {
@@ -41,6 +47,10 @@ public class VehicleUpgradeHandler {
     }
 
     public static EventResult onStartRiding(Level level, Entity rider, Entity vehicle) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).rotateVehicleWithPlayer) {
+            return EventResult.PASS;
+        }
+
         if (!vehicle.hasControllingPassenger() && rider instanceof Player player) {
             vehicle.setYRot(player.getYRot());
             vehicle.yRotO = player.getYRot();
@@ -60,20 +70,12 @@ public class VehicleUpgradeHandler {
     }
 
     public static boolean isRidingTraversable(BlockState blockState, @Nullable Entity entity) {
-        if (entity != null && (entity.hasControllingPassenger() || entity.isPassenger())) {
+        if (VehicleUpgrade.CONFIG.getHolder(ServerConfig.class).isAvailable() && VehicleUpgrade.CONFIG.get(ServerConfig.class).mountsPassThroughLeaves) {
+            return false;
+        } else if (entity != null && (entity.hasControllingPassenger() || entity.isPassenger())) {
             return blockState.is(ModRegistry.RIDING_TRAVERSABLE_BLOCK_TAG);
-        }
-
-        return false;
-    }
-
-    public static int getLeafParticleChanceFromWeather(Level level) {
-        if (level.isRaining() && level.isThundering()) {
-            return 5;
-        } else if (level.isRaining() || level.isThundering()) {
-            return 10;
         } else {
-            return 15;
+            return false;
         }
     }
 }

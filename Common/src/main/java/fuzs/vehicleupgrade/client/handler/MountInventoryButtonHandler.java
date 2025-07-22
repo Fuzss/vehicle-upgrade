@@ -3,6 +3,8 @@ package fuzs.vehicleupgrade.client.handler;
 import fuzs.puzzleslib.api.client.gui.v2.tooltip.TooltipBuilder;
 import fuzs.puzzleslib.api.network.v4.MessageSender;
 import fuzs.vehicleupgrade.VehicleUpgrade;
+import fuzs.vehicleupgrade.config.ClientConfig;
+import fuzs.vehicleupgrade.config.VehicleButton;
 import fuzs.vehicleupgrade.network.client.ServerboundOpenServerControlledInventoryMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -26,48 +28,49 @@ import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
 public class MountInventoryButtonHandler {
-    public static final WidgetSprites BUTTON_SPRITES = new WidgetSprites(VehicleUpgrade.id("button"),
-            VehicleUpgrade.id("button_highlighted"));
+    public static final WidgetSprites BUTTON_SPRITES = new WidgetSprites(VehicleUpgrade.id("container/inventory/button"),
+            VehicleUpgrade.id("container/inventory/button_highlighted"));
+    public static final WidgetSprites ICON_SPRITES = new WidgetSprites(VehicleUpgrade.id("container/inventory/chest"),
+            VehicleUpgrade.id("container/inventory/chest_highlighted"));
 
     @Nullable
     private static Button button;
 
     public static void onAfterInit(Minecraft minecraft, AbstractContainerScreen<?> screen, int screenWidth, int screenHeight, List<AbstractWidget> widgets, UnaryOperator<AbstractWidget> addWidget, Consumer<AbstractWidget> removeWidget) {
         if (OpenMountInventoryHandler.isServerControlledInventory(minecraft.player) && minecraft.screen == screen) {
-            Button button = createServerControlledInventoryButton(screen);
+            Button button = MountInventoryButtonHandler.button = createServerControlledInventoryButton(screen);
             updateServerControlledInventoryButton(screen, button);
-            addWidget.apply(button);
-            MountInventoryButtonHandler.button = button;
+            if (button != null) {
+                addWidget.apply(button);
+            }
         }
     }
 
     private static @Nullable Button createServerControlledInventoryButton(AbstractContainerScreen<?> screen) {
-        Vector2i vector2i = getButtonPositions(screen);
+        VehicleButton vehicleButton = VehicleUpgrade.CONFIG.get(ClientConfig.class).vehicleButton;
+        Vector2i vector2i = vehicleButton.getButtonPositions(screen);
         Entity playerVehicle = screen.minecraft.player.getVehicle();
         if (vector2i != null && playerVehicle != null) {
             ItemStack itemStack = new ItemStack(getVehicleEntityItem(playerVehicle));
-            Button button = new ImageButton(vector2i.x(), vector2i.y(), 20, 18, BUTTON_SPRITES, (Button buttonX) -> {
-                MessageSender.broadcast(new ServerboundOpenServerControlledInventoryMessage(playerVehicle.getId()));
-            }) {
+            Button button = new ImageButton(vector2i.x(),
+                    vector2i.y(),
+                    vehicleButton.width,
+                    vehicleButton.height,
+                    vehicleButton.sprites,
+                    (Button buttonX) -> {
+                        MessageSender.broadcast(new ServerboundOpenServerControlledInventoryMessage(playerVehicle.getId()));
+                    }) {
 
                 @Override
                 public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
                     super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
-                    guiGraphics.renderFakeItem(itemStack, this.getX() + 2, this.getY() + 1);
+                    if (vehicleButton.renderFakeItem()) {
+                        guiGraphics.renderFakeItem(itemStack, this.getX() + 2, this.getY() + 1);
+                    }
                 }
             };
             TooltipBuilder.create(playerVehicle.getDisplayName()).build(button);
             return button;
-        } else {
-            return null;
-        }
-    }
-
-    private static @Nullable Vector2i getButtonPositions(AbstractContainerScreen<?> screen) {
-        if (screen instanceof CreativeModeInventoryScreen) {
-            return new Vector2i(screen.leftPos + 104 + 20 + 2 + 12, screen.height / 2 - 50);
-        } else if (screen instanceof InventoryScreen) {
-            return new Vector2i(screen.leftPos + 104 + 20 + 8, screen.height / 2 - 22);
         } else {
             return null;
         }

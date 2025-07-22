@@ -3,7 +3,7 @@ package fuzs.vehicleupgrade.init;
 import fuzs.puzzleslib.api.init.v3.registry.RegistryManager;
 import fuzs.puzzleslib.api.init.v3.tags.TagFactory;
 import fuzs.vehicleupgrade.VehicleUpgrade;
-import fuzs.vehicleupgrade.world.inventory.SteerableInventoryMenu;
+import fuzs.vehicleupgrade.world.inventory.EquipmentInventoryMenu;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -22,9 +22,9 @@ public class ModRegistry {
             "airborne_mining_speed",
             () -> new RangedAttribute(Util.makeDescriptionId(Registries.elementsDirPath(Registries.ATTRIBUTE),
                     REGISTRIES.makeKey("airborne_mining_speed")), 0.2, 0.0, 20.0).setSyncable(true));
-    public static final Holder.Reference<MenuType<SteerableInventoryMenu>> ITEM_STEERABLE_MENU_TYPE = REGISTRIES.registerMenuType(
-            "item_steerable",
-            SteerableInventoryMenu::new,
+    public static final Holder.Reference<MenuType<EquipmentInventoryMenu>> EQUIPMENT_USER_MENU_TYPE = REGISTRIES.registerMenuType(
+            "equipment_user",
+            EquipmentInventoryMenu::new,
             ByteBufCodecs.INT);
 
     static final TagFactory TAGS = TagFactory.make(VehicleUpgrade.MOD_ID);

@@ -1,5 +1,7 @@
 package fuzs.vehicleupgrade.client.handler;
 
+import fuzs.vehicleupgrade.VehicleUpgrade;
+import fuzs.vehicleupgrade.config.ClientConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemInHandRenderer;
@@ -12,11 +14,13 @@ public class BoatItemViewHandler {
     private static ItemStack lastOffHandItem;
 
     public static void onStartClientTick(Minecraft minecraft) {
-        if (minecraft.player != null) {
+        if (VehicleUpgrade.CONFIG.get(ClientConfig.class).holdItemsWhileRowing && minecraft.player != null) {
             isHandsBusy = minecraft.player.isHandsBusy();
-            ItemInHandRenderer itemInHandRenderer = minecraft.gameRenderer.itemInHandRenderer;
-            lastMainHandItem = itemInHandRenderer.mainHandItem;
-            lastOffHandItem = itemInHandRenderer.offHandItem;
+            lastMainHandItem = minecraft.gameRenderer.itemInHandRenderer.mainHandItem;
+            lastOffHandItem = minecraft.gameRenderer.itemInHandRenderer.offHandItem;
+        } else {
+            isHandsBusy = false;
+            lastMainHandItem = lastOffHandItem = ItemStack.EMPTY;
         }
     }
 

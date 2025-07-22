@@ -8,7 +8,7 @@ import fuzs.puzzleslib.api.client.event.v1.gui.ScreenEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.ScreenKeyboardEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.ScreenMouseEvents;
 import fuzs.puzzleslib.api.event.v1.entity.player.PlayerInteractEvents;
-import fuzs.vehicleupgrade.client.gui.screens.inventory.SteerableInventoryScreen;
+import fuzs.vehicleupgrade.client.gui.screens.inventory.EquipmentInventoryScreen;
 import fuzs.vehicleupgrade.client.handler.BoatItemViewHandler;
 import fuzs.vehicleupgrade.client.handler.DebugAttributesHandler;
 import fuzs.vehicleupgrade.client.handler.MountInventoryButtonHandler;
@@ -43,6 +43,6 @@ public class VehicleUpgradeClient implements ClientModConstructor {
 
     @Override
     public void onRegisterMenuScreens(MenuScreensContext context) {
-        context.registerMenuScreen(ModRegistry.ITEM_STEERABLE_MENU_TYPE.value(), SteerableInventoryScreen::new);
+        context.registerMenuScreen(ModRegistry.EQUIPMENT_USER_MENU_TYPE.value(), EquipmentInventoryScreen::new);
     }
 }

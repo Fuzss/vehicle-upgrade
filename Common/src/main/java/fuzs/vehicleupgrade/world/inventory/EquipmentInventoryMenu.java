@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class SteerableInventoryMenu extends AbstractContainerMenu implements ContainerListener {
+public class EquipmentInventoryMenu extends AbstractContainerMenu implements ContainerListener {
     private static final ResourceLocation SADDLE_SLOT_SPRITE = ResourceLocation.withDefaultNamespace(
             "container/slot/saddle");
     private static final ResourceLocation ARMOR_SLOT_SPRITE = ResourceLocation.withDefaultNamespace(
@@ -28,12 +28,12 @@ public class SteerableInventoryMenu extends AbstractContainerMenu implements Con
     @Nullable
     private final Mob mob;
 
-    public SteerableInventoryMenu(int containerId, Inventory inventory, int entityId) {
+    public EquipmentInventoryMenu(int containerId, Inventory inventory, int entityId) {
         this(containerId, inventory, Minecraft.getInstance().level.getEntity(entityId) instanceof Mob mob ? mob : null);
     }
 
-    public SteerableInventoryMenu(int containerId, Inventory inventory, @Nullable Mob mob) {
-        super(ModRegistry.ITEM_STEERABLE_MENU_TYPE.value(), containerId);
+    public EquipmentInventoryMenu(int containerId, Inventory inventory, @Nullable Mob mob) {
+        super(ModRegistry.EQUIPMENT_USER_MENU_TYPE.value(), containerId);
         this.mob = mob;
         Container container = mob.createEquipmentSlotContainer(EquipmentSlot.SADDLE);
         this.addSlot(new ArmorSlot(container, mob, EquipmentSlot.SADDLE, 0, 8, 18, SADDLE_SLOT_SPRITE) {

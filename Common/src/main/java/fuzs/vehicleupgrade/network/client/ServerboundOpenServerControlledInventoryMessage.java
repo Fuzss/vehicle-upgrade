@@ -4,7 +4,7 @@ import fuzs.puzzleslib.api.container.v1.ContainerMenuHelper;
 import fuzs.puzzleslib.api.network.v4.message.MessageListener;
 import fuzs.puzzleslib.api.network.v4.message.play.ServerboundPlayMessage;
 import fuzs.vehicleupgrade.init.ModRegistry;
-import fuzs.vehicleupgrade.world.inventory.SteerableInventoryMenu;
+import fuzs.vehicleupgrade.world.inventory.EquipmentInventoryMenu;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -42,10 +42,10 @@ public record ServerboundOpenServerControlledInventoryMessage(int entityId) impl
     }
 
     public static void openCustomInventoryScreen(ServerPlayer serverPlayer, Mob mob) {
-        if (mob.isSaddled() && (!mob.isVehicle() || mob.hasPassenger(serverPlayer))) {
+        if ((mob.isSaddled() || mob.isWearingBodyArmor()) && (!mob.isVehicle() || mob.hasPassenger(serverPlayer))) {
             ContainerMenuHelper.openMenu(serverPlayer,
                     new SimpleMenuProvider((int containerId, Inventory inventory, Player player) -> {
-                        return new SteerableInventoryMenu(containerId, inventory, mob);
+                        return new EquipmentInventoryMenu(containerId, inventory, mob);
                     }, mob.getDisplayName()),
                     mob.getId());
         }

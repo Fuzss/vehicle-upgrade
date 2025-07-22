@@ -1,6 +1,8 @@
 package fuzs.vehicleupgrade.handler;
 
 import fuzs.puzzleslib.api.event.v1.core.EventResult;
+import fuzs.vehicleupgrade.VehicleUpgrade;
+import fuzs.vehicleupgrade.config.ServerConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
@@ -13,6 +15,10 @@ import net.minecraft.world.level.block.Blocks;
 public class SwimmingMountHandler {
 
     public static EventResult onStartEntityTick(Entity entity) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).mountsSwimInWater) {
+            return EventResult.PASS;
+        }
+
         if (entity instanceof Mob mob && entity.dismountsUnderwater()) {
             if (entity.isVehicle() && mob.isSaddled()) {
                 if (entity.isInWater() && entity.getFluidHeight(FluidTags.WATER) > entity.getFluidJumpThreshold()
@@ -34,6 +40,10 @@ public class SwimmingMountHandler {
     }
 
     public static EventResult onStopRiding(Level level, Entity passengerEntity, Entity vehicleEntity) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).mountsSwimInWater) {
+            return EventResult.PASS;
+        }
+
         if (level instanceof ServerLevel serverLevel && vehicleEntity.dismountsUnderwater()) {
             if (passengerEntity.isEyeInFluid(FluidTags.WATER) && !serverLevel.getBlockState(BlockPos.containing(
                     passengerEntity.getX(),

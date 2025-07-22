@@ -8,6 +8,7 @@ import fuzs.puzzleslib.api.core.v1.utility.ResourceLocationHelper;
 import fuzs.puzzleslib.api.event.v1.entity.EntityRidingEvents;
 import fuzs.puzzleslib.api.event.v1.entity.EntityTickEvents;
 import fuzs.puzzleslib.api.event.v1.entity.ServerEntityLevelEvents;
+import fuzs.puzzleslib.api.event.v1.entity.living.LivingEquipmentChangeCallback;
 import fuzs.puzzleslib.api.event.v1.entity.player.CalculateBlockBreakSpeedCallback;
 import fuzs.puzzleslib.api.event.v1.entity.player.PlayerInteractEvents;
 import fuzs.vehicleupgrade.config.ClientConfig;
@@ -46,6 +47,7 @@ public class VehicleUpgrade implements ModConstructor {
         EntityRidingEvents.START.register(VehicleUpgradeHandler::onStartRiding);
         ServerEntityLevelEvents.LOAD.register(DismountingRestrictionHandler::onEntityLoad);
         EntityRidingEvents.STOP.register(DismountingRestrictionHandler::onStopRiding);
+        LivingEquipmentChangeCallback.EVENT.register(DismountingRestrictionHandler::onLivingEquipmentChange);
         ServerEntityLevelEvents.LOAD.register(HorseUpgradeHandler::onEntityLoad);
         EntityTickEvents.START.register(SwimmingMountHandler::onStartEntityTick);
         EntityRidingEvents.STOP.register(SwimmingMountHandler::onStopRiding);
@@ -59,15 +61,19 @@ public class VehicleUpgrade implements ModConstructor {
 
     @Override
     public void onRegisterEntityAttributes(EntityAttributesContext context) {
-        context.registerAttribute(EntityType.HORSE, Attributes.STEP_HEIGHT, 1.15);
-        context.registerAttribute(EntityType.CAMEL, Attributes.STEP_HEIGHT, 1.15);
-        context.registerAttribute(EntityType.SKELETON_HORSE, Attributes.STEP_HEIGHT, 1.15);
-        context.registerAttribute(EntityType.ZOMBIE_HORSE, Attributes.STEP_HEIGHT, 1.15);
-        context.registerAttribute(EntityType.DONKEY, Attributes.STEP_HEIGHT, 1.15);
-        context.registerAttribute(EntityType.MULE, Attributes.STEP_HEIGHT, 1.15);
-        context.registerAttribute(EntityType.LLAMA, Attributes.STEP_HEIGHT, 1.15);
-        context.registerAttribute(EntityType.TRADER_LLAMA, Attributes.STEP_HEIGHT, 1.15);
-        context.registerAttribute(EntityType.PLAYER, ModRegistry.AIRBORNE_MINING_SPEED_ATTRIBUTE);
+        if (VehicleUpgrade.CONFIG.get(CommonConfig.class).removePassengerMiningSpeedMalus) {
+            context.registerAttribute(EntityType.PLAYER, ModRegistry.AIRBORNE_MINING_SPEED_ATTRIBUTE);
+        }
+        if (VehicleUpgrade.CONFIG.get(CommonConfig.class).increaseDefaultHorseStepHeight) {
+            context.registerAttribute(EntityType.HORSE, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityType.CAMEL, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityType.SKELETON_HORSE, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityType.ZOMBIE_HORSE, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityType.DONKEY, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityType.MULE, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityType.LLAMA, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityType.TRADER_LLAMA, Attributes.STEP_HEIGHT, 1.15);
+        }
     }
 
     public static ResourceLocation id(String path) {

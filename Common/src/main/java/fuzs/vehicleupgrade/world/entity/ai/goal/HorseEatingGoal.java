@@ -16,11 +16,6 @@ public class HorseEatingGoal extends Goal {
     }
 
     @Override
-    public boolean requiresUpdateEveryTick() {
-        return true;
-    }
-
-    @Override
     public void tick() {
         this.eatingCounter++;
     }
@@ -38,7 +33,7 @@ public class HorseEatingGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return this.horse.isEating() && this.eatingCounter <= 50;
+        return this.horse.isEating() && this.eatingCounter <= this.adjustedTickDelay(50);
 //        return this.eatingCounter <= 50 && !this.horse.isVehicle() && this.horse.level().getBlockState(this.horse.blockPosition().below()).is(Blocks.GRASS_BLOCK);
     }
 
@@ -48,8 +43,9 @@ public class HorseEatingGoal extends Goal {
         if (this.horse.isEating()) return true;
 
         if (this.horse.canEatGrass()) {
-            if (!this.horse.isVehicle() && this.horse.getRandom().nextInt(300) == 0 && this.horse.level().getBlockState(
-                    this.horse.blockPosition().below()).is(Blocks.GRASS_BLOCK)) {
+            if (!this.horse.isVehicle() && this.horse.getRandom().nextInt(300) == 0 && this.horse.level()
+                    .getBlockState(this.horse.blockPosition().below())
+                    .is(Blocks.GRASS_BLOCK)) {
                 return true;
             }
         }
