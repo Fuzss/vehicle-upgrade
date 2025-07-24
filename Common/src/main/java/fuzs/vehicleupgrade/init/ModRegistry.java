@@ -38,6 +38,9 @@ public class ModRegistry {
             "over_sized_vehicle_passengers");
     public static final TagKey<EntityType<?>> CAN_EQUIP_BODY_ITEM_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(
             "can_equip_body_item");
+    public static final TagKey<Attribute> DEBUG_ATTRIBUTES_ATTRIBUTE_TAG = TAGS.registerTagKey(Registries.ATTRIBUTE,
+            "debug_attributes");
+    public static final TagKey<Item> SHEAR_TOOLS_ITEM_TAG = TagFactory.COMMON.registerItemTag("tools/shear");
 
     public static void bootstrap() {
         // NO-OP

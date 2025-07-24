@@ -7,7 +7,6 @@ import fuzs.puzzleslib.api.client.event.v1.gui.GatherDebugInformationEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.ScreenEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.ScreenKeyboardEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.ScreenMouseEvents;
-import fuzs.puzzleslib.api.event.v1.entity.player.PlayerInteractEvents;
 import fuzs.vehicleupgrade.client.gui.screens.inventory.EquipmentInventoryScreen;
 import fuzs.vehicleupgrade.client.handler.BoatItemViewHandler;
 import fuzs.vehicleupgrade.client.handler.DebugAttributesHandler;
@@ -16,6 +15,7 @@ import fuzs.vehicleupgrade.client.handler.OpenMountInventoryHandler;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.HorseInventoryScreen;
 
 public class VehicleUpgradeClient implements ClientModConstructor {
 
@@ -38,7 +38,7 @@ public class VehicleUpgradeClient implements ClientModConstructor {
         ScreenEvents.remove(AbstractContainerScreen.class).register(MountInventoryButtonHandler::onRemove);
         ScreenKeyboardEvents.beforeKeyPress(Screen.class).register(OpenMountInventoryHandler::onBeforeKeyPress);
         ClientTickEvents.START.register(OpenMountInventoryHandler::onStartClientTick);
-        PlayerInteractEvents.USE_ENTITY.register(OpenMountInventoryHandler::onUseEntity);
+        ScreenEvents.afterRender(HorseInventoryScreen.class).register(DebugAttributesHandler::onAfterRender);
     }
 
     @Override

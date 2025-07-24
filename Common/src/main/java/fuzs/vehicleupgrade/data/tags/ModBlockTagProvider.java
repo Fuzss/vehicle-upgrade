@@ -8,9 +8,9 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 
-public class ModBlockTagsProvider extends AbstractTagProvider<Block> {
+public class ModBlockTagProvider extends AbstractTagProvider<Block> {
 
-    public ModBlockTagsProvider(DataProviderContext context) {
+    public ModBlockTagProvider(DataProviderContext context) {
         super(Registries.BLOCK, context);
     }
 

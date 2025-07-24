@@ -26,7 +26,7 @@ abstract class LeavesBlockMixin extends Block {
             entity.makeStuckInBlock(blockState, new Vec3(0.9, 1.5, 0.9));
             if (level.isClientSide) {
                 boolean moved = entity.xOld != entity.getX() || entity.zOld != entity.getZ();
-                if (moved && level.getRandom().nextInt(3) == 0) {
+                if (moved && level.getRandom().nextInt(5) == 0) {
                     this.spawnFallingLeavesParticle(level, blockPos, level.getRandom());
                 }
             }

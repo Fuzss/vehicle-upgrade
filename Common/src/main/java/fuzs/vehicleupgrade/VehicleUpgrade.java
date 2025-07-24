@@ -16,7 +16,7 @@ import fuzs.vehicleupgrade.config.CommonConfig;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.handler.*;
 import fuzs.vehicleupgrade.init.ModRegistry;
-import fuzs.vehicleupgrade.network.client.ServerboundOpenServerControlledInventoryMessage;
+import fuzs.vehicleupgrade.network.client.ServerboundOpenEquipmentInventoryMessage;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -49,14 +49,16 @@ public class VehicleUpgrade implements ModConstructor {
         EntityRidingEvents.STOP.register(DismountingRestrictionHandler::onStopRiding);
         LivingEquipmentChangeCallback.EVENT.register(DismountingRestrictionHandler::onLivingEquipmentChange);
         ServerEntityLevelEvents.LOAD.register(HorseUpgradeHandler::onEntityLoad);
+        PlayerInteractEvents.USE_ENTITY.register(HorseUpgradeHandler::onUseEntity);
         EntityTickEvents.START.register(SwimmingMountHandler::onStartEntityTick);
         EntityRidingEvents.STOP.register(SwimmingMountHandler::onStopRiding);
+        PlayerInteractEvents.USE_ENTITY.register(MountInventoryHandler::onUseEntity);
     }
 
     @Override
     public void onRegisterPayloadTypes(PayloadTypesContext context) {
-        context.playToServer(ServerboundOpenServerControlledInventoryMessage.class,
-                ServerboundOpenServerControlledInventoryMessage.STREAM_CODEC);
+        context.playToServer(ServerboundOpenEquipmentInventoryMessage.class,
+                ServerboundOpenEquipmentInventoryMessage.STREAM_CODEC);
     }
 
     @Override

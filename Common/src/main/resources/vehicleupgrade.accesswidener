@@ -7,5 +7,8 @@ accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    offHandH
 accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    oMainHandHeight F
 accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    oOffHandHeight  F
 accessible  method  net/minecraft/world/entity/vehicle/VehicleEntity    getDropItem ()Lnet/minecraft/world/item/Item;
-accessible  class   net/minecraft/client/gui/Gui$HeartType
+accessible  field   net/minecraft/client/gui/screens/inventory/HorseInventoryScreen horse   Lnet/minecraft/world/entity/animal/horse/AbstractHorse;
 accessible  field   net/minecraft/world/entity/ai/goal/RandomStrollGoal speedModifier   D
+accessible  method  net/minecraft/world/entity/Mob  canShearEquipment   (Lnet/minecraft/world/entity/player/Player;)Z
+accessible  field   net/minecraft/client/MouseHandler   xpos    D
+accessible  field   net/minecraft/client/MouseHandler   ypos    D

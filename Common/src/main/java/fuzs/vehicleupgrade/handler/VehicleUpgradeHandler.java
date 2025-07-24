@@ -2,6 +2,7 @@ package fuzs.vehicleupgrade.handler;
 
 import fuzs.puzzleslib.api.event.v1.core.EventResult;
 import fuzs.puzzleslib.api.event.v1.core.EventResultHolder;
+import fuzs.puzzleslib.api.util.v1.CommonHelper;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
@@ -70,7 +71,8 @@ public class VehicleUpgradeHandler {
     }
 
     public static boolean isRidingTraversable(BlockState blockState, @Nullable Entity entity) {
-        if (VehicleUpgrade.CONFIG.getHolder(ServerConfig.class).isAvailable() && VehicleUpgrade.CONFIG.get(ServerConfig.class).mountsPassThroughLeaves) {
+        if (CommonHelper.getMinecraftServer() == null
+                || !VehicleUpgrade.CONFIG.get(ServerConfig.class).mountsPassThroughLeaves) {
             return false;
         } else if (entity != null && (entity.hasControllingPassenger() || entity.isPassenger())) {
             return blockState.is(ModRegistry.RIDING_TRAVERSABLE_BLOCK_TAG);
