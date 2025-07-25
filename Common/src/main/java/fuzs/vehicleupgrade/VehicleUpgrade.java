@@ -71,7 +71,7 @@ public class VehicleUpgrade implements ModConstructor {
         if (VehicleUpgrade.CONFIG.get(CommonConfig.class).removePassengerMiningSpeedMalus) {
             context.registerAttribute(EntityType.PLAYER, ModRegistry.AIRBORNE_MINING_SPEED_ATTRIBUTE);
         }
-        if (VehicleUpgrade.CONFIG.get(CommonConfig.class).increaseDefaultHorseStepHeight) {
+        if (VehicleUpgrade.CONFIG.get(CommonConfig.class).increaseHorseStepHeight) {
             context.registerAttribute(EntityType.HORSE, Attributes.STEP_HEIGHT, 1.15);
             context.registerAttribute(EntityType.CAMEL, Attributes.STEP_HEIGHT, 1.15);
             context.registerAttribute(EntityType.SKELETON_HORSE, Attributes.STEP_HEIGHT, 1.15);

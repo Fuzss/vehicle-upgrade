@@ -11,6 +11,8 @@
     "LeavesBlockMixin"
   ],
   "client": [
+    "client.ModelMixin",
+    "client.MultiBufferSource\u0024BufferSourceMixin"
   ],
   "injectors": {
     "defaultRequire": 1

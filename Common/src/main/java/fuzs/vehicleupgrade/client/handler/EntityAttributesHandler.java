@@ -72,9 +72,10 @@ public class EntityAttributesHandler {
         }
     }
 
-    public static void onAfterRender(HorseInventoryScreen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        if (screen.horse.getInventoryColumns() == 0) {
-            renderMobAttributes(screen, guiGraphics, screen.horse);
+    public static void onDrawBackground(AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        if (screen instanceof HorseInventoryScreen horseInventoryScreen
+                && horseInventoryScreen.horse.getInventoryColumns() == 0) {
+            renderMobAttributes(screen, guiGraphics, horseInventoryScreen.horse);
         }
     }
 

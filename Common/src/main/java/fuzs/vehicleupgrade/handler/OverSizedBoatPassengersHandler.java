@@ -19,7 +19,7 @@ public class OverSizedBoatPassengersHandler {
 
     public static EventResultHolder<EntityDimensions> onChangeEntitySize(Entity entity, Pose pose, EntityDimensions entityDimensions) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).shrinkOverSizedBoatPassengers) {
-            return EventResultHolder.pass() ;
+            return EventResultHolder.pass();
         }
 
         if (entity.getVehicle() instanceof AbstractBoat && entity.getType()

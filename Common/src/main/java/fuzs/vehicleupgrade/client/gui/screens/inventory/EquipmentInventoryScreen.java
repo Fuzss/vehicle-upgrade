@@ -1,7 +1,6 @@
 package fuzs.vehicleupgrade.client.gui.screens.inventory;
 
 import fuzs.vehicleupgrade.client.handler.EntityAttributesHandler;
-import fuzs.vehicleupgrade.init.ModRegistry;
 import fuzs.vehicleupgrade.world.inventory.EquipmentInventoryMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -9,10 +8,9 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
 
 public class EquipmentInventoryScreen extends AbstractContainerScreen<EquipmentInventoryMenu> {
     private static final ResourceLocation SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/slot");
@@ -38,26 +36,19 @@ public class EquipmentInventoryScreen extends AbstractContainerScreen<EquipmentI
                 this.imageHeight,
                 256,
                 256);
+
+        for (Slot slot : this.getMenu().slots) {
+            if (slot.isActive() && !(slot.container instanceof Inventory)) {
+                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
+                        SLOT_SPRITE,
+                        this.leftPos + slot.x - 1,
+                        this.topPos + slot.y - 1,
+                        18,
+                        18);
+            }
+        }
+
         Mob mob = this.menu.getMob();
-
-        if (mob.canUseSlot(EquipmentSlot.SADDLE) && mob.getType().is(EntityTypeTags.CAN_EQUIP_SADDLE)) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
-                    SLOT_SPRITE,
-                    this.leftPos + 7,
-                    this.topPos + 35 - 18,
-                    18,
-                    18);
-        }
-
-        if (mob.canUseSlot(EquipmentSlot.BODY) && (mob.getType().is(ModRegistry.CAN_EQUIP_BODY_ITEM_ENTITY_TYPE_TAG))) {
-            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
-                    SLOT_SPRITE,
-                    this.leftPos + 7,
-                    this.topPos + 35,
-                    18,
-                    18);
-        }
-
         EntityAttributesHandler.renderMobAttributes(this, guiGraphics, mob);
         InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics,
                 this.leftPos + 26,

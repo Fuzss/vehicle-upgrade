@@ -1,5 +1,8 @@
 package fuzs.vehicleupgrade.mixin;
 
+import fuzs.vehicleupgrade.VehicleUpgrade;
+import fuzs.vehicleupgrade.config.BoatJumping;
+import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -23,9 +26,12 @@ abstract class AbstractBoatMixin extends VehicleEntity implements PlayerRideable
         super(entityType, level);
     }
 
+    /**
+     * @see net.minecraft.world.entity.animal.horse.AbstractHorse#onPlayerJump(int)
+     */
     @Override
     public void onPlayerJump(int jumpPower) {
-        if (this.onGround()) {
+        if (this.onGround() || VehicleUpgrade.CONFIG.get(ServerConfig.class).jumpInBoats == BoatJumping.ALWAYS) {
             float playerJumpScale;
             if (jumpPower >= 90) {
                 playerJumpScale = 1.0F;
@@ -41,7 +47,7 @@ abstract class AbstractBoatMixin extends VehicleEntity implements PlayerRideable
 
     @Override
     public boolean canJump() {
-        return this.status == Boat.Status.ON_LAND || this.status == Boat.Status.IN_AIR;
+        return VehicleUpgrade.CONFIG.get(ServerConfig.class).jumpInBoats.canJump(this.status);
     }
 
     @Override
@@ -56,12 +62,20 @@ abstract class AbstractBoatMixin extends VehicleEntity implements PlayerRideable
 
     @Override
     public float maxUpStep() {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).increaseBoatStepHeight) {
+            return super.maxUpStep();
+        }
+
         // this translates directly to the block height, so just enough to step up carpets, dirt path, soul sand, etc.
-        return this.status == Boat.Status.ON_LAND || this.status == Boat.Status.IN_AIR ? 0.15F : super.maxUpStep();
+        return BoatJumping.ON_LAND.canJump(this.status) ? 0.15F : super.maxUpStep();
     }
 
     @Inject(method = "hasEnoughSpaceFor", at = @At("HEAD"), cancellable = true)
     public void hasEnoughSpaceFor(Entity entity, CallbackInfoReturnable<Boolean> callback) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).shrinkOverSizedBoatPassengers) {
+            return;
+        }
+
         if (entity.getType().is(ModRegistry.OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG)) {
             callback.setReturnValue(true);
         }

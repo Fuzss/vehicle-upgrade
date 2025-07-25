@@ -12,3 +12,7 @@ accessible  field   net/minecraft/world/entity/ai/goal/RandomStrollGoal speedMod
 accessible  method  net/minecraft/world/entity/Mob  canShearEquipment   (Lnet/minecraft/world/entity/player/Player;)Z
 accessible  field   net/minecraft/client/MouseHandler   xpos    D
 accessible  field   net/minecraft/client/MouseHandler   ypos    D
+accessible  field   net/minecraft/client/renderer/RenderType$CompositeRenderType    state   Lnet/minecraft/client/renderer/RenderType$CompositeState;
+accessible  field   net/minecraft/client/renderer/RenderType$CompositeRenderType    renderPipeline  Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+accessible  field   net/minecraft/client/renderer/RenderType$CompositeState textureState    Lnet/minecraft/client/renderer/RenderStateShard$EmptyTextureStateShard;
+accessible  method  net/minecraft/client/renderer/RenderStateShard$EmptyTextureStateShard   cutoutTexture   ()Ljava/util/Optional;

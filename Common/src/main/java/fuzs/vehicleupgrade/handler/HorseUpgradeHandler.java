@@ -33,6 +33,7 @@ public class HorseUpgradeHandler {
         }
 
         if (entity instanceof AbstractHorse abstractHorse && abstractHorse.canEatGrass()) {
+            // priority is tied to an internal random chance to closely resemble vanilla behaviour
             abstractHorse.goalSelector.addGoal(7, new HorseEatingGoal(abstractHorse));
         }
 
