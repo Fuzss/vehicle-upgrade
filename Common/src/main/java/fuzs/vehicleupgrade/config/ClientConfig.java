@@ -7,12 +7,12 @@ public class ClientConfig implements ConfigCore {
     static final String INVENTORY_CATEGORY = "inventory";
 
     @Config(category = INVENTORY_CATEGORY, description = "The inventory to open first when riding a vehicle.")
-    public VehiclePassengerInventory defaultVehicleInventory = VehiclePassengerInventory.VEHICLE;
+    public VehicleInventory defaultVehicleInventory = VehicleInventory.VEHICLE;
     @Config(
             category = INVENTORY_CATEGORY,
-            description = "Press the inventory key twice to open the player inventory instead of the vehicle inventory."
+            description = "Press the inventory key twice to open the player inventory instead of the ridden vehicle inventory."
     )
-    public boolean doubleTabToSwitchVehicleInventory = true;
+    public InventorySwitch switchVehicleInventory = InventorySwitch.CONTROL;
     @Config(
             category = INVENTORY_CATEGORY,
             description = "Add a button to the current vehicle inventory for switching to the player inventory (if available)."

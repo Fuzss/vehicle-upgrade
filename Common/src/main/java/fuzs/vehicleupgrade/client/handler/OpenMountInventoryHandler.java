@@ -3,7 +3,7 @@ package fuzs.vehicleupgrade.client.handler;
 import fuzs.puzzleslib.api.event.v1.core.EventResult;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ClientConfig;
-import fuzs.vehicleupgrade.config.VehiclePassengerInventory;
+import fuzs.vehicleupgrade.config.VehicleInventory;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -14,46 +14,28 @@ import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 
 public class OpenMountInventoryHandler {
-    private static int inventoryTriggerTime;
 
     public static void onStartClientTick(Minecraft minecraft) {
-        if (inventoryTriggerTime > 0) {
-            if (VehicleUpgrade.CONFIG.get(ClientConfig.class).doubleTabToSwitchVehicleInventory) {
-                inventoryTriggerTime--;
-            } else {
-                inventoryTriggerTime = 0;
-            }
-        }
+        VehicleUpgrade.CONFIG.get(ClientConfig.class).switchVehicleInventory.tick();
 
-        if (minecraft.gameMode != null && isServerControlledInventory(minecraft.player)) {
-            switch (VehicleUpgrade.CONFIG.get(ClientConfig.class).defaultVehicleInventory) {
-                case VEHICLE -> {
-                    if (minecraft.options.keyInventory.isDown()) {
-                        inventoryTriggerTime = 7;
-                    }
-                }
-                case PLAYER -> {
-                    while (minecraft.options.keyInventory.consumeClick()) {
-                        if (inventoryTriggerTime == 0) {
-                            inventoryTriggerTime = 7;
-                            VehiclePassengerInventory.PLAYER.openInventory(minecraft, null);
-                        } else {
-                            VehiclePassengerInventory.VEHICLE.openInventory(minecraft, null);
-                        }
-                    }
-                }
+        if (isServerControlledInventory(minecraft.player)) {
+            while (minecraft.options.keyInventory.consumeClick()) {
+                VehicleInventory vehicleInventory = VehicleInventory.getInventory(minecraft.gameMode);
+                VehicleInventory.trigger(vehicleInventory, minecraft, null, true);
             }
         }
     }
 
     public static EventResult onBeforeKeyPress(Screen screen, int keyCode, int scanCode, int modifiers) {
-        if (inventoryTriggerTime > 0 && screen.minecraft.options.keyInventory.matches(keyCode, scanCode)) {
-            VehicleUpgrade.CONFIG.get(ClientConfig.class).defaultVehicleInventory.getOpposite()
-                    .openInventory(screen.minecraft, screen);
-            return EventResult.INTERRUPT;
-        } else {
-            return EventResult.PASS;
+        if (screen.minecraft.options.keyInventory.matches(keyCode, scanCode)) {
+            VehicleInventory vehicleInventory = VehicleInventory.getInventory(screen);
+
+            if (VehicleInventory.trigger(vehicleInventory, screen.minecraft, screen, false)) {
+                return EventResult.INTERRUPT;
+            }
         }
+
+        return EventResult.PASS;
     }
 
     /**

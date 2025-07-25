@@ -34,8 +34,8 @@ public class ModRegistry {
             "restricted_mounts");
     public static final TagKey<EntityType<?>> CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(
             "custom_equipment_user");
-    public static final TagKey<EntityType<?>> OVER_SIZED_VEHICLE_PASSENGERS_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(
-            "over_sized_vehicle_passengers");
+    public static final TagKey<EntityType<?>> OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(
+            "over_sized_boat_passengers");
     public static final TagKey<EntityType<?>> CAN_EQUIP_BODY_ITEM_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(
             "can_equip_body_item");
     public static final TagKey<Attribute> DEBUG_ATTRIBUTES_ATTRIBUTE_TAG = TAGS.registerTagKey(Registries.ATTRIBUTE,

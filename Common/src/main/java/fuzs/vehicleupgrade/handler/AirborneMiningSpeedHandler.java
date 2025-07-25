@@ -4,7 +4,6 @@ import fuzs.puzzleslib.api.event.v1.core.EventResult;
 import fuzs.puzzleslib.api.event.v1.data.MutableFloat;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.CommonConfig;
-import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -31,15 +30,15 @@ public class AirborneMiningSpeedHandler {
         return EventResult.PASS;
     }
 
-    public static EventResult onStartRiding(Level level, Entity rider, Entity vehicle) {
+    public static EventResult onStartRiding(Level level, Entity passengerEntity, Entity vehicleEntity) {
         if (!VehicleUpgrade.CONFIG.get(CommonConfig.class).removePassengerMiningSpeedMalus) {
             return EventResult.PASS;
         }
 
-        if (rider instanceof Player player) {
-            AttributeInstance attribute = player.getAttribute(ModRegistry.AIRBORNE_MINING_SPEED_ATTRIBUTE);
-            if (!attribute.hasModifier(AirborneMiningSpeedHandler.RIDING_ATTRIBUTE_MODIFIER.id())) {
-                attribute.addTransientModifier(AirborneMiningSpeedHandler.RIDING_ATTRIBUTE_MODIFIER);
+        if (passengerEntity instanceof Player player) {
+            AttributeInstance attributeInstance = player.getAttribute(ModRegistry.AIRBORNE_MINING_SPEED_ATTRIBUTE);
+            if (!attributeInstance.hasModifier(AirborneMiningSpeedHandler.RIDING_ATTRIBUTE_MODIFIER.id())) {
+                attributeInstance.addTransientModifier(AirborneMiningSpeedHandler.RIDING_ATTRIBUTE_MODIFIER);
             }
         }
 

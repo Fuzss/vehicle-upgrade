@@ -28,7 +28,11 @@ import net.minecraft.world.phys.Vec3;
 public class HorseUpgradeHandler {
 
     public static EventResult onEntityLoad(Entity entity, ServerLevel serverLevel, boolean isNewlySpawned) {
-        if (entity instanceof AbstractHorse abstractHorse) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi) {
+            return EventResult.PASS;
+        }
+
+        if (entity instanceof AbstractHorse abstractHorse && abstractHorse.canEatGrass()) {
             abstractHorse.goalSelector.addGoal(7, new HorseEatingGoal(abstractHorse));
         }
 

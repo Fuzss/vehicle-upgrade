@@ -4,7 +4,7 @@ import fuzs.puzzleslib.api.client.gui.v2.tooltip.TooltipBuilder;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ClientConfig;
 import fuzs.vehicleupgrade.config.PlayerVehicleInventoryButton;
-import fuzs.vehicleupgrade.config.VehiclePassengerInventory;
+import fuzs.vehicleupgrade.config.VehicleInventory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -18,6 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -36,6 +37,9 @@ public class MountInventoryButtonHandler {
             VehicleUpgrade.id("container/inventory/chest_highlighted"));
     public static final WidgetSprites CROSS_SPRITES = new WidgetSprites(VehicleUpgrade.id("container/inventory/cross"),
             VehicleUpgrade.id("container/inventory/cross_highlighted"));
+    /**
+     * @see Inventory#getName()
+     */
     static final Component INVENTORY_COMPONENT = Component.translatable("container.inventory");
 
     @Nullable
@@ -69,7 +73,7 @@ public class MountInventoryButtonHandler {
                     vehicleButton.height,
                     vehicleButton.sprites,
                     (Button buttonX) -> {
-                        VehiclePassengerInventory.VEHICLE.openInventory(screen.minecraft, screen);
+                        VehicleInventory.VEHICLE.openInventory(screen.minecraft, screen);
                     }) {
 
                 @Override
@@ -104,14 +108,14 @@ public class MountInventoryButtonHandler {
             return null;
         }
 
-        if (!(screen instanceof InventoryScreen) && !(screen instanceof CreativeModeInventoryScreen)) {
+        if (!VehicleInventory.isPlayerInventory(screen)) {
             Button button = new ImageButton(screen.leftPos + screen.imageWidth - 13 - 7,
                     screen.topPos + 3,
                     13,
                     13,
                     CROSS_SPRITES,
                     (Button buttonX) -> {
-                        VehiclePassengerInventory.PLAYER.openInventory(screen.minecraft, screen);
+                        VehicleInventory.PLAYER.openInventory(screen.minecraft, screen);
                     });
             TooltipBuilder.create(INVENTORY_COMPONENT).build(button);
             return button;

@@ -5,6 +5,8 @@ import fuzs.puzzleslib.api.core.v1.ModConstructor;
 import fuzs.puzzleslib.api.core.v1.context.EntityAttributesContext;
 import fuzs.puzzleslib.api.core.v1.context.PayloadTypesContext;
 import fuzs.puzzleslib.api.core.v1.utility.ResourceLocationHelper;
+import fuzs.puzzleslib.api.event.v1.core.EventPhase;
+import fuzs.puzzleslib.api.event.v1.entity.ChangeEntitySizeCallback;
 import fuzs.puzzleslib.api.event.v1.entity.EntityRidingEvents;
 import fuzs.puzzleslib.api.event.v1.entity.EntityTickEvents;
 import fuzs.puzzleslib.api.event.v1.entity.ServerEntityLevelEvents;
@@ -43,16 +45,19 @@ public class VehicleUpgrade implements ModConstructor {
         CalculateBlockBreakSpeedCallback.EVENT.register(AirborneMiningSpeedHandler::onCalculateBlockBreakSpeed);
         EntityRidingEvents.START.register(AirborneMiningSpeedHandler::onStartRiding);
         EntityRidingEvents.STOP.register(AirborneMiningSpeedHandler::onStopRiding);
-        PlayerInteractEvents.USE_ENTITY.register(VehicleUpgradeHandler::onUseEntity);
-        EntityRidingEvents.START.register(VehicleUpgradeHandler::onStartRiding);
         ServerEntityLevelEvents.LOAD.register(DismountingRestrictionHandler::onEntityLoad);
         EntityRidingEvents.STOP.register(DismountingRestrictionHandler::onStopRiding);
         LivingEquipmentChangeCallback.EVENT.register(DismountingRestrictionHandler::onLivingEquipmentChange);
         ServerEntityLevelEvents.LOAD.register(HorseUpgradeHandler::onEntityLoad);
         PlayerInteractEvents.USE_ENTITY.register(HorseUpgradeHandler::onUseEntity);
+        PlayerInteractEvents.USE_ENTITY.register(EventPhase.AFTER, MountInventoryHandler::onUseEntity);
+        ChangeEntitySizeCallback.EVENT.register(OverSizedBoatPassengersHandler::onChangeEntitySize);
+        EntityRidingEvents.START.register(OverSizedBoatPassengersHandler::onStartRiding);
+        EntityRidingEvents.STOP.register(OverSizedBoatPassengersHandler::onStopRiding);
         EntityTickEvents.START.register(SwimmingMountHandler::onStartEntityTick);
         EntityRidingEvents.STOP.register(SwimmingMountHandler::onStopRiding);
-        PlayerInteractEvents.USE_ENTITY.register(MountInventoryHandler::onUseEntity);
+        PlayerInteractEvents.USE_ENTITY.register(VehicleUpgradeHandler::onUseEntity);
+        EntityRidingEvents.START.register(VehicleUpgradeHandler::onStartRiding);
     }
 
     @Override

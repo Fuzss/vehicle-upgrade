@@ -33,4 +33,11 @@ public class ServerConfig implements ConfigCore {
     public boolean correctPassengerCollisions = true;
     @Config(description = "Using shears on a donkey, mule or llama allows for removing the equipped chest.")
     public boolean shearsRemoveChests = true;
+    @Config(description = "Update parts of horse behavior, like making grazing less disruptive to other actions, and preventing bucking while riding.")
+    public boolean upgradeHorseAi = true;
+    @Config(description = "Increase the horse head pitch offset while riding to improve visibility.")
+    @Config.DoubleRange(min = 0.0, max = 1.0)
+    public double lowerHorseHeadAmount = 0.5;
+    @Config(description = "Allow large mobs like horses to enter boats by shrinking them to an acceptable size when in the boat.")
+    public boolean shrinkOverSizedBoatPassengers = true;
 }

@@ -1,5 +1,5 @@
-// 1.21.8	2025-07-21T18:06:40.637657	Tags for minecraft:entity_type mod id vanilla
+// 1.21.8	2025-07-25T09:04:00.386649	Tags for minecraft:entity_type mod id vanilla
 537bf344b55b9e3ca92e1e9735a56de86f81b308 data/vehicleupgrade/tags/entity_type/can_equip_body_item.json
 d857ee42f7785df90bf853f4fb95130ee8a6b2d1 data/vehicleupgrade/tags/entity_type/custom_equipment_user.json
-30f314cb90ec89deecac36a46ca7784e183f26a9 data/vehicleupgrade/tags/entity_type/over_sized_vehicle_passengers.json
+62dfd553c048d548b5612c214c1c8541006a8dd6 data/vehicleupgrade/tags/entity_type/over_sized_boat_passengers.json
 651d28819984f8b2300833542e9ec5eaaad13714 data/vehicleupgrade/tags/entity_type/restricted_mounts.json

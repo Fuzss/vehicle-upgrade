@@ -1,5 +1,7 @@
 package fuzs.vehicleupgrade.mixin;
 
+import fuzs.vehicleupgrade.init.ModRegistry;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PlayerRideableJumping;
 import net.minecraft.world.entity.vehicle.AbstractBoat;
@@ -8,6 +10,9 @@ import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractBoat.class)
 abstract class AbstractBoatMixin extends VehicleEntity implements PlayerRideableJumping {
@@ -53,5 +58,12 @@ abstract class AbstractBoatMixin extends VehicleEntity implements PlayerRideable
     public float maxUpStep() {
         // this translates directly to the block height, so just enough to step up carpets, dirt path, soul sand, etc.
         return this.status == Boat.Status.ON_LAND || this.status == Boat.Status.IN_AIR ? 0.15F : super.maxUpStep();
+    }
+
+    @Inject(method = "hasEnoughSpaceFor", at = @At("HEAD"), cancellable = true)
+    public void hasEnoughSpaceFor(Entity entity, CallbackInfoReturnable<Boolean> callback) {
+        if (entity.getType().is(ModRegistry.OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG)) {
+            callback.setReturnValue(true);
+        }
     }
 }

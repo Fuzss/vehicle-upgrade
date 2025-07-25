@@ -47,16 +47,16 @@ public class VehicleUpgradeHandler {
         return EventResultHolder.pass();
     }
 
-    public static EventResult onStartRiding(Level level, Entity rider, Entity vehicle) {
+    public static EventResult onStartRiding(Level level, Entity passengerEntity, Entity vehicleEntity) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).rotateVehicleWithPlayer) {
             return EventResult.PASS;
         }
 
-        if (!vehicle.hasControllingPassenger() && rider instanceof Player player) {
-            vehicle.setYRot(player.getYRot());
-            vehicle.yRotO = player.getYRot();
+        if (!vehicleEntity.hasControllingPassenger() && passengerEntity instanceof Player player) {
+            vehicleEntity.setYRot(player.getYRot());
+            vehicleEntity.yRotO = player.getYRot();
 
-            if (vehicle instanceof LivingEntity livingEntity) {
+            if (vehicleEntity instanceof LivingEntity livingEntity) {
                 livingEntity.yBodyRot = livingEntity.yBodyRotO = player.yBodyRot;
                 livingEntity.yHeadRot = livingEntity.yHeadRotO = player.yHeadRot;
             }
