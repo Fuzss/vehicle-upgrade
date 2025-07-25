@@ -9,7 +9,7 @@ import fuzs.puzzleslib.api.client.event.v1.gui.ScreenKeyboardEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.ScreenMouseEvents;
 import fuzs.vehicleupgrade.client.gui.screens.inventory.EquipmentInventoryScreen;
 import fuzs.vehicleupgrade.client.handler.BoatItemViewHandler;
-import fuzs.vehicleupgrade.client.handler.DebugAttributesHandler;
+import fuzs.vehicleupgrade.client.handler.EntityAttributesHandler;
 import fuzs.vehicleupgrade.client.handler.MountInventoryButtonHandler;
 import fuzs.vehicleupgrade.client.handler.OpenMountInventoryHandler;
 import fuzs.vehicleupgrade.init.ModRegistry;
@@ -27,7 +27,8 @@ public class VehicleUpgradeClient implements ClientModConstructor {
     private static void registerEventHandler() {
         ClientTickEvents.START.register(BoatItemViewHandler::onStartClientTick);
         ClientTickEvents.END.register(BoatItemViewHandler::onEndClientTick);
-        GatherDebugInformationEvents.SYSTEM.register(DebugAttributesHandler::onGatherSystemInformation);
+        GatherDebugInformationEvents.SYSTEM.register(EntityAttributesHandler::onGatherSystemInformation);
+        ScreenEvents.afterRender(HorseInventoryScreen.class).register(EntityAttributesHandler::onAfterRender);
         ScreenEvents.afterInit(AbstractContainerScreen.class).register(MountInventoryButtonHandler::onAfterInit);
         ScreenMouseEvents.afterMouseClick(AbstractContainerScreen.class)
                 .register(MountInventoryButtonHandler::onAfterMouseClick);
@@ -36,9 +37,8 @@ public class VehicleUpgradeClient implements ClientModConstructor {
         ScreenKeyboardEvents.afterKeyPress(AbstractContainerScreen.class)
                 .register(MountInventoryButtonHandler::onAfterKeyPress);
         ScreenEvents.remove(AbstractContainerScreen.class).register(MountInventoryButtonHandler::onRemove);
-        ScreenKeyboardEvents.beforeKeyPress(Screen.class).register(OpenMountInventoryHandler::onBeforeKeyPress);
         ClientTickEvents.START.register(OpenMountInventoryHandler::onStartClientTick);
-        ScreenEvents.afterRender(HorseInventoryScreen.class).register(DebugAttributesHandler::onAfterRender);
+        ScreenKeyboardEvents.beforeKeyPress(Screen.class).register(OpenMountInventoryHandler::onBeforeKeyPress);
     }
 
     @Override

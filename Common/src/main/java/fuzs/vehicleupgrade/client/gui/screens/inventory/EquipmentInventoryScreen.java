@@ -1,6 +1,6 @@
 package fuzs.vehicleupgrade.client.gui.screens.inventory;
 
-import fuzs.vehicleupgrade.client.handler.DebugAttributesHandler;
+import fuzs.vehicleupgrade.client.handler.EntityAttributesHandler;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import fuzs.vehicleupgrade.world.inventory.EquipmentInventoryMenu;
 import net.minecraft.client.gui.GuiGraphics;
@@ -58,7 +58,7 @@ public class EquipmentInventoryScreen extends AbstractContainerScreen<EquipmentI
                     18);
         }
 
-        DebugAttributesHandler.renderMobAttributes(this, guiGraphics, mob);
+        EntityAttributesHandler.renderMobAttributes(this, guiGraphics, mob);
         InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics,
                 this.leftPos + 26,
                 this.topPos + 18,

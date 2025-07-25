@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DebugAttributesHandler {
+public class EntityAttributesHandler {
     static final String TARGETED_ENTITY_LINE = ChatFormatting.UNDERLINE + "Targeted Entity";
     private static final ResourceLocation ARMOR_FULL_SPRITE = ResourceLocation.withDefaultNamespace("hud/armor_full");
     private static final ResourceLocation HEART_VEHICLE_CONTAINER_SPRITE = ResourceLocation.withDefaultNamespace(
