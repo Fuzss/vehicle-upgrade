@@ -30,8 +30,11 @@ public class ModRegistry {
     static final TagFactory TAGS = TagFactory.make(VehicleUpgrade.MOD_ID);
     public static final TagKey<Block> RIDING_TRAVERSABLE_BLOCK_TAG = TAGS.registerBlockTag("riding_traversable");
     public static final TagKey<Item> HOLDABLE_WHILE_ROWING_ITEM_TAG = TAGS.registerItemTag("holdable_while_rowing");
+    public static final TagKey<EntityType<?>> HORSE_LIKE_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag("horse_like");
     public static final TagKey<EntityType<?>> RESTRICTED_MOUNTS_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(
             "restricted_mounts");
+    public static final TagKey<EntityType<?>> TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(
+            "traversable_mounts");
     public static final TagKey<EntityType<?>> CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(
             "custom_equipment_user");
     public static final TagKey<EntityType<?>> OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(

@@ -80,4 +80,8 @@ public class ServerConfig implements ConfigCore {
             description = "Increase the boat step height just enough to be able to row up carpets, path blocks, soul sand, etc."
     )
     public boolean increaseBoatStepHeight = true;
+    @Config(
+            description = "Allow the player to reach further than normal for interacting with blocks and entities while riding any vehicle."
+    )
+    public boolean increasePassengerInteractionRange = true;
 }

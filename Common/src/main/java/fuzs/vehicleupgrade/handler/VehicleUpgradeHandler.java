@@ -74,7 +74,8 @@ public class VehicleUpgradeHandler {
         if (CommonHelper.getMinecraftServer() == null
                 || !VehicleUpgrade.CONFIG.get(ServerConfig.class).mountsPassThroughLeaves) {
             return false;
-        } else if (entity != null && (entity.hasControllingPassenger() || entity.isPassenger())) {
+        } else if (entity != null && (entity.hasControllingPassenger() || entity.isPassenger()) && entity.getType()
+                .is(ModRegistry.TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG)) {
             return blockState.is(ModRegistry.RIDING_TRAVERSABLE_BLOCK_TAG);
         } else {
             return false;

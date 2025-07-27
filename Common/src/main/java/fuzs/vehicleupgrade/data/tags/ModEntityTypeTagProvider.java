@@ -16,7 +16,7 @@ public class ModEntityTypeTagProvider extends AbstractTagProvider<EntityType<?>>
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
-        this.tag(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)
+        this.tag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG)
                 .add(EntityType.HORSE,
                         EntityType.DONKEY,
                         EntityType.MULE,
@@ -24,9 +24,13 @@ public class ModEntityTypeTagProvider extends AbstractTagProvider<EntityType<?>>
                         EntityType.ZOMBIE_HORSE,
                         EntityType.LLAMA,
                         EntityType.TRADER_LLAMA,
-                        EntityType.CAMEL,
-                        EntityType.PIG,
-                        EntityType.STRIDER);
+                        EntityType.CAMEL);
+        this.tag(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)
+                .add(EntityType.PIG, EntityType.STRIDER)
+                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG);
+        this.tag(ModRegistry.TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG)
+                .add(EntityType.PIG, EntityType.STRIDER)
+                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)
                 .add(EntityType.WOLF, EntityType.PIG, EntityType.STRIDER, EntityType.HAPPY_GHAST);
         this.tag(ModRegistry.OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG)
