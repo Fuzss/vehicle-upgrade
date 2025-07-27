@@ -74,11 +74,25 @@ public class VehicleUpgradeHandler {
         if (CommonHelper.getMinecraftServer() == null
                 || !VehicleUpgrade.CONFIG.get(ServerConfig.class).mountsPassThroughLeaves) {
             return false;
-        } else if (entity != null && (entity.hasControllingPassenger() || entity.isPassenger()) && entity.getType()
-                .is(ModRegistry.TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG)) {
+        } else if (isTraversableEntity(entity)) {
             return blockState.is(ModRegistry.RIDING_TRAVERSABLE_BLOCK_TAG);
         } else {
             return false;
         }
+    }
+
+    private static boolean isTraversableEntity(@Nullable Entity entity) {
+        if (entity != null) {
+            if (entity.hasControllingPassenger() && entity.getType()
+                    .is(ModRegistry.TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG)) {
+                return true;
+            } else if (entity.isPassenger() && entity.getVehicle()
+                    .getType()
+                    .is(ModRegistry.TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

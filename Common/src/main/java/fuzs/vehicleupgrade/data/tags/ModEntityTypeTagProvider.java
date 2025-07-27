@@ -31,6 +31,9 @@ public class ModEntityTypeTagProvider extends AbstractTagProvider<EntityType<?>>
         this.tag(ModRegistry.TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG)
                 .add(EntityType.PIG, EntityType.STRIDER)
                 .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG);
+        this.tag(ModRegistry.TRANSLUCENT_MOUNTS_ENTITY_TYPE_TAG)
+                .add(EntityType.PIG, EntityType.STRIDER, EntityType.HAPPY_GHAST)
+                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)
                 .add(EntityType.WOLF, EntityType.PIG, EntityType.STRIDER, EntityType.HAPPY_GHAST);
         this.tag(ModRegistry.OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG)

@@ -35,6 +35,8 @@ public class ModRegistry {
             "restricted_mounts");
     public static final TagKey<EntityType<?>> TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(
             "traversable_mounts");
+    public static final TagKey<EntityType<?>> TRANSLUCENT_MOUNTS_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(
+            "translucent_mounts");
     public static final TagKey<EntityType<?>> CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(
             "custom_equipment_user");
     public static final TagKey<EntityType<?>> OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag(

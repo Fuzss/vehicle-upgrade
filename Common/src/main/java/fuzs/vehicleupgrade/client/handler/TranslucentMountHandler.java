@@ -5,6 +5,7 @@ import fuzs.puzzleslib.api.client.renderer.v1.RenderPropertyKey;
 import fuzs.puzzleslib.api.event.v1.core.EventResult;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ClientConfig;
+import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -31,7 +32,8 @@ public class TranslucentMountHandler {
             return;
         }
 
-        if (Minecraft.getInstance().screen != null) {
+        if (Minecraft.getInstance().screen != null || !entity.getType()
+                .is(ModRegistry.TRANSLUCENT_MOUNTS_ENTITY_TYPE_TAG)) {
             return;
         }
 

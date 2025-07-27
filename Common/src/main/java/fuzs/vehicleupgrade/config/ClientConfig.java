@@ -7,11 +7,9 @@ public class ClientConfig implements ConfigCore {
     static final String INVENTORY_CATEGORY = "inventory";
 
     @Config(
-            category = ServerConfig.BOAT_CATEGORY,
-            description = {
-                    "Allow rendering held items while rowing.",
-                    "The items this applies to are defined by a corresponding tag."
-            }
+            category = ServerConfig.BOAT_CATEGORY, description = {
+            "Allow rendering held items while rowing.", "The items this applies to are defined by a corresponding tag."
+    }
     )
     public boolean holdItemsWhileRowing = true;
     @Config(category = INVENTORY_CATEGORY, description = "The inventory to open first when riding a vehicle.")
@@ -39,6 +37,6 @@ public class ClientConfig implements ConfigCore {
             }
     )
     public boolean debugEntityAttributes = false;
-    @Config(description = "When looking down the current mount will begin to fade so what lies below can easily be seen.")
+    @Config(description = "When looking down the current mount will begin to fade so what lies below can easily be seen. Does not apply to non-living vehicles.")
     public boolean translucentMount = true;
 }
