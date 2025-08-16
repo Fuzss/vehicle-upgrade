@@ -16,3 +16,4 @@ accessible  field   net/minecraft/client/renderer/RenderType$CompositeRenderType
 accessible  field   net/minecraft/client/renderer/RenderType$CompositeRenderType    renderPipeline  Lcom/mojang/blaze3d/pipeline/RenderPipeline;
 accessible  field   net/minecraft/client/renderer/RenderType$CompositeState textureState    Lnet/minecraft/client/renderer/RenderStateShard$EmptyTextureStateShard;
 accessible  method  net/minecraft/client/renderer/RenderStateShard$EmptyTextureStateShard   cutoutTexture   ()Ljava/util/Optional;
+accessible  field   net/minecraft/world/entity/LivingEntity SPEED_MODIFIER_SPRINTING    Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;

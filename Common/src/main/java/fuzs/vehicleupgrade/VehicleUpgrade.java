@@ -56,6 +56,8 @@ public class VehicleUpgrade implements ModConstructor {
         EntityRidingEvents.STOP.register(OverSizedBoatPassengersHandler::onStopRiding);
         EntityRidingEvents.START.register(PassengerInteractionRangeHandler::onStartRiding);
         EntityRidingEvents.STOP.register(PassengerInteractionRangeHandler::onStopRiding);
+        EntityRidingEvents.START.register(SprintingMountHandler::onStartRiding);
+        EntityRidingEvents.STOP.register(SprintingMountHandler::onStopRiding);
         EntityTickEvents.START.register(SwimmingMountHandler::onStartEntityTick);
         EntityRidingEvents.STOP.register(SwimmingMountHandler::onStopRiding);
         PlayerInteractEvents.USE_ENTITY.register(VehicleUpgradeHandler::onUseEntity);

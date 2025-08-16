@@ -8,9 +8,11 @@
     "AbstractHorseMixin",
     "BlockStateBaseMixin",
     "EntityMixin",
-    "LeavesBlockMixin"
+    "LeavesBlockMixin",
+    "LivingEntityMixin"
   ],
   "client": [
+    "client.LocalPlayerMixin",
     "client.ModelMixin",
     "client.MultiBufferSource\u0024BufferSourceMixin"
   ],
