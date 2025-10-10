@@ -1,0 +1,9 @@
+{
+  "values": [
+    "#minecraft:can_equip_harness",
+    "#minecraft:can_wear_horse_armor",
+    "minecraft:llama",
+    "minecraft:trader_llama",
+    "minecraft:wolf"
+  ]
+}
