@@ -12,7 +12,6 @@
     "LivingEntityMixin"
   ],
   "client": [
-    "client.DebugEntryLookingAtEntityMixin",
     "client.LocalPlayerMixin",
     "client.SubmitNodeCollectionMixin"
   ],
