@@ -13,6 +13,8 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
@@ -116,15 +118,15 @@ public class MountInventoryButtonHandler {
         }
     }
 
-    public static void onAfterMouseClick(AbstractContainerScreen<?> screen, double mouseX, double mouseY, int mouseButton) {
+    public static void onAfterMouseClick(AbstractContainerScreen<?> screen, MouseButtonEvent mouseButtonEvent) {
         updatePlayerInventoryButtons(screen, playerInventoryButton);
     }
 
-    public static void onAfterKeyPress(AbstractContainerScreen<?> screen, int keyCode, int scanCode, int modifiers) {
+    public static void onAfterKeyPress(AbstractContainerScreen<?> screen, KeyEvent keyEvent) {
         updatePlayerInventoryButtons(screen, playerInventoryButton);
     }
 
-    public static void onAfterMouseRelease(AbstractContainerScreen<?> screen, double mouseX, double mouseY, int mouseButton) {
+    public static void onAfterMouseRelease(AbstractContainerScreen<?> screen, MouseButtonEvent mouseButtonEvent) {
         updatePlayerInventoryButtons(screen, playerInventoryButton);
     }
 

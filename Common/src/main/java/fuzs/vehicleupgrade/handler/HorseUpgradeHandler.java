@@ -14,7 +14,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityAttachment;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -63,7 +62,7 @@ public class HorseUpgradeHandler {
      * @see Entity#attemptToShearEquipment(Player, InteractionHand, ItemStack, Mob)
      */
     private static void shearChestEquipment(Player player, InteractionHand interactionHand, ItemStack itemInHand, AbstractChestedHorse chestedHorse) {
-        itemInHand.hurtAndBreak(1, player, LivingEntity.getSlotForHand(interactionHand));
+        itemInHand.hurtAndBreak(1, player, interactionHand.asEquipmentSlot());
         Vec3 vec3 = chestedHorse.getAttachments().getAverage(EntityAttachment.PASSENGER);
         chestedHorse.setChest(false);
         chestedHorse.gameEvent(GameEvent.SHEAR, player);

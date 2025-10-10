@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 
 public class OverSizedBoatPassengersHandler {
 
-    public static EventResultHolder<EntityDimensions> onChangeEntitySize(Entity entity, Pose pose, EntityDimensions entityDimensions) {
+    public static EventResultHolder<EntityDimensions> onRefreshEntityDimensions(Entity entity, Pose pose, EntityDimensions entityDimensions) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).shrinkOverSizedBoatPassengers) {
             return EventResultHolder.pass();
         }

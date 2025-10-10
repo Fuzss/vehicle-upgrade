@@ -12,9 +12,9 @@
     "LivingEntityMixin"
   ],
   "client": [
+    "client.DebugEntryLookingAtEntityMixin",
     "client.LocalPlayerMixin",
-    "client.ModelMixin",
-    "client.MultiBufferSource\u0024BufferSourceMixin"
+    "client.SubmitNodeCollectionMixin"
   ],
   "injectors": {
     "defaultRequire": 1

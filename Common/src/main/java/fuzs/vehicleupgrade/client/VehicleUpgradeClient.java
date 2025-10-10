@@ -3,9 +3,10 @@ package fuzs.vehicleupgrade.client;
 import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.api.client.core.v1.context.MenuScreensContext;
 import fuzs.puzzleslib.api.client.event.v1.ClientTickEvents;
-import fuzs.puzzleslib.api.client.event.v1.gui.*;
+import fuzs.puzzleslib.api.client.event.v1.gui.ScreenEvents;
+import fuzs.puzzleslib.api.client.event.v1.gui.ScreenKeyboardEvents;
+import fuzs.puzzleslib.api.client.event.v1.gui.ScreenMouseEvents;
 import fuzs.puzzleslib.api.client.event.v1.renderer.ExtractRenderStateCallback;
-import fuzs.puzzleslib.api.client.event.v1.renderer.RenderLivingEvents;
 import fuzs.vehicleupgrade.client.gui.screens.inventory.EquipmentInventoryScreen;
 import fuzs.vehicleupgrade.client.handler.*;
 import fuzs.vehicleupgrade.init.ModRegistry;
@@ -22,8 +23,8 @@ public class VehicleUpgradeClient implements ClientModConstructor {
     private static void registerEventHandler() {
         ClientTickEvents.START.register(BoatItemViewHandler::onStartClientTick);
         ClientTickEvents.END.register(BoatItemViewHandler::onEndClientTick);
-        GatherDebugInformationEvents.SYSTEM.register(EntityAttributesHandler::onGatherSystemInformation);
-        ContainerScreenEvents.BACKGROUND.register(EntityAttributesHandler::onDrawBackground);
+        ScreenEvents.afterBackground(AbstractContainerScreen.class)
+                .register(EntityAttributesHandler::onAfterBackground);
         ScreenEvents.afterInit(AbstractContainerScreen.class).register(MountInventoryButtonHandler::onAfterInit);
         ScreenMouseEvents.afterMouseClick(AbstractContainerScreen.class)
                 .register(MountInventoryButtonHandler::onAfterMouseClick);
@@ -35,8 +36,6 @@ public class VehicleUpgradeClient implements ClientModConstructor {
         ClientTickEvents.START.register(OpenMountInventoryHandler::onStartClientTick);
         ScreenKeyboardEvents.beforeKeyPress(Screen.class).register(OpenMountInventoryHandler::onBeforeKeyPress);
         ExtractRenderStateCallback.EVENT.register(TranslucentMountHandler::onExtractRenderState);
-        RenderLivingEvents.BEFORE.register(TranslucentMountHandler::onBeforeRenderEntity);
-        RenderLivingEvents.AFTER.register(TranslucentMountHandler::onAfterRenderEntity);
     }
 
     @Override

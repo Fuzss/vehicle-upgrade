@@ -6,9 +6,9 @@ import fuzs.puzzleslib.api.core.v1.context.EntityAttributesContext;
 import fuzs.puzzleslib.api.core.v1.context.PayloadTypesContext;
 import fuzs.puzzleslib.api.core.v1.utility.ResourceLocationHelper;
 import fuzs.puzzleslib.api.event.v1.core.EventPhase;
-import fuzs.puzzleslib.api.event.v1.entity.ChangeEntitySizeCallback;
 import fuzs.puzzleslib.api.event.v1.entity.EntityRidingEvents;
 import fuzs.puzzleslib.api.event.v1.entity.EntityTickEvents;
+import fuzs.puzzleslib.api.event.v1.entity.RefreshEntityDimensionsCallback;
 import fuzs.puzzleslib.api.event.v1.entity.ServerEntityLevelEvents;
 import fuzs.puzzleslib.api.event.v1.entity.living.LivingEquipmentChangeCallback;
 import fuzs.puzzleslib.api.event.v1.entity.player.CalculateBlockBreakSpeedCallback;
@@ -51,7 +51,7 @@ public class VehicleUpgrade implements ModConstructor {
         ServerEntityLevelEvents.LOAD.register(HorseUpgradeHandler::onEntityLoad);
         PlayerInteractEvents.USE_ENTITY.register(HorseUpgradeHandler::onUseEntity);
         PlayerInteractEvents.USE_ENTITY.register(EventPhase.AFTER, MountInventoryHandler::onUseEntity);
-        ChangeEntitySizeCallback.EVENT.register(OverSizedBoatPassengersHandler::onChangeEntitySize);
+        RefreshEntityDimensionsCallback.EVENT.register(OverSizedBoatPassengersHandler::onRefreshEntityDimensions);
         EntityRidingEvents.START.register(OverSizedBoatPassengersHandler::onStartRiding);
         EntityRidingEvents.STOP.register(OverSizedBoatPassengersHandler::onStopRiding);
         EntityRidingEvents.START.register(PassengerInteractionRangeHandler::onStartRiding);
@@ -75,6 +75,7 @@ public class VehicleUpgrade implements ModConstructor {
         if (VehicleUpgrade.CONFIG.get(CommonConfig.class).removePassengerMiningSpeedMalus) {
             context.registerAttribute(EntityType.PLAYER, ModRegistry.AIRBORNE_MINING_SPEED_ATTRIBUTE);
         }
+
         if (VehicleUpgrade.CONFIG.get(CommonConfig.class).increaseHorseStepHeight) {
             context.registerAttribute(EntityType.HORSE, Attributes.STEP_HEIGHT, 1.15);
             context.registerAttribute(EntityType.CAMEL, Attributes.STEP_HEIGHT, 1.15);

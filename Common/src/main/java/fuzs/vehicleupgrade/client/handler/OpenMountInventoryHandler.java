@@ -7,6 +7,7 @@ import fuzs.vehicleupgrade.config.VehicleInventory;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HasCustomInventoryScreen;
@@ -26,8 +27,8 @@ public class OpenMountInventoryHandler {
         }
     }
 
-    public static EventResult onBeforeKeyPress(Screen screen, int keyCode, int scanCode, int modifiers) {
-        if (screen.minecraft.options.keyInventory.matches(keyCode, scanCode)) {
+    public static EventResult onBeforeKeyPress(Screen screen, KeyEvent keyEvent) {
+        if (screen.minecraft.options.keyInventory.matches(keyEvent)) {
             VehicleInventory vehicleInventory = VehicleInventory.getInventory(screen);
 
             if (VehicleInventory.trigger(vehicleInventory, screen.minecraft, screen, false)) {

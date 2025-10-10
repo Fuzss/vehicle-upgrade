@@ -61,7 +61,7 @@ abstract class AbstractHorseMixin extends Animal {
     }
 
     @ModifyExpressionValue(method = "standIfPossible",
-            at = @At(value = "FIELD", target = "Lnet/minecraft/world/level/Level;isClientSide:Z"))
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;isClientSide()Z"))
     public boolean standIfPossible(boolean isClientSide) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi) {
             return isClientSide;

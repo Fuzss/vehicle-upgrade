@@ -21,19 +21,15 @@ public enum VehicleInventory {
             // fix mouse cursor position resetting as the old screen is closed before the new one is opened
             double xpos = minecraft.mouseHandler.xpos();
             double ypos = minecraft.mouseHandler.ypos();
-
             if (screen != null) {
                 screen.onClose();
             }
-            minecraft.setScreen(new InventoryScreen(minecraft.player));
 
+            minecraft.setScreen(new InventoryScreen(minecraft.player));
             if (screen != null && minecraft.screen != null) {
                 minecraft.mouseHandler.xpos = xpos;
                 minecraft.mouseHandler.ypos = ypos;
-                InputConstants.grabOrReleaseMouse(minecraft.getWindow().getWindow(),
-                        InputConstants.CURSOR_NORMAL,
-                        xpos,
-                        ypos);
+                InputConstants.grabOrReleaseMouse(minecraft.getWindow(), InputConstants.CURSOR_NORMAL, xpos, ypos);
             }
         }
 
@@ -51,7 +47,6 @@ public enum VehicleInventory {
 
             if (minecraft.player != null && minecraft.player.isPassenger()) {
                 Entity playerVehicle = minecraft.player.getVehicle();
-
                 if (playerVehicle instanceof HasCustomInventoryScreen) {
                     minecraft.player.sendOpenInventory();
                 } else if (playerVehicle.getType().is(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)) {

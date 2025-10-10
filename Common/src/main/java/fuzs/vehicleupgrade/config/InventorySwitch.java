@@ -1,6 +1,6 @@
 package fuzs.vehicleupgrade.config;
 
-import net.minecraft.client.gui.screens.Screen;
+import fuzs.puzzleslib.api.util.v1.CommonHelper;
 
 public enum InventorySwitch {
     NONE {
@@ -32,7 +32,7 @@ public enum InventorySwitch {
     CONTROL {
         @Override
         public boolean isActive() {
-            return Screen.hasControlDown();
+            return CommonHelper.hasControlDown();
         }
     };
 
