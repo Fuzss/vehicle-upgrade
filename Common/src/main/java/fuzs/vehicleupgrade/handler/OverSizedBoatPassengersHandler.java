@@ -2,12 +2,11 @@ package fuzs.vehicleupgrade.handler;
 
 import fuzs.puzzleslib.api.event.v1.core.EventResult;
 import fuzs.puzzleslib.api.event.v1.core.EventResultHolder;
+import fuzs.puzzleslib.api.util.v1.CommonHelper;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.server.TickTask;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.thread.BlockableEventLoop;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
@@ -47,19 +46,10 @@ public class OverSizedBoatPassengersHandler {
 
         if (vehicleEntity instanceof AbstractBoat && passengerEntity.getType()
                 .is(ModRegistry.OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG)) {
-            BlockableEventLoop<? super TickTask> blockableEventLoop = getBlockableEventLoop(level);
+            BlockableEventLoop<? super TickTask> blockableEventLoop = CommonHelper.getBlockableEventLoop(level);
             blockableEventLoop.schedule(new TickTask(0, passengerEntity::refreshDimensions));
         }
 
         return EventResult.PASS;
-    }
-
-    @Deprecated
-    private static BlockableEventLoop<? super TickTask> getBlockableEventLoop(Level level) {
-        if (level instanceof ServerLevel serverLevel) {
-            return serverLevel.getServer();
-        } else {
-            return Minecraft.getInstance();
-        }
     }
 }
