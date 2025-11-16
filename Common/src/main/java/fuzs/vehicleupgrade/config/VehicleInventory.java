@@ -41,9 +41,10 @@ public enum VehicleInventory {
     VEHICLE {
         @Override
         public void openInventory(Minecraft minecraft, @Nullable Screen screen) {
-            if (screen != null) {
-                screen.onClose();
-            }
+            // this resets the active container menu; but should not be necessary for the inventory, as that is handled fully client-side
+//            if (screen != null) {
+//                screen.onClose();
+//            }
 
             if (minecraft.player != null && minecraft.player.isPassenger()) {
                 Entity playerVehicle = minecraft.player.getVehicle();
@@ -86,7 +87,6 @@ public enum VehicleInventory {
     public static boolean trigger(VehicleInventory vehicleInventory, Minecraft minecraft, @Nullable Screen screen, boolean openAlways) {
         InventorySwitch inventorySwitch = VehicleUpgrade.CONFIG.get(ClientConfig.class).switchVehicleInventory;
         boolean isActive = inventorySwitch.isActive();
-
         if (inventorySwitch.isActive()) {
             vehicleInventory = vehicleInventory.getOpposite();
         } else {

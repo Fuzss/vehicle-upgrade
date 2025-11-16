@@ -25,21 +25,21 @@ public class ModEntityTypeTagProvider extends AbstractTagProvider<EntityType<?>>
                         EntityType.SKELETON_HORSE,
                         EntityType.TRADER_LLAMA,
                         EntityType.ZOMBIE_HORSE);
+        this.tag(ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG).add(EntityType.PIG, EntityType.STRIDER);
         this.tag(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)
-                .add(EntityType.PIG, EntityType.STRIDER)
-                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG);
+                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG)
-                .add(EntityType.PIG, EntityType.STRIDER)
-                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG);
+                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.TRANSLUCENT_MOUNTS_ENTITY_TYPE_TAG)
-                .add(EntityType.PIG, EntityType.STRIDER, EntityType.HAPPY_GHAST)
-                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG)
+                .add(EntityType.HAPPY_GHAST)
+                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG)
                 .addTag("c:boats");
         this.tag(ModRegistry.SPRINTING_MOUNTS_ENTITY_TYPE_TAG)
-                .add(EntityType.PIG, EntityType.STRIDER, EntityType.HAPPY_GHAST)
-                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG);
+                .add(EntityType.HAPPY_GHAST)
+                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)
-                .add(EntityType.WOLF, EntityType.PIG, EntityType.STRIDER, EntityType.HAPPY_GHAST);
+                .add(EntityType.WOLF, EntityType.HAPPY_GHAST)
+                .addTag(ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG)
                 .add(EntityType.CAMEL,
                         EntityType.DONKEY,
@@ -53,8 +53,12 @@ public class ModEntityTypeTagProvider extends AbstractTagProvider<EntityType<?>>
                         EntityType.TURTLE,
                         EntityType.ZOGLIN,
                         EntityType.ZOMBIE_HORSE);
+        this.tag(ModRegistry.CAN_WEAR_WOLF_ARMOR_ENTITY_TYPE_TAG).add(EntityType.WOLF);
+        this.tag(ModRegistry.CAN_EQUIP_CARPET_ENTITY_TYPE_TAG).add(EntityType.LLAMA, EntityType.TRADER_LLAMA);
         this.tag(ModRegistry.CAN_EQUIP_BODY_ITEM_ENTITY_TYPE_TAG)
-                .add(EntityType.WOLF, EntityType.LLAMA, EntityType.TRADER_LLAMA)
-                .addTag(EntityTypeTags.CAN_WEAR_HORSE_ARMOR, EntityTypeTags.CAN_EQUIP_HARNESS);
+                .addTag(EntityTypeTags.CAN_WEAR_HORSE_ARMOR,
+                        EntityTypeTags.CAN_EQUIP_HARNESS,
+                        ModRegistry.CAN_WEAR_WOLF_ARMOR_ENTITY_TYPE_TAG,
+                        ModRegistry.CAN_EQUIP_CARPET_ENTITY_TYPE_TAG);
     }
 }

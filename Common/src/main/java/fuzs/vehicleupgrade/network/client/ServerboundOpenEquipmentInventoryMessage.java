@@ -25,7 +25,9 @@ public record ServerboundOpenEquipmentInventoryMessage(int entityId) implements 
             public void accept(Context context) {
                 Entity entity = context.level().getEntity(ServerboundOpenEquipmentInventoryMessage.this.entityId);
                 if (entity != null) {
-                    MountInventoryHandler.openInventoryScreen(context.level(), entity, context.player());
+                    if (MountInventoryHandler.hasInventoryScreen(entity, context.player())) {
+                        MountInventoryHandler.openInventoryScreen(entity, context.player());
+                    }
                 }
             }
         };

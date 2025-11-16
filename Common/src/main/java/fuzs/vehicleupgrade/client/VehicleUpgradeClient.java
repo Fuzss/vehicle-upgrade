@@ -7,6 +7,7 @@ import fuzs.puzzleslib.api.client.event.v1.gui.ScreenEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.ScreenKeyboardEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.ScreenMouseEvents;
 import fuzs.puzzleslib.api.client.event.v1.renderer.ExtractRenderStateCallback;
+import fuzs.puzzleslib.api.client.event.v1.renderer.RenderLivingEvents;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.client.gui.components.debug.DebugEntryLookingAtAttributes;
 import fuzs.vehicleupgrade.client.gui.screens.inventory.EquipmentInventoryScreen;
@@ -38,7 +39,12 @@ public class VehicleUpgradeClient implements ClientModConstructor {
         ScreenEvents.remove(AbstractContainerScreen.class).register(MountInventoryButtonHandler::onRemove);
         ClientTickEvents.START.register(OpenMountInventoryHandler::onStartClientTick);
         ScreenKeyboardEvents.beforeKeyPress(Screen.class).register(OpenMountInventoryHandler::onBeforeKeyPress);
+        ScreenEvents.remove(Screen.class).register(OpenMountInventoryHandler::onRemove);
+        ScreenKeyboardEvents.beforeCharacterType(Screen.class)
+                .register(OpenMountInventoryHandler::onBeforeCharacterType);
+        ScreenKeyboardEvents.afterCharacterType(Screen.class).register(OpenMountInventoryHandler::onAfterCharacterType);
         ExtractRenderStateCallback.EVENT.register(TranslucentMountHandler::onExtractRenderState);
+        RenderLivingEvents.BEFORE.register(TranslucentMountHandler::onBeforeRenderEntity);
     }
 
     @Override

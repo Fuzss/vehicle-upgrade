@@ -45,7 +45,8 @@ abstract class AbstractHorseMixin extends Animal {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).mountsSwimInWater) {
             return super.getWaterSlowDown();
         } else {
-            return 0.92F;
+            // same as skeleton horse
+            return 0.96F;
         }
     }
 

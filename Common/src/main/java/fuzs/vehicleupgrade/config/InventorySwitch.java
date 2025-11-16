@@ -28,6 +28,11 @@ public enum InventorySwitch {
         public void reset() {
             this.inventoryTriggerTime = 7;
         }
+
+        @Override
+        public void stop() {
+            this.inventoryTriggerTime = 0;
+        }
     },
     CONTROL {
         @Override
@@ -43,6 +48,10 @@ public enum InventorySwitch {
     }
 
     public void reset() {
+        // NO-OP
+    }
+
+    public void stop() {
         // NO-OP
     }
 }

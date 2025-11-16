@@ -48,7 +48,12 @@ public class EquipmentInventoryScreen extends AbstractContainerScreen<EquipmentI
             }
         }
 
-        Mob mob = this.menu.getMob();
+        if (this.menu.mob != null) {
+            this.renderMobWithAttributes(guiGraphics, this.menu.mob);
+        }
+    }
+
+    protected void renderMobWithAttributes(GuiGraphics guiGraphics, Mob mob) {
         EntityAttributesHandler.renderMobAttributes(this, guiGraphics, mob);
         InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics,
                 this.leftPos + 26,

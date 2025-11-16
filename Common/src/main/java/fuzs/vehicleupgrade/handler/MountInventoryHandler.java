@@ -2,12 +2,10 @@ package fuzs.vehicleupgrade.handler;
 
 import fuzs.puzzleslib.api.container.v1.ContainerMenuHelper;
 import fuzs.puzzleslib.api.event.v1.core.EventResultHolder;
-import fuzs.puzzleslib.api.util.v1.InteractionResultHelper;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import fuzs.vehicleupgrade.world.inventory.EquipmentInventoryMenu;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,30 +16,43 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
+
 public class MountInventoryHandler {
 
     public static EventResultHolder<InteractionResult> onUseEntity(Player player, Level level, InteractionHand interactionHand, Entity entity) {
-        if (player.isSecondaryUseActive() && openInventoryScreen(level, entity, player)) {
-            return EventResultHolder.interrupt(InteractionResultHelper.SUCCESS);
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).openMobInventoryByInteracting) {
+            return EventResultHolder.pass();
+        }
+
+        if (player.isSecondaryUseActive() && hasInventoryScreen(entity, player)) {
+            if (player instanceof ServerPlayer serverPlayer) {
+                if (canBeLeashed(entity, player)) {
+                    return EventResultHolder.pass();
+                } else {
+                    openInventoryScreen(entity, serverPlayer);
+                }
+            }
+
+            return EventResultHolder.interrupt(InteractionResult.SUCCESS);
         } else {
             return EventResultHolder.pass();
         }
     }
 
-    public static boolean openInventoryScreen(Level level, Entity entity, Player player) {
-        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).openMobInventoryByInteracting) {
-            return false;
-        }
-
-        if (hasInventoryScreen(entity, player)) {
-            if (level instanceof ServerLevel) {
-                openInventoryScreen(entity, (ServerPlayer) player);
+    private static boolean canBeLeashed(Entity entity, Player player) {
+        if (entity instanceof Leashable leashable && leashable.canBeLeashed() && entity.isAlive() && !(
+                entity instanceof LivingEntity livingEntity && livingEntity.isBaby())) {
+            List<Leashable> list = Leashable.leashableInArea(entity,
+                    (Leashable leashableX) -> leashableX.getLeashHolder() == player);
+            for (Leashable currentLeashable : list) {
+                if (currentLeashable.canHaveALeashAttachedTo(entity)) {
+                    return true;
+                }
             }
-
-            return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public static boolean hasInventoryScreen(Entity vehicleEntity, Player player) {

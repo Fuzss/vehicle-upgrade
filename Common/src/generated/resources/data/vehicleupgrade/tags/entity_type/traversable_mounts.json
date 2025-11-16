@@ -1,7 +1,6 @@
 {
   "values": [
     "#vehicleupgrade:horse_like",
-    "minecraft:pig",
-    "minecraft:strider"
+    "#vehicleupgrade:item_steerable"
   ]
 }

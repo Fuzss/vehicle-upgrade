@@ -1,8 +1,7 @@
 {
   "values": [
     "minecraft:happy_ghast",
-    "minecraft:pig",
-    "minecraft:strider",
+    "#vehicleupgrade:item_steerable",
     "minecraft:wolf"
   ]
 }

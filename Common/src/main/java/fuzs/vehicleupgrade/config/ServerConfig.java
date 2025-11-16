@@ -26,10 +26,14 @@ public class ServerConfig implements ConfigCore {
     public boolean openMobInventoryByInteracting = true;
     @Config(description = {
             "Allows ridden mobs to pass though leaves with a slight slowdown and some fancy particles.",
-            "The blocks this applies to are defined by a corresponding tag."
+            "Optionally still allows for walking on ground leaves while making leaves at and above eye height passable (with some unfortunate quirks).",
+            "The blocks and entities this applies to are defined by corresponding tags."
     })
-    public boolean mountsPassThroughLeaves = true;
-    @Config(description = "Mobs that would otherwise throw off their rider when sinking in water are now able to swim while allowing the rider to stay.")
+    public LeavesMountCollisions mountsPassThroughLeaves = LeavesMountCollisions.ABOVE_FEET;
+    @Config(description = {
+            "Mobs that would otherwise throw off their rider when sinking in water are now able to swim while allowing the rider to stay mounted.",
+            "Additionally increases the swim speed of horses."
+    })
     public boolean mountsSwimInWater = true;
     @Config(description = {
             "When determining collisions for a vehicle, passengers are no longer ignored and are now properly taken into account.",
