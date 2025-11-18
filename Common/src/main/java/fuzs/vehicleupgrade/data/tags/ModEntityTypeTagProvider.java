@@ -32,8 +32,7 @@ public class ModEntityTypeTagProvider extends AbstractTagProvider<EntityType<?>>
                 .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.TRANSLUCENT_MOUNTS_ENTITY_TYPE_TAG)
                 .add(EntityType.HAPPY_GHAST)
-                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG)
-                .addTag("c:boats");
+                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.SPRINTING_MOUNTS_ENTITY_TYPE_TAG)
                 .add(EntityType.HAPPY_GHAST)
                 .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
