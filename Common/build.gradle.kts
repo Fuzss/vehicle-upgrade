@@ -8,13 +8,14 @@ dependencies {
 
 multiloader {
     mixins {
-        mixin("AbstractBoatMixin")
-        mixin("AbstractHorseMixin")
-        mixin("BlockStateBaseMixin")
-        mixin("EntityMixin")
-        mixin("LeavesBlockMixin")
-        mixin("LivingEntityMixin")
-        clientMixin("LocalPlayerMixin")
-        clientMixin("SubmitNodeCollectionMixin")
+        mixin(
+            "AbstractBoatMixin",
+            "AbstractHorseMixin",
+            "BlockStateBaseMixin",
+            "EntityMixin",
+            "LeavesBlockMixin",
+            "LivingEntityMixin"
+        )
+        clientMixin("LocalPlayerMixin", "SubmitNodeCollectionMixin")
     }
 }
