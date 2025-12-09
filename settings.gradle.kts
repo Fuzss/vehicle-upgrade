@@ -41,5 +41,5 @@ pluginManagement {
 }
 
 plugins {
-    id("fuzs.multiloader.conventions-settings") version providers.gradleProperty("project.multiloader-conventions")
+    id("fuzs.multiloader.multiloader-convention-plugins-settings") version providers.gradleProperty("project.plugins")
 }

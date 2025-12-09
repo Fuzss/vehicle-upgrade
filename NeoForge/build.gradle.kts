@@ -1,5 +1,5 @@
 plugins {
-    id("fuzs.multiloader.conventions-neoforge")
+    id("fuzs.multiloader.multiloader-convention-plugins-neoforge")
 }
 
 dependencies {

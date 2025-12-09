@@ -1,5 +1,5 @@
 plugins {
-    id("fuzs.multiloader.conventions-fabric")
+    id("fuzs.multiloader.multiloader-convention-plugins-fabric")
 }
 
 dependencies {
