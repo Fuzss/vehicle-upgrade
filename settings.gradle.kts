@@ -16,18 +16,6 @@ pluginManagement {
         exclusiveContent {
             forRepository {
                 maven {
-                    name = "Forge"
-                    url = uri("https://maven.minecraftforge.net/")
-                }
-            }
-            filter {
-                @Suppress("UnstableApiUsage")
-                includeGroupAndSubgroups("net.minecraftforge")
-            }
-        }
-        exclusiveContent {
-            forRepository {
-                maven {
                     name = "Fuzs Mod Resources"
                     url = uri("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
                 }
