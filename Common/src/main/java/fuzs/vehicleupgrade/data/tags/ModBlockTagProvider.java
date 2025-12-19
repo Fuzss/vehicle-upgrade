@@ -16,6 +16,6 @@ public class ModBlockTagProvider extends AbstractTagProvider<Block> {
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
-        this.tag(ModRegistry.RIDING_TRAVERSABLE_BLOCK_TAG).addTag(BlockTags.LEAVES);
+        this.add(ModRegistry.RIDING_TRAVERSABLE_BLOCK_TAG).addTag(BlockTags.LEAVES);
     }
 }

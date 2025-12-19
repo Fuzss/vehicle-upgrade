@@ -5,7 +5,6 @@ import fuzs.vehicleupgrade.world.inventory.EquipmentInventoryMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
@@ -26,8 +25,7 @@ public class EquipmentInventoryScreen extends AbstractContainerScreen<EquipmentI
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
-                HORSE_INVENTORY_LOCATION,
+        guiGraphics.blit(HORSE_INVENTORY_LOCATION,
                 this.leftPos,
                 this.topPos,
                 0,
@@ -39,12 +37,7 @@ public class EquipmentInventoryScreen extends AbstractContainerScreen<EquipmentI
 
         for (Slot slot : this.getMenu().slots) {
             if (slot.isActive() && !(slot.container instanceof Inventory)) {
-                guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED,
-                        SLOT_SPRITE,
-                        this.leftPos + slot.x - 1,
-                        this.topPos + slot.y - 1,
-                        18,
-                        18);
+                guiGraphics.blitSprite(SLOT_SPRITE, this.leftPos + slot.x - 1, this.topPos + slot.y - 1, 18, 18);
             }
         }
 

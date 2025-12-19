@@ -16,7 +16,7 @@ public class ModAttributeTagProvider extends AbstractTagProvider<Attribute> {
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
-        this.tag(ModRegistry.DEBUG_ATTRIBUTES_ATTRIBUTE_TAG)
+        this.add(ModRegistry.DEBUG_ATTRIBUTES_ATTRIBUTE_TAG)
                 .add(Attributes.ARMOR.value(),
                         Attributes.ARMOR_TOUGHNESS.value(),
                         Attributes.ATTACK_DAMAGE.value(),

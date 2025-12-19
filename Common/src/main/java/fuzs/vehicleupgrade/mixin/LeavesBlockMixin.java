@@ -4,7 +4,6 @@ import fuzs.vehicleupgrade.handler.VehicleUpgradeHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
@@ -21,7 +20,7 @@ abstract class LeavesBlockMixin extends Block {
     }
 
     @Override
-    protected void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity, InsideBlockEffectApplier effectApplier, boolean intersectsPosition) {
+    protected void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
         if (VehicleUpgradeHandler.isRidingTraversable(blockState, entity)) {
             entity.makeStuckInBlock(blockState, new Vec3(0.9, 1.5, 0.9));
             if (level.isClientSide()) {
@@ -31,7 +30,7 @@ abstract class LeavesBlockMixin extends Block {
                 }
             }
         } else {
-            super.entityInside(blockState, level, blockPos, entity, effectApplier, intersectsPosition);
+            super.entityInside(blockState, level, blockPos, entity);
         }
     }
 

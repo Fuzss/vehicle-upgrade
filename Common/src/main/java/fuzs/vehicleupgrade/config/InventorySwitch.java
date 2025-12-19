@@ -1,6 +1,6 @@
 package fuzs.vehicleupgrade.config;
 
-import fuzs.puzzleslib.api.util.v1.CommonHelper;
+import fuzs.puzzleslib.api.core.v1.Proxy;
 
 public enum InventorySwitch {
     NONE {
@@ -37,7 +37,7 @@ public enum InventorySwitch {
     CONTROL {
         @Override
         public boolean isActive() {
-            return CommonHelper.hasControlDown();
+            return Proxy.INSTANCE.hasControlDown();
         }
     };
 

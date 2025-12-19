@@ -9,11 +9,9 @@ accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    oOffHand
 accessible  method  net/minecraft/world/entity/vehicle/VehicleEntity    getDropItem ()Lnet/minecraft/world/item/Item;
 accessible  field   net/minecraft/client/gui/screens/inventory/HorseInventoryScreen horse   Lnet/minecraft/world/entity/animal/horse/AbstractHorse;
 accessible  field   net/minecraft/world/entity/ai/goal/RandomStrollGoal speedModifier   D
-accessible  method  net/minecraft/world/entity/Mob  canShearEquipment   (Lnet/minecraft/world/entity/player/Player;)Z
 accessible  field   net/minecraft/client/MouseHandler   xpos    D
 accessible  field   net/minecraft/client/MouseHandler   ypos    D
 accessible  field   net/minecraft/client/renderer/RenderType$CompositeRenderType    state   Lnet/minecraft/client/renderer/RenderType$CompositeState;
-accessible  field   net/minecraft/client/renderer/RenderType$CompositeRenderType    renderPipeline  Lcom/mojang/blaze3d/pipeline/RenderPipeline;
 accessible  field   net/minecraft/client/renderer/RenderType$CompositeState textureState    Lnet/minecraft/client/renderer/RenderStateShard$EmptyTextureStateShard;
 accessible  method  net/minecraft/client/renderer/RenderStateShard$EmptyTextureStateShard   cutoutTexture   ()Ljava/util/Optional;
 accessible  field   net/minecraft/world/entity/LivingEntity SPEED_MODIFIER_SPRINTING    Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;

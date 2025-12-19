@@ -12,6 +12,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.vehicle.AbstractBoat;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.Level;
 
 public class OverSizedBoatPassengersHandler {
@@ -21,7 +22,7 @@ public class OverSizedBoatPassengersHandler {
             return EventResultHolder.pass();
         }
 
-        if (entity.getVehicle() instanceof AbstractBoat && entity.getType()
+        if (entity.getVehicle() instanceof Boat && entity.getType()
                 .is(ModRegistry.OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG)) {
             // this is the ideal size where a player controlling the boat can still use items by not being inside the other passenger's hitbox
             return EventResultHolder.interrupt(entityDimensions.scale(Math.min(0.875F / entityDimensions.width(), 1.0F),
@@ -44,10 +45,10 @@ public class OverSizedBoatPassengersHandler {
             return EventResult.PASS;
         }
 
-        if (vehicleEntity instanceof AbstractBoat && passengerEntity.getType()
+        if (vehicleEntity instanceof Boat && passengerEntity.getType()
                 .is(ModRegistry.OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG)) {
             BlockableEventLoop<? super TickTask> blockableEventLoop = CommonHelper.getBlockableEventLoop(level);
-            blockableEventLoop.schedule(new TickTask(0, passengerEntity::refreshDimensions));
+            blockableEventLoop.tell(new TickTask(0, passengerEntity::refreshDimensions));
         }
 
         return EventResult.PASS;

@@ -64,7 +64,7 @@ public class DismountingRestrictionHandler {
     }
 
     private static void setHomePosition(Mob mob) {
-        if (mob.isSaddled()) {
+        if (mob instanceof Saddleable saddleable && saddleable.isSaddled()) {
             mob.setHomeTo(mob.blockPosition(), (int) (mob.leashElasticDistance() - 1.0));
             mob.getNavigation().stop();
         } else {

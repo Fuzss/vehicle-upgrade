@@ -7,7 +7,6 @@ import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PlayerRideableJumping;
-import net.minecraft.world.entity.vehicle.AbstractBoat;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.level.Level;
@@ -17,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(AbstractBoat.class)
+@Mixin(Boat.class)
 abstract class AbstractBoatMixin extends VehicleEntity implements PlayerRideableJumping {
     @Shadow
     private Boat.Status status;

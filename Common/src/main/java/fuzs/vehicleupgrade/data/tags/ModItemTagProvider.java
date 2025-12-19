@@ -16,6 +16,6 @@ public class ModItemTagProvider extends AbstractTagProvider<Item> {
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
-        this.tag(ModRegistry.HOLDABLE_WHILE_ROWING_ITEM_TAG).add(Items.FILLED_MAP);
+        this.add(ModRegistry.HOLDABLE_WHILE_ROWING_ITEM_TAG).add(Items.FILLED_MAP);
     }
 }

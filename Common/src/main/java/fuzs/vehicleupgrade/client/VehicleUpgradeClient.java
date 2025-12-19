@@ -40,10 +40,10 @@ public class VehicleUpgradeClient implements ClientModConstructor {
         ClientTickEvents.START.register(OpenMountInventoryHandler::onStartClientTick);
         ScreenKeyboardEvents.beforeKeyPress(Screen.class).register(OpenMountInventoryHandler::onBeforeKeyPress);
         ScreenEvents.remove(Screen.class).register(OpenMountInventoryHandler::onRemove);
-        ScreenKeyboardEvents.beforeCharacterType(Screen.class)
-                .register(OpenMountInventoryHandler::onBeforeCharacterType);
-        ScreenKeyboardEvents.afterCharacterType(Screen.class).register(OpenMountInventoryHandler::onAfterCharacterType);
-        ExtractRenderStateCallback.EVENT.register(TranslucentMountHandler::onExtractRenderState);
+//        ScreenKeyboardEvents.beforeCharacterType(Screen.class)
+//                .register(OpenMountInventoryHandler::onBeforeCharacterType);
+//        ScreenKeyboardEvents.afterCharacterType(Screen.class).register(OpenMountInventoryHandler::onAfterCharacterType);
+//        ExtractRenderStateCallback.EVENT.register(TranslucentMountHandler::onExtractRenderState);
         RenderLivingEvents.BEFORE.register(TranslucentMountHandler::onBeforeRenderEntity);
     }
 

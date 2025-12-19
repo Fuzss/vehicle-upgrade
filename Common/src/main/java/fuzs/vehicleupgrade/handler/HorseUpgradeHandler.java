@@ -6,14 +6,13 @@ import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import fuzs.vehicleupgrade.world.entity.ai.goal.HorseEatingGoal;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityAttachment;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
@@ -45,7 +44,7 @@ public class HorseUpgradeHandler {
         }
 
         if (entity instanceof AbstractChestedHorse chestedHorse && chestedHorse.hasChest()) {
-            if (!player.isSecondaryUseActive() && chestedHorse.canShearEquipment(player)) {
+            if (!player.isSecondaryUseActive() && !chestedHorse.isVehicle()) {
                 ItemStack itemInHand = player.getItemInHand(interactionHand);
 
                 if (itemInHand.is(ModRegistry.SHEAR_TOOLS_ITEM_TAG)) {
@@ -62,15 +61,15 @@ public class HorseUpgradeHandler {
      * @see Entity#attemptToShearEquipment(Player, InteractionHand, ItemStack, Mob)
      */
     private static void shearChestEquipment(Player player, InteractionHand interactionHand, ItemStack itemInHand, AbstractChestedHorse chestedHorse) {
-        itemInHand.hurtAndBreak(1, player, interactionHand.asEquipmentSlot());
-        Vec3 vec3 = chestedHorse.getAttachments().getAverage(EntityAttachment.PASSENGER);
+        itemInHand.hurtAndBreak(1, player, LivingEntity.getSlotForHand(interactionHand));
+        Vec3 vec3 = chestedHorse.getAttachments().get(EntityAttachment.PASSENGER, 0, chestedHorse.getYRot());
         chestedHorse.setChest(false);
         chestedHorse.gameEvent(GameEvent.SHEAR, player);
-        chestedHorse.playSound(SoundEvents.SHEARS_SNIP);
+        chestedHorse.playSound(SoundEvents.SNOW_GOLEM_SHEAR);
         if (chestedHorse.level() instanceof ServerLevel serverLevel) {
             ItemStack itemStack = new ItemStack(Items.CHEST);
-            chestedHorse.spawnAtLocation(serverLevel, itemStack, vec3);
-            CriteriaTriggers.PLAYER_SHEARED_EQUIPMENT.trigger((ServerPlayer) player, itemStack, chestedHorse);
+            chestedHorse.spawnAtLocation(itemStack, (float) vec3.y());
+//            CriteriaTriggers.PLAYER_SHEARED_EQUIPMENT.trigger((ServerPlayer) player, itemStack, chestedHorse);
         }
     }
 }
