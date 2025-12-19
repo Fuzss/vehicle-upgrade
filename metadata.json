@@ -1,0 +1,54 @@
+{
+    "mod": {
+        "id": "vehicleupgrade",
+        "group": "fuzs.vehicleupgrade",
+        "name": "Vehicle Upgrade",
+        "version": "21.10.2",
+        "authors": [
+            "Fuzs"
+        ],
+        "description": "Bring tons of quality-of-life improvements to your rides. Enjoy more reliable, and more capable mounts.",
+        "license": "MPL-2.0"
+    },
+    "dependencies": [
+        {
+            "name": "fabricapi",
+            "platform": "fabric",
+            "type": "required"
+        },
+        {
+            "name": "forgeconfigapiport",
+            "platform": "fabric",
+            "type": "required"
+        },
+        {
+            "name": "puzzleslib",
+            "platform": "common",
+            "type": "required"
+        }
+    ],
+    "links": [
+        {
+            "name": "curseforge",
+            "slug": "vehicle-upgrade",
+            "id": "1369699"
+        },
+        {
+            "name": "github",
+            "slug": "vehicleupgrade"
+        },
+        {
+            "name": "modrinth",
+            "slug": "vehicle-upgrade",
+            "id": "9B9c6QcJ"
+        }
+    ],
+    "environments": {
+        "client": "required",
+        "server": "required"
+    },
+    "platforms": [
+        "fabric",
+        "neoforge"
+    ]
+}
