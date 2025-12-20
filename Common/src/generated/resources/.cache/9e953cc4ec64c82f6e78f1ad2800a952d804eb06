@@ -1,4 +1,6 @@
-// 1.21.10	2025-11-18T16:36:39.109855	Tags for minecraft:entity_type mod id vanilla
+// 1.21.11	2025-12-20T11:19:08.678968	Tags for minecraft:entity_type mod id vanilla
+3c7c1deb9bba5d0904b3f54586d45c5aa32c5eee data/minecraft/tags/entity_type/can_float_while_ridden.json
+c7584ed31d1a8f4d3954d4871900a40d58b5083c data/minecraft/tags/entity_type/dismounts_underwater.json
 e1255115d90c1574a4766bdfb1ae20db3fac2c07 data/vehicleupgrade/tags/entity_type/can_equip_body_item.json
 f4a1a1b7238d9094eed269d1557d8ff7d41935fc data/vehicleupgrade/tags/entity_type/can_equip_carpet.json
 7de65935b0b39ff2ffe91074550ac77e9fae7a84 data/vehicleupgrade/tags/entity_type/can_wear_wolf_armor.json

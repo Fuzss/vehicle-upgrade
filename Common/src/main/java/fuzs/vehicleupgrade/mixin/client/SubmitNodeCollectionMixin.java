@@ -3,16 +3,16 @@ package fuzs.vehicleupgrade.mixin.client;
 import com.llamalad7.mixinextras.sugar.Local;
 import fuzs.puzzleslib.api.client.renderer.v1.RenderStateExtraData;
 import fuzs.vehicleupgrade.client.handler.TranslucentMountHandler;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.SubmitNodeCollection;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.rendertype.RenderSetup;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.util.ARGB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-import java.util.Optional;
 import java.util.OptionalInt;
 
 @Mixin(SubmitNodeCollection.class)
@@ -24,12 +24,10 @@ abstract class SubmitNodeCollectionMixin {
             OptionalInt alpha = RenderStateExtraData.getOrDefault(entityRenderState,
                     TranslucentMountHandler.VEHICLE_ALPHA_KEY,
                     OptionalInt.empty());
-            if (alpha.isPresent() && renderType instanceof RenderType.CompositeRenderType compositeRenderType) {
-                if (compositeRenderType.renderPipeline.getBlendFunction().isEmpty()) {
-                    Optional<ResourceLocation> cutoutTexture = compositeRenderType.state.textureState.cutoutTexture();
-                    if (cutoutTexture.isPresent()) {
-                        return RenderType.entityTranslucent(cutoutTexture.get());
-                    }
+            if (alpha.isPresent() && renderType.state.pipeline.getBlendFunction().isEmpty()) {
+                if (renderType.state.textures.containsKey("Sampler0")) {
+                    RenderSetup.TextureBinding textureBinding = renderType.state.textures.get("Sampler0");
+                    return RenderTypes.entityTranslucent(textureBinding.location());
                 }
             }
         }

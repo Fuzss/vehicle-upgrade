@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.world.entity.ai.goal;
 
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.EnumSet;

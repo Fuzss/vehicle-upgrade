@@ -8,6 +8,7 @@ dependencies {
 
 multiloader {
     mixins {
+        plugin.set("${project.group}.mixin.MixinConfigPluginImpl")
         mixin(
             "AbstractBoatMixin",
             "AbstractHorseMixin",
@@ -16,6 +17,6 @@ multiloader {
             "LeavesBlockMixin",
             "LivingEntityMixin"
         )
-        clientMixin("LocalPlayerMixin", "SubmitNodeCollectionMixin")
+        clientMixin("AbstractMountInventoryScreenMixin", "LocalPlayerMixin", "SubmitNodeCollectionMixin")
     }
 }

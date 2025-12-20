@@ -12,7 +12,7 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HasCustomInventoryScreen;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public enum VehicleInventory {
     PLAYER {
@@ -71,8 +71,8 @@ public enum VehicleInventory {
     }
 
     public static VehicleInventory getInventory(@Nullable MultiPlayerGameMode gameMode) {
-        // do not alter vanilla behaviour;
-        // we still open to the player inventory for mobs that have their inventory screen added by us
+        // Do not alter vanilla behaviour for mobs that do not have a server-controlled inventory.
+        // This means we still open to the player inventory for mobs that have their inventory screen added by us.
         if (gameMode != null && gameMode.isServerControlledInventory()) {
             return VehicleUpgrade.CONFIG.get(ClientConfig.class).defaultVehicleInventory;
         } else {

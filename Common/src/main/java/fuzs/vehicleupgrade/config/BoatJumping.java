@@ -1,6 +1,6 @@
 package fuzs.vehicleupgrade.config;
 
-import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.entity.vehicle.boat.Boat;
 
 public enum BoatJumping {
     NEVER {

@@ -31,11 +31,6 @@ public class ServerConfig implements ConfigCore {
     })
     public LeavesMountCollisions mountsPassThroughLeaves = LeavesMountCollisions.ABOVE_FEET;
     @Config(description = {
-            "Mobs that would otherwise throw off their rider when sinking in water are now able to swim while allowing the rider to stay mounted.",
-            "Additionally increases the swim speed of horses."
-    })
-    public boolean mountsSwimInWater = true;
-    @Config(description = {
             "When determining collisions for a vehicle, passengers are no longer ignored and are now properly taken into account.",
             "Due to Minecraft's quirky physics engine this behavior will still break when moving quickly or purposefully glitching into corners."
     })
@@ -43,10 +38,11 @@ public class ServerConfig implements ConfigCore {
     @Config(category = HORSE_CATEGORY,
             description = "Using shears on a donkey, mule or llama allows for removing the equipped chest.")
     public boolean shearsRemoveChests = true;
-    @Config(category = HORSE_CATEGORY,
-            description = "Update horse behavior, like making grazing less disruptive to other actions, and preventing bucking while riding.",
-            worldRestart = true)
-    public boolean upgradeHorseAi = true;
+    @Config(category = HORSE_CATEGORY, description = {
+            "Update horse behavior, like making grazing less disruptive to other actions, and preventing bucking while riding.",
+            "Additionally increases the swim speed of horses. Also prevents charging the jump bar while swimming."
+    }, worldRestart = true)
+    public boolean smarterHorseBehavior = true;
     @Config(category = HORSE_CATEGORY,
             description = "Increase the horse head pitch offset while riding to improve visibility.")
     @Config.DoubleRange(min = 0.0, max = 1.0)

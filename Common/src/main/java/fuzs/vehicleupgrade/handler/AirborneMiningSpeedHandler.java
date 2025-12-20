@@ -5,7 +5,7 @@ import fuzs.puzzleslib.api.event.v1.data.MutableFloat;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.CommonConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class AirborneMiningSpeedHandler {
-    public static final ResourceLocation RIDING_ATTRIBUTE_MODIFIER_ID = VehicleUpgrade.id("riding");
+    public static final Identifier RIDING_ATTRIBUTE_MODIFIER_ID = VehicleUpgrade.id("riding");
     private static final AttributeModifier RIDING_ATTRIBUTE_MODIFIER = new AttributeModifier(
             RIDING_ATTRIBUTE_MODIFIER_ID,
             4.0,
@@ -26,7 +26,7 @@ public class AirborneMiningSpeedHandler {
         }
 
         if (!player.onGround()) {
-            breakSpeed.mapFloat((Float value) -> value * (float) (
+            breakSpeed.mapAsFloat((Float value) -> value * (float) (
                     player.getAttributeValue(ModRegistry.AIRBORNE_MINING_SPEED_ATTRIBUTE) * 5.0));
         }
 

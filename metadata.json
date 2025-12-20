@@ -3,7 +3,7 @@
         "id": "vehicleupgrade",
         "group": "fuzs.vehicleupgrade",
         "name": "Vehicle Upgrade",
-        "version": "21.10.2",
+        "version": "21.11.0",
         "authors": [
             "Fuzs"
         ],
@@ -13,29 +13,36 @@
     "dependencies": [
         {
             "name": "fabricapi",
-            "platform": "fabric",
-            "type": "required"
+            "type": "required",
+            "platforms": [
+                "fabric"
+            ]
         },
         {
             "name": "forgeconfigapiport",
-            "platform": "fabric",
-            "type": "required"
+            "type": "required",
+            "platforms": [
+                "fabric"
+            ]
         },
         {
             "name": "puzzleslib",
-            "platform": "common",
-            "type": "required"
+            "type": "required",
+            "platforms": [
+                "fabric",
+                "neoforge"
+            ]
         }
     ],
     "links": [
         {
+            "name": "github",
+            "slug": "vehicleupgrade"
+        },
+        {
             "name": "curseforge",
             "slug": "vehicle-upgrade",
             "id": "1369699"
-        },
-        {
-            "name": "github",
-            "slug": "vehicleupgrade"
         },
         {
             "name": "modrinth",

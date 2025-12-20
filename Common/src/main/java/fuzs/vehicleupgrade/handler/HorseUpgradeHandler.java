@@ -15,8 +15,8 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityAttachment;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.animal.equine.AbstractChestedHorse;
+import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -27,7 +27,7 @@ import net.minecraft.world.phys.Vec3;
 public class HorseUpgradeHandler {
 
     public static EventResult onEntityLoad(Entity entity, ServerLevel serverLevel, boolean isNewlySpawned) {
-        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).smarterHorseBehavior) {
             return EventResult.PASS;
         }
 

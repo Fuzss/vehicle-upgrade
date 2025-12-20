@@ -7,9 +7,9 @@ import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PlayerRideableJumping;
-import net.minecraft.world.entity.vehicle.AbstractBoat;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
+import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
+import net.minecraft.world.entity.vehicle.boat.Boat;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -39,7 +39,7 @@ abstract class AbstractBoatMixin extends VehicleEntity implements PlayerRideable
                 playerJumpScale = 0.4F + 0.4F * Math.max(jumpPower, 0.0F) / 90.0F;
             }
 
-            this.hasImpulse = true;
+            this.needsSync = true;
             // same as Entity::maxStepUp, allows for carpets, dirt path, soul sand, etc.
             this.setDeltaMovement(this.getDeltaMovement().add(0.0, playerJumpScale * 0.325, 0.0));
         }

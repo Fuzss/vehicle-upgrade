@@ -7,10 +7,10 @@ import fuzs.puzzleslib.api.client.event.v1.gui.ScreenEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.ScreenKeyboardEvents;
 import fuzs.puzzleslib.api.client.event.v1.gui.ScreenMouseEvents;
 import fuzs.puzzleslib.api.client.event.v1.renderer.ExtractRenderStateCallback;
-import fuzs.puzzleslib.api.client.event.v1.renderer.RenderLivingEvents;
+import fuzs.puzzleslib.api.client.event.v1.renderer.SubmitLivingEntityEvents;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.client.gui.components.debug.DebugEntryLookingAtAttributes;
-import fuzs.vehicleupgrade.client.gui.screens.inventory.EquipmentInventoryScreen;
+import fuzs.vehicleupgrade.client.gui.screens.inventory.MountInventoryScreen;
 import fuzs.vehicleupgrade.client.handler.*;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.client.gui.components.debug.DebugScreenEntries;
@@ -44,7 +44,7 @@ public class VehicleUpgradeClient implements ClientModConstructor {
                 .register(OpenMountInventoryHandler::onBeforeCharacterType);
         ScreenKeyboardEvents.afterCharacterType(Screen.class).register(OpenMountInventoryHandler::onAfterCharacterType);
         ExtractRenderStateCallback.EVENT.register(TranslucentMountHandler::onExtractRenderState);
-        RenderLivingEvents.BEFORE.register(TranslucentMountHandler::onBeforeRenderEntity);
+        SubmitLivingEntityEvents.BEFORE.register(TranslucentMountHandler::onBeforeSubmitLivingEntity);
     }
 
     @Override
@@ -57,6 +57,6 @@ public class VehicleUpgradeClient implements ClientModConstructor {
 
     @Override
     public void onRegisterMenuScreens(MenuScreensContext context) {
-        context.registerMenuScreen(ModRegistry.EQUIPMENT_USER_MENU_TYPE.value(), EquipmentInventoryScreen::new);
+        context.registerMenuScreen(ModRegistry.EQUIPMENT_USER_MENU_TYPE.value(), MountInventoryScreen::new);
     }
 }

@@ -16,6 +16,8 @@ public class ModEntityTypeTagProvider extends AbstractTagProvider<EntityType<?>>
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
+        this.tag(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN).add(EntityType.LLAMA, EntityType.PIG, EntityType.TRADER_LLAMA);
+        this.tag(EntityTypeTags.DISMOUNTS_UNDERWATER).removeTag(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN);
         this.tag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG)
                 .add(EntityType.CAMEL,
                         EntityType.DONKEY,

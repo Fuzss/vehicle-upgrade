@@ -3,12 +3,12 @@ package fuzs.vehicleupgrade.init;
 import fuzs.puzzleslib.api.init.v3.registry.RegistryManager;
 import fuzs.puzzleslib.api.init.v3.tags.TagFactory;
 import fuzs.vehicleupgrade.VehicleUpgrade;
-import fuzs.vehicleupgrade.world.inventory.EquipmentInventoryMenu;
-import net.minecraft.Util;
+import fuzs.vehicleupgrade.world.inventory.MountInventoryMenu;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Util;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Leashable;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -23,9 +23,9 @@ public class ModRegistry {
             "airborne_mining_speed",
             () -> new RangedAttribute(Util.makeDescriptionId(Registries.elementsDirPath(Registries.ATTRIBUTE),
                     REGISTRIES.makeKey("airborne_mining_speed")), 0.2, 0.0, 20.0).setSyncable(true));
-    public static final Holder.Reference<MenuType<EquipmentInventoryMenu>> EQUIPMENT_USER_MENU_TYPE = REGISTRIES.registerMenuType(
+    public static final Holder.Reference<MenuType<MountInventoryMenu>> EQUIPMENT_USER_MENU_TYPE = REGISTRIES.registerMenuType(
             "equipment_user",
-            EquipmentInventoryMenu::new,
+            MountInventoryMenu::new,
             ByteBufCodecs.INT);
 
     static final TagFactory TAGS = TagFactory.make(VehicleUpgrade.MOD_ID);

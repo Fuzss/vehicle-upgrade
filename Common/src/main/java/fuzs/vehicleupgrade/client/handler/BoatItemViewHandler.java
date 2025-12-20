@@ -34,6 +34,7 @@ public class BoatItemViewHandler {
                 if (ItemStack.matches(mainHandItem, currentMainHandItem)) {
                     mainHandItem = currentMainHandItem;
                 }
+
                 float attackStrengthScale = minecraft.player.getAttackStrengthScale(1.0F);
                 mainHandHeight += Mth.clamp((mainHandItem == currentMainHandItem ?
                                 attackStrengthScale * attackStrengthScale * attackStrengthScale : 0.0F) - mainHandHeight,
@@ -42,9 +43,11 @@ public class BoatItemViewHandler {
                 if (mainHandHeight < 0.1F) {
                     mainHandItem = currentMainHandItem;
                 }
+
                 itemInHandRenderer.mainHandHeight = mainHandHeight;
                 itemInHandRenderer.mainHandItem = mainHandItem;
             }
+
             if (lastOffHandItem.is(ModRegistry.HOLDABLE_WHILE_ROWING_ITEM_TAG)) {
                 float offHandHeight = itemInHandRenderer.oOffHandHeight;
                 ItemStack offHandItem = lastOffHandItem;
@@ -58,6 +61,7 @@ public class BoatItemViewHandler {
                 if (offHandHeight < 0.1F) {
                     offHandItem = currentOffHandItem;
                 }
+
                 itemInHandRenderer.offHandHeight = offHandHeight;
                 itemInHandRenderer.offHandItem = offHandItem;
             }

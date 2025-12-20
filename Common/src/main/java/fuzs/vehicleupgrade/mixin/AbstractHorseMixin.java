@@ -4,67 +4,76 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.PlayerRideableJumping;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AbstractHorse.class)
-abstract class AbstractHorseMixin extends Animal {
+abstract class AbstractHorseMixin extends Animal implements PlayerRideableJumping {
 
     protected AbstractHorseMixin(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
 
     @ModifyExpressionValue(method = "isImmobile",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/horse/AbstractHorse;isEating()Z"))
+                           at = @At(value = "INVOKE",
+                                    target = "Lnet/minecraft/world/entity/animal/equine/AbstractHorse;isEating()Z"))
     public boolean isImmobile$0(boolean isEating) {
-        return !VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi;
+        return !VehicleUpgrade.CONFIG.get(ServerConfig.class).smarterHorseBehavior;
     }
 
     @ModifyExpressionValue(method = "isImmobile",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/horse/AbstractHorse;isStanding()Z"))
+                           at = @At(value = "INVOKE",
+                                    target = "Lnet/minecraft/world/entity/animal/equine/AbstractHorse;isStanding()Z"))
     public boolean isImmobile$1(boolean isStanding) {
-        return !VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi;
+        return !VehicleUpgrade.CONFIG.get(ServerConfig.class).smarterHorseBehavior;
     }
 
     @ModifyExpressionValue(method = "aiStep",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/animal/horse/AbstractHorse;canEatGrass()Z"))
+                           at = @At(value = "INVOKE",
+                                    target = "Lnet/minecraft/world/entity/animal/equine/AbstractHorse;canEatGrass()Z"))
     public boolean aiStep(boolean canEatGrass) {
-        return !VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi;
+        return !VehicleUpgrade.CONFIG.get(ServerConfig.class).smarterHorseBehavior;
     }
 
     @Override
     protected float getWaterSlowDown() {
-        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).mountsSwimInWater) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).smarterHorseBehavior) {
             return super.getWaterSlowDown();
         } else {
-            // same as skeleton horse
-            return 0.96F;
+            if (this.getType().is(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN)) {
+                // By default, this value is 0.8; skeleton horses use 0.96.
+                return 0.92F;
+            } else {
+                return super.getWaterSlowDown();
+            }
         }
     }
 
-    @Inject(method = {"onPlayerJump", "handleStartJump"}, at = @At("HEAD"), cancellable = true)
-    public void handleStartJump(CallbackInfo callback) {
-        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).mountsSwimInWater) {
-            return;
+    @Override
+    public int getJumpCooldown() {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).smarterHorseBehavior) {
+            return PlayerRideableJumping.super.getJumpCooldown();
         }
 
-        if (this.isInLiquid()) {
-            callback.cancel();
+        if (this.getType().is(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN) && this.isInWater()) {
+            // A negative number will still allow the normal jump bar to render but also prevents charging it.
+            return -1;
+        } else {
+            return PlayerRideableJumping.super.getJumpCooldown();
         }
     }
 
     @ModifyExpressionValue(method = "standIfPossible",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;isClientSide()Z"))
+                           at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;isClientSide()Z"))
     public boolean standIfPossible(boolean isClientSide) {
-        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).smarterHorseBehavior) {
             return isClientSide;
         }
 

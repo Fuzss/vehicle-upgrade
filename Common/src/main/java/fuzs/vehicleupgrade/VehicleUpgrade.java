@@ -4,10 +4,8 @@ import fuzs.puzzleslib.api.config.v3.ConfigHolder;
 import fuzs.puzzleslib.api.core.v1.ModConstructor;
 import fuzs.puzzleslib.api.core.v1.context.EntityAttributesContext;
 import fuzs.puzzleslib.api.core.v1.context.PayloadTypesContext;
-import fuzs.puzzleslib.api.core.v1.utility.ResourceLocationHelper;
 import fuzs.puzzleslib.api.event.v1.core.EventPhase;
 import fuzs.puzzleslib.api.event.v1.entity.EntityRidingEvents;
-import fuzs.puzzleslib.api.event.v1.entity.EntityTickEvents;
 import fuzs.puzzleslib.api.event.v1.entity.RefreshEntityDimensionsCallback;
 import fuzs.puzzleslib.api.event.v1.entity.ServerEntityLevelEvents;
 import fuzs.puzzleslib.api.event.v1.entity.living.LivingEquipmentChangeCallback;
@@ -19,7 +17,7 @@ import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.handler.*;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import fuzs.vehicleupgrade.network.client.ServerboundOpenEquipmentInventoryMessage;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.slf4j.Logger;
@@ -58,8 +56,6 @@ public class VehicleUpgrade implements ModConstructor {
         EntityRidingEvents.STOP.register(PassengerInteractionRangeHandler::onStopRiding);
         EntityRidingEvents.START.register(SprintingMountHandler::onStartRiding);
         EntityRidingEvents.STOP.register(SprintingMountHandler::onStopRiding);
-        EntityTickEvents.START.register(SwimmingMountHandler::onStartEntityTick);
-        EntityRidingEvents.STOP.register(SwimmingMountHandler::onStopRiding);
         PlayerInteractEvents.USE_ENTITY.register(VehicleUpgradeHandler::onUseEntity);
         EntityRidingEvents.START.register(VehicleUpgradeHandler::onStartRiding);
     }
@@ -88,7 +84,7 @@ public class VehicleUpgrade implements ModConstructor {
         }
     }
 
-    public static ResourceLocation id(String path) {
-        return ResourceLocationHelper.fromNamespaceAndPath(MOD_ID, path);
+    public static Identifier id(String path) {
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 }

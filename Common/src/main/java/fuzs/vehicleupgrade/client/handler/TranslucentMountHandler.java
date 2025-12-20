@@ -18,8 +18,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 import java.util.OptionalInt;
 
@@ -44,7 +42,7 @@ public class TranslucentMountHandler {
         }
     }
 
-    public static <T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> EventResult onBeforeRenderEntity(S renderState, LivingEntityRenderer<T, S, M> entityRenderer, float partialTick, PoseStack poseStack, SubmitNodeCollector nodeCollector) {
+    public static <T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> EventResult onBeforeSubmitLivingEntity(S renderState, LivingEntityRenderer<T, S, M> entityRenderer, PoseStack poseStack, SubmitNodeCollector nodeCollector) {
         // not good to modify the render state during rendering,
         // but we cannot access the render state earlier with the changes made to it by inventory rendering which we depend upon for detection
         if (isRenderingInInventory(renderState)) {
@@ -55,11 +53,13 @@ public class TranslucentMountHandler {
     }
 
     /**
-     * @see net.minecraft.client.gui.screens.inventory.InventoryScreen#renderEntityInInventory(GuiGraphics, int, int,
-     *         int, int, float, Vector3f, Quaternionf, Quaternionf, LivingEntity)
+     * @see net.minecraft.client.gui.screens.inventory.InventoryScreen#renderEntityInInventoryFollowsMouse(GuiGraphics,
+     *         int, int, int, int, int, float, float, float, LivingEntity)
      */
-    private static boolean isRenderingInInventory(EntityRenderState renderState) {
-        return renderState.lightCoords == 15728880 && renderState.hitboxesRenderState == null
-                && renderState.shadowPieces.isEmpty() && renderState.outlineColor == 0;
+    private static boolean isRenderingInInventory(EntityRenderState entityRenderState) {
+        return entityRenderState.lightCoords == 15728880 && entityRenderState.shadowPieces.isEmpty()
+                && entityRenderState.outlineColor == 0 && (
+                !(entityRenderState instanceof LivingEntityRenderState livingEntityRenderState)
+                        || livingEntityRenderState.scale == 1.0F);
     }
 }

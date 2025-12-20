@@ -5,13 +5,13 @@ import fuzs.puzzleslib.api.event.v1.core.EventResultHolder;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
-import fuzs.vehicleupgrade.world.inventory.EquipmentInventoryMenu;
+import fuzs.vehicleupgrade.world.inventory.MountInventoryMenu;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -93,7 +93,7 @@ public class MountInventoryHandler {
                 .is(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)) {
             ContainerMenuHelper.openMenu(serverPlayer,
                     new SimpleMenuProvider((int containerId, Inventory inventory, Player player) -> {
-                        return new EquipmentInventoryMenu(containerId, inventory, mob);
+                        return new MountInventoryMenu(containerId, inventory, mob);
                     }, mob.getDisplayName()),
                     mob.getId());
         }
