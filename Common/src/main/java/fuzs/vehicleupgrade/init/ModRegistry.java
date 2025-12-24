@@ -44,7 +44,7 @@ public class ModRegistry {
     public static final TagKey<Item> HOLDABLE_WHILE_ROWING_ITEM_TAG = TAGS.registerItemTag("holdable_while_rowing");
     /**
      * Mobs that are implemented similarly to horses (via extending
-     * {@link net.minecraft.world.entity.animal.horse.AbstractHorse}).
+     * {@link net.minecraft.world.entity.animal.equine.AbstractHorse}).
      */
     public static final TagKey<EntityType<?>> HORSE_LIKE_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag("horse_like");
     /**
@@ -80,7 +80,7 @@ public class ModRegistry {
     /**
      * Mobs that can be made to sprint by a riding player, just like the player normally would when on foot.
      * <p>
-     * In vanilla, this behavior is only enabled for {@link net.minecraft.world.entity.animal.horse.Llama llamas}.
+     * In vanilla, this behavior is only enabled for {@link net.minecraft.world.entity.animal.equine.Llama llamas}.
      *
      * @see fuzs.vehicleupgrade.config.ServerConfig#sprintWhileRiding
      */
