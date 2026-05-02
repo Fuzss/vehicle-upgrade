@@ -1,6 +1,6 @@
 package fuzs.vehicleupgrade.fabric;
 
-import fuzs.vehicleupgrade.VehicleUpgrade;
+import fuzs.vehicleupgrade.common.VehicleUpgrade;
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
 import net.fabricmc.api.ModInitializer;
 

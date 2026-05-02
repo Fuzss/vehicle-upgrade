@@ -1,4 +1,4 @@
-// 1.21.11	2025-12-20T11:19:08.678968	Tags for minecraft:entity_type mod id vanilla
+// 26.1.2	2026-05-02T14:43:49.863167	Tags for minecraft:entity_type mod id vanilla
 3c7c1deb9bba5d0904b3f54586d45c5aa32c5eee data/minecraft/tags/entity_type/can_float_while_ridden.json
 c7584ed31d1a8f4d3954d4871900a40d58b5083c data/minecraft/tags/entity_type/dismounts_underwater.json
 e1255115d90c1574a4766bdfb1ae20db3fac2c07 data/vehicleupgrade/tags/entity_type/can_equip_body_item.json
@@ -11,4 +11,4 @@ bdc33bb40f6b31aa2146b6fbea4c69b81d832f90 data/vehicleupgrade/tags/entity_type/cu
 82e83e516d30c74cf2eac86f91b9f3ff38629e90 data/vehicleupgrade/tags/entity_type/restricted_mounts.json
 2590db63aa6a84aa280b3540bdf879d4f18c2ed1 data/vehicleupgrade/tags/entity_type/sprinting_mounts.json
 2590db63aa6a84aa280b3540bdf879d4f18c2ed1 data/vehicleupgrade/tags/entity_type/translucent_mounts.json
-82e83e516d30c74cf2eac86f91b9f3ff38629e90 data/vehicleupgrade/tags/entity_type/traversable_mounts.json
+82e83e516d30c74cf2eac86f91b9f3ff38629e90 data/vehicleupgrade/tags/entity_type/traversing_mounts.json

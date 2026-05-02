@@ -1,0 +1,19 @@
+package fuzs.vehicleupgrade.common.config;
+
+import fuzs.puzzleslib.common.api.config.v3.Config;
+import fuzs.puzzleslib.common.api.config.v3.ConfigCore;
+
+public class CommonConfig implements ConfigCore {
+    @Config(description = "Prevent a slower block breaking speed caused by the player not standing on the ground while riding any vehicle.",
+            gameRestart = true)
+    public boolean removePassengerMiningSpeedMalus = true;
+    @Config(category = ServerConfig.HORSE_CATEGORY,
+            description = "Set the step height for all horses above one block to be able to run up from path blocks, farmland, etc.",
+            gameRestart = true)
+    public boolean increaseHorseStepHeight = true;
+    @Config(description = {
+            "Makes speed and slowness mob effects provide flying speed in addition to movement speed.",
+            "This allows mobs such as the happy ghast and bees to benefit from these effects."
+    }, gameRestart = true)
+    public boolean speedMobEffectsGrantFlyingSpeed = true;
+}

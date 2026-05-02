@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.fabric.client;
 
-import fuzs.vehicleupgrade.VehicleUpgrade;
-import fuzs.vehicleupgrade.client.VehicleUpgradeClient;
+import fuzs.vehicleupgrade.common.VehicleUpgrade;
+import fuzs.vehicleupgrade.common.client.VehicleUpgradeClient;
 import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import net.fabricmc.api.ClientModInitializer;
 
