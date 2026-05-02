@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    modApi(libs.puzzleslib.common)
+    modApi(sharedLibs.puzzleslib.common)
 }
 
 multiloader {

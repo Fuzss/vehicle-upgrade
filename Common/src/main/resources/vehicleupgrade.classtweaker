@@ -1,4 +1,4 @@
-accessWidener   v2  named
+classTweaker    v2  official
 accessible  field   net/minecraft/world/entity/animal/equine/AbstractHorse  playerJumpPendingScale  F
 accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    mainHandItem    Lnet/minecraft/world/item/ItemStack;
 accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    offHandItem Lnet/minecraft/world/item/ItemStack;
