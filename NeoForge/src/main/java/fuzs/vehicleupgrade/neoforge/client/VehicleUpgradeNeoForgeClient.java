@@ -2,7 +2,7 @@ package fuzs.vehicleupgrade.neoforge.client;
 
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.client.VehicleUpgradeClient;
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.Mod;
 

@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.client.handler;
 
-import fuzs.puzzleslib.api.client.gui.v2.tooltip.TooltipBuilder;
-import fuzs.puzzleslib.api.core.v1.ModLoaderEnvironment;
+import fuzs.puzzleslib.common.api.client.gui.v2.tooltip.TooltipBuilder;
+import fuzs.puzzleslib.common.api.core.v1.ModLoaderEnvironment;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ClientConfig;
 import fuzs.vehicleupgrade.config.VehicleInventory;
@@ -19,8 +19,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.CreativeModeTabs;
-import org.jspecify.annotations.Nullable;
 import org.joml.Vector2i;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.Objects;
@@ -38,9 +38,10 @@ public class MountInventoryButtonHandler {
     @Nullable
     private static Button playerInventoryButton;
 
-    public static void onAfterInit(Minecraft minecraft, AbstractContainerScreen<?> screen, int screenWidth, int screenHeight, List<AbstractWidget> widgets, UnaryOperator<AbstractWidget> addWidget, Consumer<AbstractWidget> removeWidget) {
+    public static void onAfterInit(AbstractContainerScreen<?> screen, int screenWidth, int screenHeight, List<AbstractWidget> widgets, UnaryOperator<AbstractWidget> addWidget, Consumer<AbstractWidget> removeWidget) {
         // check the screen, both inventory screens open consecutively for creative, survival will falsely override the creative button then
-        if (minecraft.screen == screen && OpenMountInventoryHandler.isServerControlledInventory(minecraft.player)) {
+        if (screen.minecraft.screen == screen
+                && OpenMountInventoryHandler.isServerControlledInventory(screen.minecraft.player)) {
             playerInventoryButton = createPlayerInventoryButton(screen);
             updatePlayerInventoryButtons(screen, playerInventoryButton);
             if (playerInventoryButton != null) {

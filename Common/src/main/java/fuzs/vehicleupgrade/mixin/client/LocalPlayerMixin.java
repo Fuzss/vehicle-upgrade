@@ -20,12 +20,12 @@ abstract class LocalPlayerMixin extends AbstractClientPlayer {
     }
 
     @ModifyExpressionValue(method = "vehicleCanSprint",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;canSprint()Z"))
+                           at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;canSprint()Z"))
     private boolean vehicleCanSprint(boolean canSprint, Entity vehicle) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).sprintWhileRiding) {
             return canSprint;
         } else {
-            return canSprint || vehicle.getType().is(ModRegistry.SPRINTING_MOUNTS_ENTITY_TYPE_TAG);
+            return canSprint || vehicle.is(ModRegistry.SPRINTING_MOUNTS_ENTITY_TYPE_TAG);
         }
     }
 }

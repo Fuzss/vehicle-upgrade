@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.handler;
 
-import fuzs.puzzleslib.api.container.v1.ContainerMenuHelper;
-import fuzs.puzzleslib.api.event.v1.core.EventResultHolder;
+import fuzs.puzzleslib.common.api.container.v1.ContainerMenuHelper;
+import fuzs.puzzleslib.common.api.event.v1.core.EventResultHolder;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
@@ -15,12 +15,13 @@ import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
 public class MountInventoryHandler {
 
-    public static EventResultHolder<InteractionResult> onUseEntity(Player player, Level level, InteractionHand interactionHand, Entity entity) {
+    public static EventResultHolder<InteractionResult> onUseEntity(Player player, Level level, InteractionHand interactionHand, Entity entity, Vec3 hitVector) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).openMobInventoryByInteracting) {
             return EventResultHolder.pass();
         }
@@ -82,15 +83,15 @@ public class MountInventoryHandler {
     }
 
     private static boolean hasEquipmentScreen(Entity vehicleEntity) {
-        return vehicleEntity instanceof Mob mob && mob.getType().is(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)
-                && (mob.isSaddled() || mob.isWearingBodyArmor());
+        return vehicleEntity instanceof Mob mob && mob.is(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG) && (
+                mob.isSaddled() || mob.isWearingBodyArmor());
     }
 
     public static void openInventoryScreen(Entity vehicleEntity, ServerPlayer serverPlayer) {
         if (vehicleEntity instanceof HasCustomInventoryScreen hasCustomInventoryScreen) {
             hasCustomInventoryScreen.openCustomInventoryScreen(serverPlayer);
-        } else if (vehicleEntity instanceof Mob mob && vehicleEntity.getType()
-                .is(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)) {
+        } else if (vehicleEntity instanceof Mob mob
+                && vehicleEntity.is(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)) {
             ContainerMenuHelper.openMenu(serverPlayer,
                     new SimpleMenuProvider((int containerId, Inventory inventory, Player player) -> {
                         return new MountInventoryMenu(containerId, inventory, mob);

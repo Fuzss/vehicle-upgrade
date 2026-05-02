@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.config;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import fuzs.puzzleslib.api.network.v4.MessageSender;
+import fuzs.puzzleslib.common.api.network.v4.MessageSender;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import fuzs.vehicleupgrade.network.client.ServerboundOpenEquipmentInventoryMessage;
@@ -47,11 +47,11 @@ public enum VehicleInventory {
 //            }
 
             if (minecraft.player != null && minecraft.player.isPassenger()) {
-                Entity playerVehicle = minecraft.player.getVehicle();
-                if (playerVehicle instanceof HasCustomInventoryScreen) {
+                Entity vehicle = minecraft.player.getVehicle();
+                if (vehicle instanceof HasCustomInventoryScreen) {
                     minecraft.player.sendOpenInventory();
-                } else if (playerVehicle.getType().is(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)) {
-                    MessageSender.broadcast(new ServerboundOpenEquipmentInventoryMessage(playerVehicle.getId()));
+                } else if (vehicle != null && vehicle.is(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)) {
+                    MessageSender.broadcast(new ServerboundOpenEquipmentInventoryMessage(vehicle.getId()));
                 }
             }
         }

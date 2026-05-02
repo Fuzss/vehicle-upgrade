@@ -76,7 +76,7 @@ abstract class AbstractBoatMixin extends VehicleEntity implements PlayerRideable
             return;
         }
 
-        if (entity.getType().is(ModRegistry.OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG)) {
+        if (entity.is(ModRegistry.OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG)) {
             callback.setReturnValue(true);
         }
     }

@@ -6,11 +6,11 @@ accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    mainHand
 accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    offHandHeight   F
 accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    oMainHandHeight F
 accessible  field   net/minecraft/client/renderer/ItemInHandRenderer    oOffHandHeight  F
-accessible  method  net/minecraft/world/entity/vehicle/VehicleEntity    getDropItem ()Lnet/minecraft/world/item/Item;
 accessible  field   net/minecraft/client/gui/screens/inventory/AbstractMountInventoryScreen inventoryColumns    I
 accessible  field   net/minecraft/client/gui/screens/inventory/AbstractMountInventoryScreen mount   Lnet/minecraft/world/entity/LivingEntity;
 accessible  field   net/minecraft/world/entity/ai/goal/RandomStrollGoal speedModifier   D
 accessible  method  net/minecraft/world/entity/Mob  canShearEquipment   (Lnet/minecraft/world/entity/player/Player;)Z
+accessible  method  net/minecraft/world/entity/animal/wolf/Wolf canShearEquipment   (Lnet/minecraft/world/entity/player/Player;)Z
 accessible  field   net/minecraft/client/MouseHandler   xpos    D
 accessible  field   net/minecraft/client/MouseHandler   ypos    D
 accessible  field   net/minecraft/client/renderer/rendertype/RenderType state   Lnet/minecraft/client/renderer/rendertype/RenderSetup;

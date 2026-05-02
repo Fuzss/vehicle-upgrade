@@ -1,6 +1,6 @@
 package fuzs.vehicleupgrade.handler;
 
-import fuzs.puzzleslib.api.event.v1.core.EventResult;
+import fuzs.puzzleslib.common.api.event.v1.core.EventResult;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
@@ -49,7 +49,7 @@ public class SprintingMountHandler {
      * @see net.minecraft.client.player.LocalPlayer#vehicleCanSprint(Entity)
      */
     private static boolean vehicleCanSprint(Entity vehicle) {
-        return !vehicle.canSprint() && vehicle.getType().is(ModRegistry.SPRINTING_MOUNTS_ENTITY_TYPE_TAG)
+        return !vehicle.canSprint() && vehicle.is(ModRegistry.SPRINTING_MOUNTS_ENTITY_TYPE_TAG)
                 && vehicle.isLocalInstanceAuthoritative();
     }
 

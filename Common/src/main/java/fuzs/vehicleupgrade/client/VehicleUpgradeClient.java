@@ -1,13 +1,13 @@
 package fuzs.vehicleupgrade.client;
 
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
-import fuzs.puzzleslib.api.client.core.v1.context.MenuScreensContext;
-import fuzs.puzzleslib.api.client.event.v1.ClientTickEvents;
-import fuzs.puzzleslib.api.client.event.v1.gui.ScreenEvents;
-import fuzs.puzzleslib.api.client.event.v1.gui.ScreenKeyboardEvents;
-import fuzs.puzzleslib.api.client.event.v1.gui.ScreenMouseEvents;
-import fuzs.puzzleslib.api.client.event.v1.renderer.ExtractRenderStateCallback;
-import fuzs.puzzleslib.api.client.event.v1.renderer.SubmitLivingEntityEvents;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.common.api.client.core.v1.context.MenuScreensContext;
+import fuzs.puzzleslib.common.api.client.event.v1.ClientTickEvents;
+import fuzs.puzzleslib.common.api.client.event.v1.gui.ScreenEvents;
+import fuzs.puzzleslib.common.api.client.event.v1.gui.ScreenKeyboardEvents;
+import fuzs.puzzleslib.common.api.client.event.v1.gui.ScreenMouseEvents;
+import fuzs.puzzleslib.common.api.client.event.v1.renderer.ExtractEntityRenderStateCallback;
+import fuzs.puzzleslib.common.api.client.event.v1.renderer.SubmitLivingEntityEvents;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.client.gui.components.debug.DebugEntryLookingAtAttributes;
 import fuzs.vehicleupgrade.client.gui.screens.inventory.MountInventoryScreen;
@@ -43,7 +43,7 @@ public class VehicleUpgradeClient implements ClientModConstructor {
         ScreenKeyboardEvents.beforeCharacterType(Screen.class)
                 .register(OpenMountInventoryHandler::onBeforeCharacterType);
         ScreenKeyboardEvents.afterCharacterType(Screen.class).register(OpenMountInventoryHandler::onAfterCharacterType);
-        ExtractRenderStateCallback.EVENT.register(TranslucentMountHandler::onExtractRenderState);
+        ExtractEntityRenderStateCallback.EVENT.register(TranslucentMountHandler::onExtractEntityRenderState);
         SubmitLivingEntityEvents.BEFORE.register(TranslucentMountHandler::onBeforeSubmitLivingEntity);
     }
 

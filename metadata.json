@@ -1,9 +1,10 @@
 {
+    "minecraft": "26.1.2",
     "mod": {
         "id": "vehicleupgrade",
         "group": "fuzs.vehicleupgrade",
         "name": "Vehicle Upgrade",
-        "version": "21.11.1",
+        "version": "26.1.0",
         "authors": [
             "Fuzs"
         ],
@@ -36,13 +37,13 @@
     ],
     "links": [
         {
-            "name": "github",
-            "slug": "vehicleupgrade"
-        },
-        {
             "name": "curseforge",
             "slug": "vehicle-upgrade",
             "id": "1369699"
+        },
+        {
+            "name": "github",
+            "slug": "vehicle-upgrade"
         },
         {
             "name": "modrinth",

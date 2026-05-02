@@ -2,7 +2,7 @@ package fuzs.vehicleupgrade.client.handler;
 
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ClientConfig;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.AbstractMountInventoryScreen;
 import net.minecraft.data.AtlasIds;
@@ -16,7 +16,7 @@ public class EntityAttributesHandler {
     private static final Identifier ARMOR_FULL_SPRITE = Identifier.withDefaultNamespace("hud/armor_full");
     private static final Identifier HEART_VEHICLE_FULL_SPRITE = VehicleUpgrade.id("hud/heart/vehicle_full");
 
-    public static void onAfterBackground(AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public static void onAfterBackground(AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         if (!VehicleUpgrade.CONFIG.get(ClientConfig.class).mobAttributesInInventory) {
             return;
         }
@@ -56,8 +56,8 @@ public class EntityAttributesHandler {
                 .append(getValueComponent(maxValue, identifier));
     }
 
-    private static void submitAttributeComponent(AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, Component component, int posX, int posY) {
-        guiGraphics.drawString(screen.getFont(),
+    private static void submitAttributeComponent(AbstractContainerScreen<?> screen, GuiGraphicsExtractor guiGraphics, Component component, int posX, int posY) {
+        guiGraphics.text(screen.getFont(),
                 component,
                 screen.leftPos + posX - screen.getFont().width(component) / 2,
                 screen.topPos + posY,

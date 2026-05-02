@@ -1,6 +1,6 @@
 package fuzs.vehicleupgrade.handler;
 
-import fuzs.puzzleslib.api.event.v1.core.EventResult;
+import fuzs.puzzleslib.common.api.event.v1.core.EventResult;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
@@ -20,7 +20,7 @@ public class DismountingRestrictionHandler {
             return EventResult.PASS;
         }
 
-        if (entity instanceof PathfinderMob mob && entity.getType().is(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)) {
+        if (entity instanceof PathfinderMob mob && entity.is(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)) {
             for (WrappedGoal wrappedGoal : mob.goalSelector.getAvailableGoals()) {
                 if (wrappedGoal.getGoal() instanceof RandomStrollGoal goal) {
                     mob.goalSelector.addGoal(wrappedGoal.getPriority() - 1,
@@ -41,8 +41,7 @@ public class DismountingRestrictionHandler {
         }
 
         if (passengerEntity instanceof Player) {
-            if (vehicleEntity instanceof PathfinderMob mob && mob.getType()
-                    .is(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)) {
+            if (vehicleEntity instanceof PathfinderMob mob && mob.is(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)) {
                 setHomePosition(mob);
             }
         }
@@ -56,8 +55,8 @@ public class DismountingRestrictionHandler {
         }
 
         if (equipmentSlot == EquipmentSlot.SADDLE) {
-            if (livingEntity instanceof PathfinderMob mob && livingEntity.getType()
-                    .is(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)) {
+            if (livingEntity instanceof PathfinderMob mob
+                    && livingEntity.is(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)) {
                 setHomePosition(mob);
             }
         }

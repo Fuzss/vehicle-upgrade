@@ -47,7 +47,7 @@ abstract class AbstractHorseMixin extends Animal implements PlayerRideableJumpin
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).smarterHorseBehavior) {
             return super.getWaterSlowDown();
         } else {
-            if (this.getType().is(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN)) {
+            if (this.is(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN)) {
                 // By default, this value is 0.8; skeleton horses use 0.96.
                 return 0.92F;
             } else {
@@ -62,7 +62,7 @@ abstract class AbstractHorseMixin extends Animal implements PlayerRideableJumpin
             return PlayerRideableJumping.super.getJumpCooldown();
         }
 
-        if (this.getType().is(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN) && this.isInWater()) {
+        if (this.is(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN) && this.isInWater()) {
             // A negative number will still allow the normal jump bar to render but also prevents charging it.
             return -1;
         } else {

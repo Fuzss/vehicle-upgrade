@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import fuzs.puzzleslib.api.client.renderer.v1.RenderStateExtraData;
+import fuzs.puzzleslib.common.api.client.renderer.v1.RenderStateExtraData;
 import fuzs.vehicleupgrade.client.handler.TranslucentMountHandler;
 import net.minecraft.client.renderer.SubmitNodeCollection;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
@@ -19,12 +19,12 @@ import java.util.OptionalInt;
 abstract class SubmitNodeCollectionMixin {
 
     @ModifyVariable(method = "submitModel", at = @At("HEAD"), argsOnly = true)
-    public <S> RenderType submitModel(RenderType renderType, @Local(argsOnly = true) S renderState) {
-        if (renderState instanceof EntityRenderState entityRenderState) {
+    public <S> RenderType submitModel(RenderType renderType, @Local(argsOnly = true) S state) {
+        if (state instanceof EntityRenderState entityRenderState) {
             OptionalInt alpha = RenderStateExtraData.getOrDefault(entityRenderState,
                     TranslucentMountHandler.VEHICLE_ALPHA_KEY,
                     OptionalInt.empty());
-            if (alpha.isPresent() && renderType.state.pipeline.getBlendFunction().isEmpty()) {
+            if (alpha.isPresent() && renderType.state.pipeline.getColorTargetState().blendFunction().isEmpty()) {
                 if (renderType.state.textures.containsKey("Sampler0")) {
                     RenderSetup.TextureBinding textureBinding = renderType.state.textures.get("Sampler0");
                     return RenderTypes.entityTranslucent(textureBinding.location());
@@ -36,16 +36,16 @@ abstract class SubmitNodeCollectionMixin {
     }
 
     @ModifyVariable(method = "submitModel", at = @At("HEAD"), ordinal = 2, argsOnly = true)
-    public <S> int submitModel(int tintColor, @Local(argsOnly = true) S renderState) {
-        if (renderState instanceof EntityRenderState entityRenderState) {
+    public <S> int submitModel(int tintedColor, @Local(argsOnly = true) S state) {
+        if (state instanceof EntityRenderState entityRenderState) {
             OptionalInt alpha = RenderStateExtraData.getOrDefault(entityRenderState,
                     TranslucentMountHandler.VEHICLE_ALPHA_KEY,
                     OptionalInt.empty());
             if (alpha.isPresent()) {
-                return ARGB.color(alpha.getAsInt(), tintColor);
+                return ARGB.color(alpha.getAsInt(), tintedColor);
             }
         }
 
-        return tintColor;
+        return tintedColor;
     }
 }

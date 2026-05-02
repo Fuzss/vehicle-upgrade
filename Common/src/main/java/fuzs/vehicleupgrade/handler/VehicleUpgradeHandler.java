@@ -1,8 +1,8 @@
 package fuzs.vehicleupgrade.handler;
 
-import fuzs.puzzleslib.api.event.v1.core.EventResult;
-import fuzs.puzzleslib.api.event.v1.core.EventResultHolder;
-import fuzs.puzzleslib.api.util.v1.CommonHelper;
+import fuzs.puzzleslib.common.api.event.v1.core.EventResult;
+import fuzs.puzzleslib.common.api.event.v1.core.EventResultHolder;
+import fuzs.puzzleslib.common.api.util.v1.CommonHelper;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.LeavesMountCollisions;
 import fuzs.vehicleupgrade.config.ServerConfig;
@@ -18,6 +18,7 @@ import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -29,7 +30,7 @@ import java.util.Optional;
 
 public class VehicleUpgradeHandler {
 
-    public static EventResultHolder<InteractionResult> onUseEntity(Player player, Level level, InteractionHand interactionHand, Entity entity) {
+    public static EventResultHolder<InteractionResult> onUseEntity(Player player, Level level, InteractionHand interactionHand, Entity entity, Vec3 hitVector) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).manuallyDismountPassengers) {
             return EventResultHolder.pass();
         }
@@ -114,11 +115,9 @@ public class VehicleUpgradeHandler {
 
     private static @Nullable Entity getTraversableEntity(@Nullable Entity entity) {
         if (entity != null) {
-            if (entity.hasControllingPassenger() && entity.getType()
-                    .is(ModRegistry.TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG)) {
+            if (entity.hasControllingPassenger() && entity.is(ModRegistry.TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG)) {
                 return entity;
-            } else if (entity.isPassenger() && entity.getVehicle()
-                    .getType()
+            } else if (entity.isPassenger() && entity.getVehicle() != null && entity.getVehicle()
                     .is(ModRegistry.TRAVERSABLE_MOUNTS_ENTITY_TYPE_TAG)) {
                 return entity.getVehicle();
             }

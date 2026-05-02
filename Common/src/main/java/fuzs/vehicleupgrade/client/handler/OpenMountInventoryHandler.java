@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.client.handler;
 
-import fuzs.puzzleslib.api.client.key.v1.KeyMappingHelper;
-import fuzs.puzzleslib.api.event.v1.core.EventResult;
+import fuzs.puzzleslib.common.api.client.key.v1.KeyMappingHelper;
+import fuzs.puzzleslib.common.api.event.v1.core.EventResult;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ClientConfig;
 import fuzs.vehicleupgrade.config.VehicleInventory;
@@ -81,8 +81,8 @@ public class OpenMountInventoryHandler {
     public static boolean isServerControlledInventory(@Nullable Player player) {
         if (player != null && player.isPassenger()) {
             Entity playerVehicle = player.getVehicle();
-            return playerVehicle != null && (playerVehicle instanceof HasCustomInventoryScreen
-                    || playerVehicle.getType().is(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG));
+            return playerVehicle != null && (playerVehicle instanceof HasCustomInventoryScreen || playerVehicle.is(
+                    ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG));
         } else {
             return false;
         }

@@ -23,7 +23,7 @@ abstract class AbstractMountInventoryScreenMixin<T extends AbstractMountInventor
 
     @ModifyArg(method = "renderBg",
                at = @At(value = "INVOKE",
-                        target = "Lnet/minecraft/client/gui/screens/inventory/InventoryScreen;renderEntityInInventoryFollowsMouse(Lnet/minecraft/client/gui/GuiGraphics;IIIIIFFFLnet/minecraft/world/entity/LivingEntity;)V"),
+                        target = "Lnet/minecraft/client/gui/screens/inventory/InventoryScreen;renderEntityInInventoryFollowsMouse(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIIIIFFFLnet/minecraft/world/entity/LivingEntity;)V"),
                index = 5)
     protected int renderBg(int scale) {
         return MountInventoryScreen.class.isInstance(this) ?
@@ -32,7 +32,7 @@ abstract class AbstractMountInventoryScreenMixin<T extends AbstractMountInventor
 
     @ModifyArg(method = "renderBg",
                at = @At(value = "INVOKE",
-                        target = "Lnet/minecraft/client/gui/screens/inventory/InventoryScreen;renderEntityInInventoryFollowsMouse(Lnet/minecraft/client/gui/GuiGraphics;IIIIIFFFLnet/minecraft/world/entity/LivingEntity;)V"),
+                        target = "Lnet/minecraft/client/gui/screens/inventory/InventoryScreen;renderEntityInInventoryFollowsMouse(Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIIIIFFFLnet/minecraft/world/entity/LivingEntity;)V"),
                index = 6)
     protected float renderBg(float scale) {
         return MountInventoryScreen.class.isInstance(this) ? 0.0625F : scale;

@@ -1,13 +1,13 @@
 package fuzs.vehicleupgrade.client.handler;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import fuzs.puzzleslib.api.client.renderer.v1.RenderStateExtraData;
-import fuzs.puzzleslib.api.event.v1.core.EventResult;
+import fuzs.puzzleslib.common.api.client.renderer.v1.RenderStateExtraData;
+import fuzs.puzzleslib.common.api.event.v1.core.EventResult;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ClientConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -24,12 +24,12 @@ import java.util.OptionalInt;
 public class TranslucentMountHandler {
     public static final ContextKey<OptionalInt> VEHICLE_ALPHA_KEY = new ContextKey<>(VehicleUpgrade.id("vehicle_alpha"));
 
-    public static void onExtractRenderState(Entity entity, EntityRenderState renderState, float partialTick) {
+    public static void onExtractEntityRenderState(Entity entity, EntityRenderState renderState, float partialTick) {
         if (!VehicleUpgrade.CONFIG.get(ClientConfig.class).translucentMount) {
             return;
         }
 
-        if (!entity.getType().is(ModRegistry.TRANSLUCENT_MOUNTS_ENTITY_TYPE_TAG)) {
+        if (!entity.is(ModRegistry.TRANSLUCENT_MOUNTS_ENTITY_TYPE_TAG)) {
             return;
         }
 
@@ -53,7 +53,7 @@ public class TranslucentMountHandler {
     }
 
     /**
-     * @see net.minecraft.client.gui.screens.inventory.InventoryScreen#renderEntityInInventoryFollowsMouse(GuiGraphics,
+     * @see net.minecraft.client.gui.screens.inventory.InventoryScreen#renderEntityInInventoryFollowsMouse(GuiGraphicsExtractor,
      *         int, int, int, int, int, float, float, float, LivingEntity)
      */
     private static boolean isRenderingInInventory(EntityRenderState entityRenderState) {

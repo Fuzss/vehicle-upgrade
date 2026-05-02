@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.config;
 
-import fuzs.puzzleslib.api.config.v3.Config;
-import fuzs.puzzleslib.api.config.v3.ConfigCore;
+import fuzs.puzzleslib.common.api.config.v3.Config;
+import fuzs.puzzleslib.common.api.config.v3.ConfigCore;
 
 public class CommonConfig implements ConfigCore {
     @Config(description = "Prevent a slower block breaking speed caused by the player not standing on the ground while riding any vehicle.",
