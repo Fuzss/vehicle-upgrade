@@ -25,7 +25,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class HorseUpgradeHandler {
 
-    public static EventResult onEntityLoad(Entity entity, ServerLevel serverLevel, boolean isNewlySpawned) {
+    public static EventResult onEntityLoad(Entity entity, ServerLevel serverLevel) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi) {
             return EventResult.PASS;
         }

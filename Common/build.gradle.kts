@@ -1,5 +1,5 @@
 plugins {
-    id("fuzs.multiloader.conventions-common")
+    id("fuzs.multiloader.multiloader-convention-plugins-common")
 }
 
 dependencies {
@@ -8,14 +8,16 @@ dependencies {
 
 multiloader {
     mixins {
+        plugin.set("${project.group}.mixin.MixinConfigPluginImpl")
         mixin(
             "AbstractBoatMixin",
             "AbstractHorseMixin",
             "BlockStateBaseMixin",
             "EntityMixin",
             "LeavesBlockMixin",
-            "LivingEntityMixin"
+            "LivingEntityMixin",
+            "MobMixin"
         )
-        clientMixin("LocalPlayerMixin", "SubmitNodeCollectionMixin")
+        clientMixin("LocalPlayerMixin", "ModelPartMixin", "MultiBufferSource\u0024BufferSourceMixin")
     }
 }

@@ -1,7 +1,10 @@
 {
   "pack": {
     "description": "Resources for Vehicle Upgrade",
-    "max_format": 88,
-    "min_format": 88
+    "pack_format": 48,
+    "supported_formats": [
+      0,
+      2147483647
+    ]
   }
 }

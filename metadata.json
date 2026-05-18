@@ -13,18 +13,25 @@
     "dependencies": [
         {
             "name": "fabricapi",
-            "platform": "fabric",
-            "type": "required"
+            "type": "required",
+            "platforms": [
+                "fabric"
+            ]
         },
         {
             "name": "forgeconfigapiport",
-            "platform": "fabric",
-            "type": "required"
+            "type": "required",
+            "platforms": [
+                "fabric"
+            ]
         },
         {
             "name": "puzzleslib",
-            "platform": "common",
-            "type": "required"
+            "type": "required",
+            "platforms": [
+                "fabric",
+                "neoforge"
+            ]
         }
     ],
     "links": [

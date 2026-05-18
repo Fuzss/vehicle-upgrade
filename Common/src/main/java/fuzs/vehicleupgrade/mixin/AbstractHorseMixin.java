@@ -22,20 +22,22 @@ abstract class AbstractHorseMixin extends Animal {
     }
 
     @ModifyExpressionValue(method = "isImmobile",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/horse/AbstractHorse;isEating()Z"))
+                           at = @At(value = "INVOKE",
+                                    target = "Lnet/minecraft/world/entity/animal/horse/AbstractHorse;isEating()Z"))
     public boolean isImmobile$0(boolean isEating) {
         return !VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi;
     }
 
     @ModifyExpressionValue(method = "isImmobile",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/horse/AbstractHorse;isStanding()Z"))
+                           at = @At(value = "INVOKE",
+                                    target = "Lnet/minecraft/world/entity/animal/horse/AbstractHorse;isStanding()Z"))
     public boolean isImmobile$1(boolean isStanding) {
         return !VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi;
     }
 
     @ModifyExpressionValue(method = "aiStep",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/entity/animal/horse/AbstractHorse;canEatGrass()Z"))
+                           at = @At(value = "INVOKE",
+                                    target = "Lnet/minecraft/world/entity/animal/horse/AbstractHorse;canEatGrass()Z"))
     public boolean aiStep(boolean canEatGrass) {
         return !VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi;
     }
@@ -62,13 +64,15 @@ abstract class AbstractHorseMixin extends Animal {
     }
 
     @ModifyExpressionValue(method = "standIfPossible",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;isClientSide()Z"))
-    public boolean standIfPossible(boolean isClientSide) {
+                           at = @At(value = "INVOKE",
+                                    target = "Lnet/minecraft/world/entity/animal/horse/AbstractHorse;isEffectiveAi()Z"))
+    public boolean standIfPossible(boolean isEffectiveAi) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi) {
-            return isClientSide;
+            return isEffectiveAi;
         }
 
-        return !this.isEffectiveAi();
+        // TODO this gets stuck with the animation
+        return this.level().isClientSide() && this.isControlledByLocalInstance();
     }
 
     @ModifyReturnValue(method = "getRiddenRotation", at = @At("TAIL"))

@@ -1,7 +1,6 @@
 {
   "values": [
-    "minecraft:happy_ghast",
-    "#vehicleupgrade:item_steerable",
-    "minecraft:wolf"
+    "minecraft:wolf",
+    "#vehicleupgrade:item_steerable"
   ]
 }

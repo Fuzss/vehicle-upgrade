@@ -50,7 +50,7 @@ public class SprintingMountHandler {
      */
     private static boolean vehicleCanSprint(Entity vehicle) {
         return !vehicle.canSprint() && vehicle.getType().is(ModRegistry.SPRINTING_MOUNTS_ENTITY_TYPE_TAG)
-                && vehicle.isLocalInstanceAuthoritative();
+                && vehicle.isControlledByLocalInstance();
     }
 
     private static void applySpeedModifier(@Nullable AttributeInstance attributeInstance, boolean isSprinting) {

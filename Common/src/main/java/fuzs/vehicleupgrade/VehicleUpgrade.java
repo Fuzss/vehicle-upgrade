@@ -11,7 +11,7 @@ import fuzs.puzzleslib.api.event.v1.entity.EntityTickEvents;
 import fuzs.puzzleslib.api.event.v1.entity.RefreshEntityDimensionsCallback;
 import fuzs.puzzleslib.api.event.v1.entity.ServerEntityLevelEvents;
 import fuzs.puzzleslib.api.event.v1.entity.living.LivingEquipmentChangeCallback;
-import fuzs.puzzleslib.api.event.v1.entity.player.CalculateBlockBreakSpeedCallback;
+import fuzs.puzzleslib.api.event.v1.entity.player.BreakSpeedCallback;
 import fuzs.puzzleslib.api.event.v1.entity.player.PlayerInteractEvents;
 import fuzs.vehicleupgrade.config.ClientConfig;
 import fuzs.vehicleupgrade.config.CommonConfig;
@@ -42,12 +42,12 @@ public class VehicleUpgrade implements ModConstructor {
     }
 
     private static void registerEventHandler() {
-        CalculateBlockBreakSpeedCallback.EVENT.register(AirborneMiningSpeedHandler::onCalculateBlockBreakSpeed);
+        BreakSpeedCallback.EVENT.register(AirborneMiningSpeedHandler::onCalculateBlockBreakSpeed);
         EntityRidingEvents.START.register(AirborneMiningSpeedHandler::onStartRiding);
         EntityRidingEvents.STOP.register(AirborneMiningSpeedHandler::onStopRiding);
         ServerEntityLevelEvents.LOAD.register(DismountingRestrictionHandler::onEntityLoad);
         EntityRidingEvents.STOP.register(DismountingRestrictionHandler::onStopRiding);
-        LivingEquipmentChangeCallback.EVENT.register(DismountingRestrictionHandler::onLivingEquipmentChange);
+//        LivingEquipmentChangeCallback.EVENT.register(DismountingRestrictionHandler::onLivingEquipmentChange);
         ServerEntityLevelEvents.LOAD.register(HorseUpgradeHandler::onEntityLoad);
         PlayerInteractEvents.USE_ENTITY.register(HorseUpgradeHandler::onUseEntity);
         PlayerInteractEvents.USE_ENTITY.register(EventPhase.AFTER, MountInventoryHandler::onUseEntity);

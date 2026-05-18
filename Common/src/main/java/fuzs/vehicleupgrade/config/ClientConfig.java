@@ -21,6 +21,12 @@ public class ClientConfig implements ConfigCore {
     @Config(category = INVENTORY_CATEGORY,
             description = "Show health and armor attributes for a mob in the corresponding inventory screen.")
     public boolean mobAttributesInInventory = false;
+    @Config(description = {
+            "Add non-default entity attributes to the targeted entity section on the debug screen.",
+            "Useful for inspecting horse-like animals.",
+            "The attributes this applies to are defined by a corresponding tag."
+    })
+    public boolean debugEntityAttributes = false;
     @Config(description = "When looking down the current mount will begin to fade so what lies below can easily be seen. Does not apply to non-living vehicles.")
     public boolean translucentMount = true;
 }

@@ -13,5 +13,7 @@ accessible  field   net/minecraft/client/MouseHandler   xpos    D
 accessible  field   net/minecraft/client/MouseHandler   ypos    D
 accessible  field   net/minecraft/client/renderer/RenderType$CompositeRenderType    state   Lnet/minecraft/client/renderer/RenderType$CompositeState;
 accessible  field   net/minecraft/client/renderer/RenderType$CompositeState textureState    Lnet/minecraft/client/renderer/RenderStateShard$EmptyTextureStateShard;
+accessible  field   net/minecraft/client/renderer/RenderType$CompositeState transparencyState   Lnet/minecraft/client/renderer/RenderStateShard$TransparencyStateShard;
 accessible  method  net/minecraft/client/renderer/RenderStateShard$EmptyTextureStateShard   cutoutTexture   ()Ljava/util/Optional;
 accessible  field   net/minecraft/world/entity/LivingEntity SPEED_MODIFIER_SPRINTING    Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;
+accessible  field   net/minecraft/client/renderer/entity/EntityRenderDispatcher shouldRenderShadow Z

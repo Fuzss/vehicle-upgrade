@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.client.gui.screens.inventory;
 
 import fuzs.vehicleupgrade.client.handler.EntityAttributesHandler;
-import fuzs.vehicleupgrade.world.inventory.EquipmentInventoryMenu;
+import fuzs.vehicleupgrade.world.inventory.SteerableInventoryMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -11,7 +11,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 
-public class EquipmentInventoryScreen extends AbstractContainerScreen<EquipmentInventoryMenu> {
+public class EquipmentInventoryScreen extends AbstractContainerScreen<SteerableInventoryMenu> {
     private static final ResourceLocation SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/slot");
     private static final ResourceLocation HORSE_INVENTORY_LOCATION = ResourceLocation.withDefaultNamespace(
             "textures/gui/container/horse.png");
@@ -19,7 +19,7 @@ public class EquipmentInventoryScreen extends AbstractContainerScreen<EquipmentI
     private float xMouse;
     private float yMouse;
 
-    public EquipmentInventoryScreen(EquipmentInventoryMenu menu, Inventory inventory, Component component) {
+    public EquipmentInventoryScreen(SteerableInventoryMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
 

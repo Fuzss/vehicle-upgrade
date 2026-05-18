@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Saddleable;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -19,8 +19,8 @@ public class SwimmingMountHandler {
             return EventResult.PASS;
         }
 
-        if (entity instanceof Mob mob && entity.dismountsUnderwater()) {
-            if (entity.isVehicle() && mob.isSaddled()) {
+        if (entity instanceof Saddleable saddleable && entity.dismountsUnderwater()) {
+            if (entity.isVehicle() && saddleable.isSaddled()) {
                 if (entity.isInWater() && entity.getFluidHeight(FluidTags.WATER) > entity.getFluidJumpThreshold()
                         || entity.isInLava()) {
                     if (entity.getRandom().nextFloat() < 0.8F) {
