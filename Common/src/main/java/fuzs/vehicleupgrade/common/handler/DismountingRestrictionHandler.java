@@ -12,10 +12,11 @@ import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jspecify.annotations.Nullable;
 
 public class DismountingRestrictionHandler {
 
-    public static EventResult onEntityLoad(Entity entity, ServerLevel serverLevel, boolean isNewlySpawned) {
+    public static EventResult onEntityJoin(Entity entity, ServerLevel serverLevel, boolean isLoadedFromDisk, @Nullable EntitySpawnReason entitySpawnReason) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).saddledMountsDoNotWander) {
             return EventResult.PASS;
         }
@@ -36,10 +37,6 @@ public class DismountingRestrictionHandler {
     }
 
     public static EventResult onStopRiding(Level level, Entity passengerEntity, Entity vehicleEntity) {
-        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).saddledMountsDoNotWander) {
-            return EventResult.PASS;
-        }
-
         if (passengerEntity instanceof Player) {
             if (vehicleEntity instanceof PathfinderMob mob && mob.is(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)) {
                 setHomePosition(mob);
@@ -50,10 +47,6 @@ public class DismountingRestrictionHandler {
     }
 
     public static void onLivingEquipmentChange(LivingEntity livingEntity, EquipmentSlot equipmentSlot, ItemStack oldItemStack, ItemStack newItemStack) {
-        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).saddledMountsDoNotWander) {
-            return;
-        }
-
         if (equipmentSlot == EquipmentSlot.SADDLE) {
             if (livingEntity instanceof PathfinderMob mob
                     && livingEntity.is(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)) {
@@ -63,6 +56,12 @@ public class DismountingRestrictionHandler {
     }
 
     private static void setHomePosition(Mob mob) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).saddledMountsDoNotWander) {
+            // Make sure this is cleared when the config option is disabled after being active previously.
+            mob.clearHome();
+            return;
+        }
+
         if (mob.isSaddled()) {
             mob.setHomeTo(mob.blockPosition(), (int) (mob.leashElasticDistance() - 1.0));
             mob.getNavigation().stop();

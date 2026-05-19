@@ -2,6 +2,7 @@ package fuzs.vehicleupgrade.common.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import fuzs.vehicleupgrade.common.VehicleUpgrade;
 import fuzs.vehicleupgrade.common.config.ServerConfig;
 import net.minecraft.tags.EntityTypeTags;
@@ -46,13 +47,13 @@ abstract class AbstractHorseMixin extends Animal implements PlayerRideableJumpin
     protected float getWaterSlowDown() {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).smarterHorseBehavior) {
             return super.getWaterSlowDown();
+        }
+
+        if (this.is(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN)) {
+            // By default, this value is 0.8; skeleton horses use 0.96.
+            return 0.92F;
         } else {
-            if (this.is(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN)) {
-                // By default, this value is 0.8; skeleton horses use 0.96.
-                return 0.92F;
-            } else {
-                return super.getWaterSlowDown();
-            }
+            return super.getWaterSlowDown();
         }
     }
 
@@ -70,14 +71,15 @@ abstract class AbstractHorseMixin extends Animal implements PlayerRideableJumpin
         }
     }
 
-    @ModifyExpressionValue(method = "standIfPossible",
-                           at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;isClientSide()Z"))
-    public boolean standIfPossible(boolean isClientSide) {
+    @WrapWithCondition(method = "hurtServer",
+                       at = @At(value = "INVOKE",
+                                target = "Lnet/minecraft/world/entity/animal/equine/AbstractHorse;standIfPossible()V"))
+    public boolean hurtServer(AbstractHorse horse) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).smarterHorseBehavior) {
-            return isClientSide;
+            return true;
         }
 
-        return !this.isEffectiveAi();
+        return this.isEffectiveAi();
     }
 
     @ModifyReturnValue(method = "getRiddenRotation", at = @At("TAIL"))
