@@ -5,19 +5,17 @@ import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.Saddleable;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.MoveTowardsRestrictionGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 public class DismountingRestrictionHandler {
 
-    public static EventResult onEntityLoad(Entity entity, ServerLevel serverLevel) {
+    public static EventResult onEntityJoin(Entity entity, ServerLevel serverLevel, boolean isLoadedFromDisk, @Nullable MobSpawnType spawnReason) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).saddledMountsDoNotWander) {
             return EventResult.PASS;
         }
@@ -38,10 +36,6 @@ public class DismountingRestrictionHandler {
     }
 
     public static EventResult onStopRiding(Level level, Entity passengerEntity, Entity vehicleEntity) {
-        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).saddledMountsDoNotWander) {
-            return EventResult.PASS;
-        }
-
         if (passengerEntity instanceof Player) {
             if (vehicleEntity instanceof PathfinderMob mob && mob.getType()
                     .is(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)) {
@@ -53,10 +47,6 @@ public class DismountingRestrictionHandler {
     }
 
 //    public static void onLivingEquipmentChange(LivingEntity livingEntity, EquipmentSlot equipmentSlot, ItemStack oldItemStack, ItemStack newItemStack) {
-//        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).saddledMountsDoNotWander) {
-//            return;
-//        }
-//
 //        if (equipmentSlot == EquipmentSlot.SADDLE) {
 //            if (livingEntity instanceof PathfinderMob mob && livingEntity.getType()
 //                    .is(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)) {
@@ -71,6 +61,12 @@ public class DismountingRestrictionHandler {
      * @see PathfinderMob#handleLeashAtDistance(Entity, float)
      */
     private static void setHomePosition(Mob mob) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).saddledMountsDoNotWander) {
+            // Make sure this is cleared when the config option is disabled after being active previously.
+            mob.clearRestriction();
+            return;
+        }
+
         if (mob instanceof Saddleable saddleable && saddleable.isSaddled()) {
             mob.restrictTo(mob.blockPosition(), 5);
             mob.getNavigation().stop();

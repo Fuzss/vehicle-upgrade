@@ -2,10 +2,6 @@ package fuzs.vehicleupgrade.mixin;
 
 import fuzs.vehicleupgrade.handler.VehicleUpgradeHandler;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -25,13 +21,7 @@ abstract class LeavesBlockMixin extends Block {
     protected void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
         if (VehicleUpgradeHandler.isRidingTraversable(blockState, entity)) {
             entity.makeStuckInBlock(blockState, new Vec3(0.9, 1.5, 0.9));
-            if (level.isClientSide()) {
-                boolean moved = entity.xOld != entity.getX() || entity.zOld != entity.getZ();
-                if (moved && level.getRandom().nextInt(5) == 0) {
-                    ParticleOptions particle = new BlockParticleOption(ParticleTypes.BLOCK, blockState);
-                    ParticleUtils.spawnParticleBelow(level, blockPos, level.getRandom(), particle);
-                }
-            }
+            // The falling leaves particles are missing in this version as they have not yet been implemented in vanilla.
         } else {
             super.entityInside(blockState, level, blockPos, entity);
         }

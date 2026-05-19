@@ -46,7 +46,7 @@ public class ServerConfig implements ConfigCore {
     @Config(category = HORSE_CATEGORY,
             description = "Update horse behavior, like making grazing less disruptive to other actions, and preventing bucking while riding.",
             worldRestart = true)
-    public boolean upgradeHorseAi = true;
+    public boolean smarterHorseBehavior = true;
     @Config(category = HORSE_CATEGORY,
             description = "Increase the horse head pitch offset while riding to improve visibility.")
     @Config.DoubleRange(min = 0.0, max = 1.0)

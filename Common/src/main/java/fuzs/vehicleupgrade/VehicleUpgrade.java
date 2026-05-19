@@ -9,8 +9,7 @@ import fuzs.puzzleslib.api.event.v1.core.EventPhase;
 import fuzs.puzzleslib.api.event.v1.entity.EntityRidingEvents;
 import fuzs.puzzleslib.api.event.v1.entity.EntityTickEvents;
 import fuzs.puzzleslib.api.event.v1.entity.RefreshEntityDimensionsCallback;
-import fuzs.puzzleslib.api.event.v1.entity.ServerEntityLevelEvents;
-import fuzs.puzzleslib.api.event.v1.entity.living.LivingEquipmentChangeCallback;
+import fuzs.puzzleslib.api.event.v1.entity.ServerEntityEvents;
 import fuzs.puzzleslib.api.event.v1.entity.player.BreakSpeedCallback;
 import fuzs.puzzleslib.api.event.v1.entity.player.PlayerInteractEvents;
 import fuzs.vehicleupgrade.config.ClientConfig;
@@ -45,10 +44,11 @@ public class VehicleUpgrade implements ModConstructor {
         BreakSpeedCallback.EVENT.register(AirborneMiningSpeedHandler::onCalculateBlockBreakSpeed);
         EntityRidingEvents.START.register(AirborneMiningSpeedHandler::onStartRiding);
         EntityRidingEvents.STOP.register(AirborneMiningSpeedHandler::onStopRiding);
-        ServerEntityLevelEvents.LOAD.register(DismountingRestrictionHandler::onEntityLoad);
+        ServerEntityEvents.JOIN.register(DismountingRestrictionHandler::onEntityJoin);
         EntityRidingEvents.STOP.register(DismountingRestrictionHandler::onStopRiding);
+        // This does not work on 1.21 as saddles do not use a universal equipment slot.
 //        LivingEquipmentChangeCallback.EVENT.register(DismountingRestrictionHandler::onLivingEquipmentChange);
-        ServerEntityLevelEvents.LOAD.register(HorseUpgradeHandler::onEntityLoad);
+        ServerEntityEvents.JOIN.register(HorseUpgradeHandler::onEntityJoin);
         PlayerInteractEvents.USE_ENTITY.register(HorseUpgradeHandler::onUseEntity);
         PlayerInteractEvents.USE_ENTITY.register(EventPhase.AFTER, MountInventoryHandler::onUseEntity);
         RefreshEntityDimensionsCallback.EVENT.register(OverSizedBoatPassengersHandler::onRefreshEntityDimensions);

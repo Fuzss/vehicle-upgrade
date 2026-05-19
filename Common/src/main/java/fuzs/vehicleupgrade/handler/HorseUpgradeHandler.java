@@ -10,10 +10,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityAttachment;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.RandomStandGoal;
 import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
@@ -22,17 +21,21 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 public class HorseUpgradeHandler {
 
-    public static EventResult onEntityLoad(Entity entity, ServerLevel serverLevel) {
-        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).upgradeHorseAi) {
+    public static EventResult onEntityJoin(Entity entity, ServerLevel serverLevel, boolean isLoadedFromDisk, @Nullable MobSpawnType spawnReason) {
+        if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).smarterHorseBehavior) {
             return EventResult.PASS;
         }
 
-        if (entity instanceof AbstractHorse abstractHorse && abstractHorse.canEatGrass()) {
-            // priority is tied to an internal random chance to closely resemble vanilla behaviour
-            abstractHorse.goalSelector.addGoal(7, new HorseEatingGoal(abstractHorse));
+        if (entity instanceof AbstractHorse horse) {
+            horse.goalSelector.removeAllGoals((Goal goal) -> goal instanceof RandomStandGoal);
+            if (horse.canEatGrass()) {
+                // Priority is tied to an internal random chance to closely resemble vanilla behaviour.
+                horse.goalSelector.addGoal(7, new HorseEatingGoal(horse));
+            }
         }
 
         return EventResult.PASS;

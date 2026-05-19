@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.handler;
 
+import fuzs.puzzleslib.api.container.v1.ContainerMenuHelper;
 import fuzs.puzzleslib.api.event.v1.core.EventResultHolder;
-import fuzs.puzzleslib.impl.core.proxy.ProxyImpl;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
@@ -61,12 +61,11 @@ public class MountInventoryHandler {
             hasCustomInventoryScreen.openCustomInventoryScreen(serverPlayer);
         } else if (vehicleEntity instanceof Mob mob && vehicleEntity.getType()
                 .is(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)) {
-            ProxyImpl.get()
-                    .openMenu(serverPlayer,
-                            new SimpleMenuProvider((int containerId, Inventory inventory, Player player) -> {
-                                return new MountInventoryMenu(containerId, inventory, mob);
-                            }, mob.getDisplayName()),
-                            mob.getId());
+            ContainerMenuHelper.openMenu(serverPlayer,
+                    new SimpleMenuProvider((int containerId, Inventory inventory, Player player) -> {
+                        return new MountInventoryMenu(containerId, inventory, mob);
+                    }, mob.getDisplayName()),
+                    mob.getId());
         }
     }
 }
