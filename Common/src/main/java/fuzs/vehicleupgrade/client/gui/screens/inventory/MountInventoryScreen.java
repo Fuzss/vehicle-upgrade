@@ -1,26 +1,27 @@
 package fuzs.vehicleupgrade.client.gui.screens.inventory;
 
-import fuzs.vehicleupgrade.client.handler.EntityAttributesHandler;
-import fuzs.vehicleupgrade.world.inventory.SteerableInventoryMenu;
+import fuzs.vehicleupgrade.world.inventory.MountInventoryMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
 
-public class EquipmentInventoryScreen extends AbstractContainerScreen<SteerableInventoryMenu> {
+public class MountInventoryScreen extends AbstractContainerScreen<MountInventoryMenu> {
     private static final ResourceLocation SLOT_SPRITE = ResourceLocation.withDefaultNamespace("container/slot");
     private static final ResourceLocation HORSE_INVENTORY_LOCATION = ResourceLocation.withDefaultNamespace(
             "textures/gui/container/horse.png");
 
+    public final LivingEntity mount;
     private float xMouse;
     private float yMouse;
 
-    public EquipmentInventoryScreen(SteerableInventoryMenu menu, Inventory inventory, Component component) {
+    public MountInventoryScreen(MountInventoryMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
+        this.mount = menu.getMount();
     }
 
     @Override
@@ -41,27 +42,20 @@ public class EquipmentInventoryScreen extends AbstractContainerScreen<SteerableI
             }
         }
 
-        if (this.menu.mob != null) {
-            this.renderMobWithAttributes(guiGraphics, this.menu.mob);
-        }
-    }
-
-    protected void renderMobWithAttributes(GuiGraphics guiGraphics, Mob mob) {
-        EntityAttributesHandler.renderMobAttributes(this, guiGraphics, mob);
         InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics,
                 this.leftPos + 26,
                 this.topPos + 18,
                 this.leftPos + 78,
                 this.topPos + 70,
-                getMobScale(mob.getBbWidth(), mob.getBbHeight()),
+                this.getMountSize(),
                 0.0625F,
                 this.xMouse,
                 this.yMouse,
-                mob);
+                this.mount);
     }
 
-    private static int getMobScale(float width, float height) {
-        return Math.round(80.0F / (height + 1.5F * width));
+    private int getMountSize() {
+        return Math.round(80.0F / (this.mount.getBbHeight() + 1.5F * this.mount.getBbWidth()));
     }
 
     @Override

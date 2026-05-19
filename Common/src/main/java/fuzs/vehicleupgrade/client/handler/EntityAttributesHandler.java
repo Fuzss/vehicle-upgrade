@@ -3,6 +3,7 @@ package fuzs.vehicleupgrade.client.handler;
 import com.mojang.blaze3d.platform.Window;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.client.gui.components.RenderableComponent;
+import fuzs.vehicleupgrade.client.gui.screens.inventory.MountInventoryScreen;
 import fuzs.vehicleupgrade.config.ClientConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import net.minecraft.ChatFormatting;
@@ -19,7 +20,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import org.jetbrains.annotations.Nullable;
 
@@ -75,36 +75,43 @@ public class EntityAttributesHandler {
     }
 
     public static void onDrawBackground(AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        if (screen instanceof HorseInventoryScreen horseInventoryScreen
-                && horseInventoryScreen.horse.getInventoryColumns() == 0) {
-            renderMobAttributes(screen, guiGraphics, horseInventoryScreen.horse);
-        }
-    }
-
-    public static void renderMobAttributes(AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, Mob mob) {
         if (!VehicleUpgrade.CONFIG.get(ClientConfig.class).mobAttributesInInventory) {
             return;
         }
 
-        renderMobAttribute(guiGraphics,
-                screen.font,
-                Mth.ceil(mob.getHealth()),
-                Mth.ceil(mob.getMaxHealth()),
-                screen.leftPos + 124,
-                screen.topPos + 32,
-                HEART_VEHICLE_FULL_SPRITE,
-                HEART_VEHICLE_CONTAINER_SPRITE);
-        renderMobAttribute(guiGraphics,
-                screen.font,
-                mob.getArmorValue(),
-                -1,
-                screen.leftPos + 124,
-                screen.topPos + 48,
-                ARMOR_FULL_SPRITE,
-                null);
+        LivingEntity mount = getMountFromInventoryScreen(screen);
+        if (mount != null) {
+            renderAttributeComponent(guiGraphics,
+                    screen.font,
+                    Mth.ceil(mount.getHealth()),
+                    Mth.ceil(mount.getMaxHealth()),
+                    screen.leftPos + 124,
+                    screen.topPos + 32,
+                    HEART_VEHICLE_FULL_SPRITE,
+                    HEART_VEHICLE_CONTAINER_SPRITE);
+            renderAttributeComponent(guiGraphics,
+                    screen.font,
+                    mount.getArmorValue(),
+                    -1,
+                    screen.leftPos + 124,
+                    screen.topPos + 48,
+                    ARMOR_FULL_SPRITE,
+                    null);
+        }
     }
 
-    private static void renderMobAttribute(GuiGraphics guiGraphics, Font font, int value, int maxValue, int posX, int posY, ResourceLocation fullSprite, @Nullable ResourceLocation emptySprite) {
+    private static @Nullable LivingEntity getMountFromInventoryScreen(AbstractContainerScreen<?> screen) {
+        if (screen instanceof HorseInventoryScreen horseInventoryScreen
+                && horseInventoryScreen.horse.getInventoryColumns() == 0) {
+            return horseInventoryScreen.horse;
+        } else if (screen instanceof MountInventoryScreen mountInventoryScreen) {
+            return mountInventoryScreen.mount;
+        } else {
+            return null;
+        }
+    }
+
+    private static void renderAttributeComponent(GuiGraphics guiGraphics, Font font, int value, int maxValue, int posX, int posY, ResourceLocation fullSprite, @Nullable ResourceLocation emptySprite) {
         if (value > 0) {
             List<RenderableComponent> list = new ArrayList<>();
             list.add(RenderableComponent.ofText(Component.literal(value + "x")));

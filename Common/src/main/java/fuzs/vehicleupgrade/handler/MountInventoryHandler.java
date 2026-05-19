@@ -5,7 +5,7 @@ import fuzs.puzzleslib.impl.core.proxy.ProxyImpl;
 import fuzs.vehicleupgrade.VehicleUpgrade;
 import fuzs.vehicleupgrade.config.ServerConfig;
 import fuzs.vehicleupgrade.init.ModRegistry;
-import fuzs.vehicleupgrade.world.inventory.SteerableInventoryMenu;
+import fuzs.vehicleupgrade.world.inventory.MountInventoryMenu;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -64,7 +64,7 @@ public class MountInventoryHandler {
             ProxyImpl.get()
                     .openMenu(serverPlayer,
                             new SimpleMenuProvider((int containerId, Inventory inventory, Player player) -> {
-                                return new SteerableInventoryMenu(containerId, inventory, mob);
+                                return new MountInventoryMenu(containerId, inventory, mob);
                             }, mob.getDisplayName()),
                             mob.getId());
         }

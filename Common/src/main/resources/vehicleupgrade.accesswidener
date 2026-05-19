@@ -17,3 +17,5 @@ accessible  field   net/minecraft/client/renderer/RenderType$CompositeState tran
 accessible  method  net/minecraft/client/renderer/RenderStateShard$EmptyTextureStateShard   cutoutTexture   ()Ljava/util/Optional;
 accessible  field   net/minecraft/world/entity/LivingEntity SPEED_MODIFIER_SPRINTING    Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;
 accessible  field   net/minecraft/client/renderer/entity/EntityRenderDispatcher shouldRenderShadow Z
+accessible  field   net/minecraft/world/entity/animal/Pig   steering    Lnet/minecraft/world/entity/ItemBasedSteering;
+accessible  field   net/minecraft/world/entity/monster/Strider  steering    Lnet/minecraft/world/entity/ItemBasedSteering;
