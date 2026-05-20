@@ -19,7 +19,9 @@ import fuzs.vehicleupgrade.handler.*;
 import fuzs.vehicleupgrade.init.ModRegistry;
 import fuzs.vehicleupgrade.network.client.ServerboundOpenEquipmentInventoryMessage;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +64,22 @@ public class VehicleUpgrade implements ModConstructor {
         EntityRidingEvents.STOP.register(SwimmingMountHandler::onStopRiding);
         PlayerInteractEvents.USE_ENTITY.register(VehicleUpgradeHandler::onUseEntity);
         EntityRidingEvents.START.register(VehicleUpgradeHandler::onStartRiding);
+    }
+
+    @Override
+    public void onCommonSetup() {
+        if (CONFIG.get(CommonConfig.class).speedMobEffectsGrantFlyingSpeed) {
+            MobEffects.MOVEMENT_SPEED.value()
+                    .addAttributeModifier(Attributes.FLYING_SPEED,
+                            ResourceLocation.withDefaultNamespace("effect.flying_speed"),
+                            0.2F,
+                            AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+            MobEffects.MOVEMENT_SLOWDOWN.value()
+                    .addAttributeModifier(Attributes.FLYING_SPEED,
+                            ResourceLocation.withDefaultNamespace("effect.flying_speed"),
+                            -0.15F,
+                            AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        }
     }
 
     @Override
