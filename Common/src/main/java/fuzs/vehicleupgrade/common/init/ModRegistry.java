@@ -48,7 +48,7 @@ public class ModRegistry {
      * Mobs that are implemented similarly to horses (via extending
      * {@link net.minecraft.world.entity.animal.equine.AbstractHorse}).
      */
-    public static final TagKey<EntityType<?>> HORSE_LIKE_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag("horse_like");
+    public static final TagKey<EntityType<?>> EQUINE_ENTITY_TYPE_TAG = TAGS.registerEntityTypeTag("equine");
     /**
      * Mobs that are controlled holding a specific item (like carrot on a stick) when riding.
      */

@@ -25,6 +25,7 @@ public class MountInventoryMenu extends AbstractMountInventoryMenu {
     private static final Identifier HARNESS_SLOT_SPRITE = VehicleUpgrade.id("container/slot/harness");
 
     public MountInventoryMenu(int containerId, Inventory inventory, int mountId) {
+        // Just some workaround to never have the mount entity be null, as we cannot fully control that in the super class and screen.
         this(containerId,
                 inventory,
                 CommonHelper.getClientLevel().getEntity(mountId) instanceof Mob mount ? mount :

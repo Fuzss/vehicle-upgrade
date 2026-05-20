@@ -18,8 +18,9 @@ public class ModEntityTypeTagProvider extends AbstractTagProvider<EntityType<?>>
     public void addTags(HolderLookup.Provider provider) {
         this.tag(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN).add(EntityType.LLAMA, EntityType.PIG, EntityType.TRADER_LLAMA);
         this.tag(EntityTypeTags.DISMOUNTS_UNDERWATER).removeTag(EntityTypeTags.CAN_FLOAT_WHILE_RIDDEN);
-        this.tag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG)
+        this.tag(ModRegistry.EQUINE_ENTITY_TYPE_TAG)
                 .add(EntityType.CAMEL,
+                        EntityType.CAMEL_HUSK,
                         EntityType.DONKEY,
                         EntityType.HORSE,
                         EntityType.LLAMA,
@@ -28,21 +29,23 @@ public class ModEntityTypeTagProvider extends AbstractTagProvider<EntityType<?>>
                         EntityType.TRADER_LLAMA,
                         EntityType.ZOMBIE_HORSE);
         this.tag(ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG).add(EntityType.PIG, EntityType.STRIDER);
+        // Nautilus is not added to this, there is already some custom restriction handling in vanilla (AbstractNautilus::checkRestriction).
         this.tag(ModRegistry.RESTRICTED_MOUNTS_ENTITY_TYPE_TAG)
-                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
+                .addTag(ModRegistry.EQUINE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.TRAVERSING_MOUNTS_ENTITY_TYPE_TAG)
-                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
+                .addTag(ModRegistry.EQUINE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.TRANSLUCENT_MOUNTS_ENTITY_TYPE_TAG)
-                .add(EntityType.HAPPY_GHAST)
-                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
+                .add(EntityType.HAPPY_GHAST, EntityType.NAUTILUS, EntityType.ZOMBIE_NAUTILUS)
+                .addTag(ModRegistry.EQUINE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.SPRINTING_MOUNTS_ENTITY_TYPE_TAG)
-                .add(EntityType.HAPPY_GHAST)
-                .addTag(ModRegistry.HORSE_LIKE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
+                .add(EntityType.HAPPY_GHAST, EntityType.NAUTILUS, EntityType.ZOMBIE_NAUTILUS)
+                .addTag(ModRegistry.EQUINE_ENTITY_TYPE_TAG, ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.CUSTOM_EQUIPMENT_USER_ENTITY_TYPE_TAG)
                 .add(EntityType.WOLF, EntityType.HAPPY_GHAST)
                 .addTag(ModRegistry.ITEM_STEERABLE_ENTITY_TYPE_TAG);
         this.tag(ModRegistry.OVER_SIZED_BOAT_PASSENGERS_ENTITY_TYPE_TAG)
                 .add(EntityType.CAMEL,
+                        EntityType.CAMEL_HUSK,
                         EntityType.DONKEY,
                         EntityType.HOGLIN,
                         EntityType.HORSE,

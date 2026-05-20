@@ -1,7 +1,9 @@
 {
   "values": [
+    "#vehicleupgrade:equine",
     "minecraft:happy_ghast",
-    "#vehicleupgrade:horse_like",
-    "#vehicleupgrade:item_steerable"
+    "#vehicleupgrade:item_steerable",
+    "minecraft:nautilus",
+    "minecraft:zombie_nautilus"
   ]
 }

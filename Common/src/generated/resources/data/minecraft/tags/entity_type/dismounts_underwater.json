@@ -1,4 +1,7 @@
 {
+  "fabric:remove": [
+    "#minecraft:can_float_while_ridden"
+  ],
   "remove": [
     "#minecraft:can_float_while_ridden"
   ],
