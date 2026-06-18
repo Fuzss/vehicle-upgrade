@@ -25,8 +25,8 @@ public enum VehicleInventory {
                 screen.onClose();
             }
 
-            minecraft.setScreen(new InventoryScreen(minecraft.player));
-            if (screen != null && minecraft.screen != null) {
+            minecraft.gui.setScreen(new InventoryScreen(minecraft.player));
+            if (screen != null && minecraft.gui.screen() != null) {
                 minecraft.mouseHandler.xpos = xpos;
                 minecraft.mouseHandler.ypos = ypos;
                 InputConstants.grabOrReleaseMouse(minecraft.getWindow(), InputConstants.CURSOR_NORMAL, xpos, ypos);

@@ -8,7 +8,6 @@ import fuzs.puzzleslib.common.api.event.v1.core.EventPhase;
 import fuzs.puzzleslib.common.api.event.v1.entity.EntityRidingEvents;
 import fuzs.puzzleslib.common.api.event.v1.entity.RefreshEntityDimensionsCallback;
 import fuzs.puzzleslib.common.api.event.v1.entity.ServerEntityEvents;
-import fuzs.puzzleslib.common.api.event.v1.entity.ServerEntityLevelEvents;
 import fuzs.puzzleslib.common.api.event.v1.entity.living.LivingEquipmentChangeCallback;
 import fuzs.puzzleslib.common.api.event.v1.entity.player.CalculateBlockBreakSpeedCallback;
 import fuzs.puzzleslib.common.api.event.v1.entity.player.PlayerInteractEvents;
@@ -20,7 +19,7 @@ import fuzs.vehicleupgrade.common.init.ModRegistry;
 import fuzs.vehicleupgrade.common.network.client.ServerboundOpenEquipmentInventoryMessage;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.slf4j.Logger;
@@ -88,18 +87,18 @@ public class VehicleUpgrade implements ModConstructor {
     @Override
     public void onRegisterEntityAttributes(EntityAttributesContext context) {
         if (VehicleUpgrade.CONFIG.get(CommonConfig.class).removePassengerMiningSpeedMalus) {
-            context.registerAttribute(EntityType.PLAYER, ModRegistry.AIRBORNE_MINING_SPEED_ATTRIBUTE);
+            context.registerAttribute(EntityTypes.PLAYER, ModRegistry.AIRBORNE_MINING_SPEED_ATTRIBUTE);
         }
 
         if (VehicleUpgrade.CONFIG.get(CommonConfig.class).increaseHorseStepHeight) {
-            context.registerAttribute(EntityType.HORSE, Attributes.STEP_HEIGHT, 1.15);
-            context.registerAttribute(EntityType.CAMEL, Attributes.STEP_HEIGHT, 1.15);
-            context.registerAttribute(EntityType.SKELETON_HORSE, Attributes.STEP_HEIGHT, 1.15);
-            context.registerAttribute(EntityType.ZOMBIE_HORSE, Attributes.STEP_HEIGHT, 1.15);
-            context.registerAttribute(EntityType.DONKEY, Attributes.STEP_HEIGHT, 1.15);
-            context.registerAttribute(EntityType.MULE, Attributes.STEP_HEIGHT, 1.15);
-            context.registerAttribute(EntityType.LLAMA, Attributes.STEP_HEIGHT, 1.15);
-            context.registerAttribute(EntityType.TRADER_LLAMA, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityTypes.HORSE, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityTypes.CAMEL, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityTypes.SKELETON_HORSE, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityTypes.ZOMBIE_HORSE, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityTypes.DONKEY, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityTypes.MULE, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityTypes.LLAMA, Attributes.STEP_HEIGHT, 1.15);
+            context.registerAttribute(EntityTypes.TRADER_LLAMA, Attributes.STEP_HEIGHT, 1.15);
         }
     }
 

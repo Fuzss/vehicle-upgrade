@@ -6,7 +6,7 @@ import fuzs.vehicleupgrade.common.VehicleUpgrade;
 import fuzs.vehicleupgrade.common.config.ServerConfig;
 import fuzs.vehicleupgrade.common.init.ModRegistry;
 import fuzs.vehicleupgrade.common.world.entity.ai.goal.HorseEatingGoal;
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;

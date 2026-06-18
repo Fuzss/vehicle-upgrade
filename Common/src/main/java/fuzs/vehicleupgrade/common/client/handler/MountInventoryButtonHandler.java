@@ -40,7 +40,7 @@ public class MountInventoryButtonHandler {
 
     public static void onAfterInit(AbstractContainerScreen<?> screen, int screenWidth, int screenHeight, List<AbstractWidget> widgets, UnaryOperator<AbstractWidget> addWidget, Consumer<AbstractWidget> removeWidget) {
         // check the screen, both inventory screens open consecutively for creative, survival will falsely override the creative button then
-        if (screen.minecraft.screen == screen
+        if (screen.minecraft.gui.screen() == screen
                 && OpenMountInventoryHandler.isServerControlledInventory(screen.minecraft.player)) {
             playerInventoryButton = createPlayerInventoryButton(screen);
             updatePlayerInventoryButtons(screen, playerInventoryButton);

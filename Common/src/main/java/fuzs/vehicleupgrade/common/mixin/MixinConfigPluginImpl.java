@@ -16,6 +16,7 @@ public class MixinConfigPluginImpl implements IMixinConfigPlugin {
     @Override
     public void onLoad(String mixinPackage) {
         this.removeMixinsIf("moonrise", "EntityMixin");
+        this.removeMixinsIf("create", "EntityMixin");
     }
 
     private void removeMixinsIf(String modId, String... mixins) {

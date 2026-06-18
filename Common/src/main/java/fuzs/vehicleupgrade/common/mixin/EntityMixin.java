@@ -19,7 +19,7 @@ import java.util.List;
 abstract class EntityMixin implements EntityAccess {
 
     @ModifyReturnValue(method = "collide", at = @At(value = "RETURN", ordinal = 0))
-    private Vec3 collide$0(Vec3 stepUpVector, @Local(ordinal = 1) Vec3 collideVector) {
+    private Vec3 collide$0(Vec3 stepUpVector, @Local(ordinal = 1) Vec3 movementStep) {
         if (!VehicleUpgrade.CONFIG.get(ServerConfig.class).correctPassengerCollisions) {
             return stepUpVector;
         }
@@ -33,13 +33,13 @@ abstract class EntityMixin implements EntityAccess {
                 Vec3 vec3 = stepUpVector.lengthSqr() == 0.0 ? stepUpVector :
                         Entity.collideBoundingBox(entity, stepUpVector, aABB, entity.level(), list);
                 if (vec3.y() != stepUpVector.y()) {
-                    return collideVector;
+                    return movementStep;
                 } else {
                     if (vec3.x() != stepUpVector.x()) {
-                        vec3 = new Vec3(collideVector.x(), vec3.y(), vec3.z());
+                        vec3 = new Vec3(movementStep.x(), vec3.y(), vec3.z());
                     }
                     if (vec3.z() != stepUpVector.z()) {
-                        vec3 = new Vec3(vec3.x(), vec3.y(), collideVector.z());
+                        vec3 = new Vec3(vec3.x(), vec3.y(), movementStep.z());
                     }
                     stepUpVector = vec3;
                 }

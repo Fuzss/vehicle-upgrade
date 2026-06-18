@@ -17,4 +17,5 @@ accessible  field   net/minecraft/client/renderer/rendertype/RenderType state   
 accessible  field   net/minecraft/client/renderer/rendertype/RenderSetup    pipeline    Lcom/mojang/blaze3d/pipeline/RenderPipeline;
 accessible  field   net/minecraft/client/renderer/rendertype/RenderSetup    textures    Ljava/util/Map;
 accessible  class   net/minecraft/client/renderer/rendertype/RenderSetup$TextureBinding
+accessible  method  net/minecraft/client/renderer/rendertype/RenderSetup$TextureBinding <init>  (Lnet/minecraft/resources/Identifier;Ljava/util/function/Supplier;)V
 accessible  field   net/minecraft/world/entity/LivingEntity SPEED_MODIFIER_SPRINTING    Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;

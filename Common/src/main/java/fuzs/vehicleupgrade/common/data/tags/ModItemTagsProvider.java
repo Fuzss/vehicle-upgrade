@@ -5,17 +5,17 @@ import fuzs.puzzleslib.common.api.data.v2.tags.AbstractTagProvider;
 import fuzs.vehicleupgrade.common.init.ModRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.references.ItemIds;
+import net.minecraft.world.item.Item;
 
-public class ModBlockTagProvider extends AbstractTagProvider<Block> {
+public class ModItemTagsProvider extends AbstractTagProvider<Item> {
 
-    public ModBlockTagProvider(DataProviderContext context) {
-        super(Registries.BLOCK, context);
+    public ModItemTagsProvider(DataProviderContext context) {
+        super(Registries.ITEM, context);
     }
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
-        this.tag(ModRegistry.RIDING_TRAVERSABLE_BLOCK_TAG).addTag(BlockTags.LEAVES);
+        this.tag(ModRegistry.HOLDABLE_WHILE_ROWING_ITEM_TAG).add(ItemIds.FILLED_MAP);
     }
 }
