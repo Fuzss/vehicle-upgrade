@@ -1,8 +1,15 @@
 {
   "branches": {
-    "1.21.11": "archived",
     "1.21.1": "maintained",
+    "1.21.11": "archived",
     "26.1.x": "maintained",
     "26.2.x": "primary"
+  },
+  "properties": {
+    "distributions.curseforge.id": "1369699",
+    "distributions.curseforge.slug": "vehicle-upgrade",
+    "distributions.github.slug": "vehicle-upgrade",
+    "distributions.modrinth.id": "9B9c6QcJ",
+    "distributions.modrinth.slug": "vehicle-upgrade"
   }
 }
