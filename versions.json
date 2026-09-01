@@ -5,11 +5,17 @@
     "26.1.x": "maintained",
     "26.2.x": "primary"
   },
-  "properties": {
-    "distributions.curseforge.id": "1369699",
-    "distributions.curseforge.slug": "vehicle-upgrade",
-    "distributions.github.slug": "vehicle-upgrade",
-    "distributions.modrinth.id": "9B9c6QcJ",
-    "distributions.modrinth.slug": "vehicle-upgrade"
+  "distributions": {
+    "curseforge": {
+      "id": "1369699",
+      "slug": "vehicle-upgrade"
+    },
+    "github": {
+      "slug": "vehicle-upgrade"
+    },
+    "modrinth": {
+      "id": "9B9c6QcJ",
+      "slug": "vehicle-upgrade"
+    }
   }
 }
