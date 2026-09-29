@@ -6,7 +6,6 @@ import fuzs.vehicleupgrade.common.VehicleUpgrade;
 import fuzs.vehicleupgrade.common.config.ClientConfig;
 import fuzs.vehicleupgrade.common.config.VehicleInventory;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -22,10 +21,7 @@ import net.minecraft.world.item.CreativeModeTabs;
 import org.joml.Vector2i;
 import org.jspecify.annotations.Nullable;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.function.UnaryOperator;
 
 public class MountInventoryButtonHandler {
     public static final WidgetSprites CROSS_SPRITES = new WidgetSprites(VehicleUpgrade.id("container/inventory/cross"),
@@ -38,18 +34,18 @@ public class MountInventoryButtonHandler {
     @Nullable
     private static Button playerInventoryButton;
 
-    public static void onAfterInit(AbstractContainerScreen<?> screen, int screenWidth, int screenHeight, List<AbstractWidget> widgets, UnaryOperator<AbstractWidget> addWidget, Consumer<AbstractWidget> removeWidget) {
+    public static void onAfterInit(AbstractContainerScreen<?> screen, int screenWidth, int screenHeight) {
         // check the screen, both inventory screens open consecutively for creative, survival will falsely override the creative button then
         if (screen.minecraft.gui.screen() == screen
                 && OpenMountInventoryHandler.isServerControlledInventory(screen.minecraft.player)) {
             playerInventoryButton = createPlayerInventoryButton(screen);
             updatePlayerInventoryButtons(screen, playerInventoryButton);
             if (playerInventoryButton != null) {
-                addWidget.apply(playerInventoryButton);
+                screen.addRenderableWidget(playerInventoryButton);
             }
             Button vehicleInventoryButton = createVehicleInventoryButton(screen);
             if (vehicleInventoryButton != null) {
-                addWidget.apply(vehicleInventoryButton);
+                screen.addRenderableWidget(vehicleInventoryButton);
             }
         }
     }

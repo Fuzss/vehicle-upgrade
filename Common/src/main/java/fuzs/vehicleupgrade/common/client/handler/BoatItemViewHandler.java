@@ -4,7 +4,7 @@ import fuzs.vehicleupgrade.common.VehicleUpgrade;
 import fuzs.vehicleupgrade.common.config.ClientConfig;
 import fuzs.vehicleupgrade.common.init.ModRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemInHandRenderer;
+import net.minecraft.client.player.FirstPersonHandsAndItems;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 
@@ -16,8 +16,8 @@ public class BoatItemViewHandler {
     public static void onStartClientTick(Minecraft minecraft) {
         if (VehicleUpgrade.CONFIG.get(ClientConfig.class).holdItemsWhileRowing && minecraft.player != null) {
             isHandsBusy = minecraft.player.isHandsBusy();
-            lastMainHandItem = minecraft.gameRenderer.itemInHandRenderer.mainHandItem;
-            lastOffHandItem = minecraft.gameRenderer.itemInHandRenderer.offHandItem;
+            lastMainHandItem = minecraft.player.firstPersonHandsAndItems().mainHandItem;
+            lastOffHandItem = minecraft.player.firstPersonHandsAndItems().offHandItem;
         } else {
             isHandsBusy = false;
             lastMainHandItem = lastOffHandItem = ItemStack.EMPTY;
@@ -26,9 +26,9 @@ public class BoatItemViewHandler {
 
     public static void onEndClientTick(Minecraft minecraft) {
         if (minecraft.player != null && isHandsBusy) {
-            ItemInHandRenderer itemInHandRenderer = minecraft.gameRenderer.itemInHandRenderer;
+            FirstPersonHandsAndItems firstPersonHandsAndItems = minecraft.player.firstPersonHandsAndItems();
             if (lastMainHandItem.is(ModRegistry.HOLDABLE_WHILE_ROWING_ITEM_TAG)) {
-                float mainHandHeight = itemInHandRenderer.oMainHandHeight;
+                float mainHandHeight = firstPersonHandsAndItems.oMainHandHeight;
                 ItemStack mainHandItem = lastMainHandItem;
                 ItemStack currentMainHandItem = minecraft.player.getMainHandItem();
                 if (ItemStack.matches(mainHandItem, currentMainHandItem)) {
@@ -44,12 +44,12 @@ public class BoatItemViewHandler {
                     mainHandItem = currentMainHandItem;
                 }
 
-                itemInHandRenderer.mainHandHeight = mainHandHeight;
-                itemInHandRenderer.mainHandItem = mainHandItem;
+                firstPersonHandsAndItems.mainHandHeight = mainHandHeight;
+                firstPersonHandsAndItems.mainHandItem = mainHandItem;
             }
 
             if (lastOffHandItem.is(ModRegistry.HOLDABLE_WHILE_ROWING_ITEM_TAG)) {
-                float offHandHeight = itemInHandRenderer.oOffHandHeight;
+                float offHandHeight = firstPersonHandsAndItems.oOffHandHeight;
                 ItemStack offHandItem = lastOffHandItem;
                 ItemStack currentOffHandItem = minecraft.player.getOffhandItem();
                 if (ItemStack.matches(offHandItem, currentOffHandItem)) {
@@ -62,8 +62,8 @@ public class BoatItemViewHandler {
                     offHandItem = currentOffHandItem;
                 }
 
-                itemInHandRenderer.offHandHeight = offHandHeight;
-                itemInHandRenderer.offHandItem = offHandItem;
+                firstPersonHandsAndItems.offHandHeight = offHandHeight;
+                firstPersonHandsAndItems.offHandItem = offHandItem;
             }
         }
     }

@@ -16,6 +16,7 @@ multiloader {
             "AbstractHorseMixin",
             "BlockStateBaseMixin",
             "EntityMixin",
+            "FallingParticlesLeavesBlockMixin",
             "LeavesBlockMixin",
             "LivingEntityMixin"
         )

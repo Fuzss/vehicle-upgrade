@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.neoforge;
 
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
-import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;
+import fuzs.puzzleslib.neoforge.api.data.v3.core.DataProviderBuilder;
 import fuzs.vehicleupgrade.common.VehicleUpgrade;
 import fuzs.vehicleupgrade.common.data.tags.ModAttributeTagsProvider;
 import fuzs.vehicleupgrade.common.data.tags.ModBlockTagsProvider;
@@ -14,10 +14,10 @@ public class VehicleUpgradeNeoForge {
 
     public VehicleUpgradeNeoForge() {
         ModConstructor.construct(VehicleUpgrade.MOD_ID, VehicleUpgrade::new);
-        DataProviderHelper.registerDataProviders(VehicleUpgrade.MOD_ID,
-                ModBlockTagsProvider::new,
-                ModEntityTypeTagsProvider::new,
-                ModItemTagsProvider::new,
-                ModAttributeTagsProvider::new);
+        DataProviderBuilder.of(VehicleUpgrade.MOD_ID)
+                .addProvider(ModBlockTagsProvider::new,
+                        ModEntityTypeTagsProvider::new,
+                        ModItemTagsProvider::new,
+                        ModAttributeTagsProvider::new);
     }
 }

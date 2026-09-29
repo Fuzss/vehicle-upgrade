@@ -1,7 +1,7 @@
 package fuzs.vehicleupgrade.common.client.handler;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import fuzs.puzzleslib.common.api.client.renderer.v1.RenderStateExtraData;
+import fuzs.puzzleslib.common.api.client.renderer.v2.RenderStateExtraData;
 import fuzs.puzzleslib.common.api.event.v1.core.EventResult;
 import fuzs.vehicleupgrade.common.VehicleUpgrade;
 import fuzs.vehicleupgrade.common.config.ClientConfig;

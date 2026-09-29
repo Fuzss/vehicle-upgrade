@@ -29,7 +29,7 @@ public enum VehicleInventory {
             if (screen != null && minecraft.gui.screen() != null) {
                 minecraft.mouseHandler.xpos = xpos;
                 minecraft.mouseHandler.ypos = ypos;
-                InputConstants.grabOrReleaseMouse(minecraft.getWindow(), InputConstants.CURSOR_NORMAL, xpos, ypos);
+                InputConstants.releaseMouse(minecraft.getWindow(), xpos, ypos);
             }
         }
 

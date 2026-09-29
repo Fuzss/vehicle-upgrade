@@ -1,8 +1,8 @@
 package fuzs.vehicleupgrade.common.data.tags;
 
-import fuzs.puzzleslib.common.api.data.v2.core.DataProviderContext;
-import fuzs.puzzleslib.common.api.data.v2.tags.AbstractTagAppender;
-import fuzs.puzzleslib.common.api.data.v2.tags.AbstractTagProvider;
+import fuzs.puzzleslib.common.api.data.v3.core.DataProviderContext;
+import fuzs.puzzleslib.common.api.data.v3.tags.AbstractTagAppender;
+import fuzs.puzzleslib.common.api.data.v3.tags.AbstractTagsProvider;
 import fuzs.vehicleupgrade.common.init.ModRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -14,7 +14,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class ModAttributeTagsProvider extends AbstractTagProvider<Attribute> {
+public class ModAttributeTagsProvider extends AbstractTagsProvider<Attribute> {
 
     public ModAttributeTagsProvider(DataProviderContext context) {
         super(Registries.ATTRIBUTE, context);
